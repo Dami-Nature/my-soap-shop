@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мыльная Лавка - натуральное мыло ручной работы</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Мыльная Лавка</div>
+        <nav>
+            <a href="#products">Товары</a>
+            <a href="#about">О нас</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Натуральное мыло ручной работы</h1>
+            <p>Экологично, полезно для кожи, с любовью сделано</p>
+            <a href="#products" class="btn">Смотреть каталог</a>
+        </section>
+
+        <section id="products" class="products">
+            <h2>Наша продукция</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <div class="product-img">🫧</div>
+                    <h3>Лавандовое мыло</h3>
+                    <p>Расслабляющий аромат</p>
+                    <span class="price">350 ₽</span>
+                    <button>Купить</button>
+                </div>
+                <div class="product">
+                    <div class="product-img">🌿</div>
+                    <h3>Мятное мыло</h3>
+                    <p>Освежающий эффект</p>
+                    <span class="price">320 ₽</span>
+                    <button>Купить</button>
+                </div>
+                <div class="product">
+                    <div class="product-img">🍯</div>
+                    <h3>Медовое мыло</h3>
+                    <p>Увлажняющее действие</p>
+                    <span class="price">380 ₽</span>
+                    <button>Купить</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacts" class="contacts">
+            <h2>Контакты</h2>
+            <p>📞 Телефон: +7 (999) 123-45-67</p>
+            <p>📧 Email: info@soap-shop.ru</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Мыльная Лавка. Все права защищены.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

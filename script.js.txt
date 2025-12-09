@@ -1,0 +1,21 @@
+// Добавление товара в корзину
+document.querySelectorAll('.product button').forEach(button => {
+    button.addEventListener('click', function() {
+        const product = this.parentElement;
+        const name = product.querySelector('h3').textContent;
+        const price = product.querySelector('.price').textContent;
+        
+        alert(`Добавлено в корзину:\n${name}\n${price}`);
+        
+        // Здесь можно добавить логику для корзины
+        // Например, сохранение в localStorage
+        addToCart(name, price);
+    });
+});
+
+function addToCart(name, price) {
+    // Простая корзина в localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push({name, price});
+    localStorage.setItem('cart', JSON.stringify(cart));
+}

@@ -41,7 +41,7 @@ const PRODUCTS = [
     weight: '100г', price: null, image: 'images/soap-children-calendula.jpg', featured: false },
 
   { id: 23, name: 'Детское с ромашкой', category: 'soap', subcategory: 'children',
-    description: 'Нежное детское мыло с настоем ромашки. Ромашка мягко успокаивает, увлажняет и защищает чувствительную детскую кожу. Гипоаллергенный состав без красителей и синтетических ароматизаторов. Подходит с рождения.',
+    description: 'Мыло питательное. Идеально для детской и сухой кожи.\nМожно использовать для интимной гигиены.\nНикаких эфирных масел, только инфуз ромашки на оливковом масле Extra Virgin и масло ши.\n\nСостав: Оливковое масло Extra Virgin (инфуз ромашки), масло Ши, отвар ромашки.\n\nСозревание: 4–5 мес.\nВес: 100 г (±10 г)',
     weight: '100г', price: null, image: 'images/soap-children-chamomile.jpg', featured: false },
 
   { id: 5, name: 'Кастильское с шиповником', category: 'soap', subcategory: 'all',

@@ -37,7 +37,7 @@ const PRODUCTS = [
     weight: '100г', price: null, image: 'images/soap-orange.jpg', featured: false },
 
   { id: 4, name: 'Детское с календулой', category: 'soap', subcategory: 'children',
-    description: 'Мягкое детское мыло с настоем календулы. Календула обладает противовоспалительным и заживляющим действием, успокаивает раздражённую кожу. Без агрессивных ПАВ, красителей и синтетических ароматизаторов. Подходит с рождения.',
+    description: 'Мыло питательное. Идеально для детской и сухой кожи. Можно использовать для интимной гигиены. Никаких эфирных масел, только инфуз календулы на оливковом масле Extra Virgin и масло ши.\n\nСостав: Оливковое масло Extra Virgin (инфуз календулы), масло Ши.\n\nСозревание: 4–5 мес. (Будет в июне)\nВес: 100 г (±10 г)',
     weight: '100г', price: null, image: 'images/soap-children-calendula.jpg', featured: false },
 
   { id: 23, name: 'Детское с ромашкой', category: 'soap', subcategory: 'children',

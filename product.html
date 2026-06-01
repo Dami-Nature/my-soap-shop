@@ -139,7 +139,7 @@
         <div class="product-page-info">
           <a href="${backHref}" class="product-page-back">← ${backLabel}</a>
           <div class="product-page-name">${p.name}</div>
-          <div class="product-page-desc">${p.description}</div>
+          <div class="product-page-desc">${p.description.replace(/\n/g, '<br>')}</div>
           <div class="product-page-meta">
             ${weightHtml}
             ${priceHtml}

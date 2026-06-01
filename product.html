@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Товар — Дами</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .product-page {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .product-page-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #dff0e6, #ede5d5);
+      display: block;
+    }
+    .product-page-placeholder {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #dff0e6, #ede5d5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 100px;
+    }
+    .product-page-info { display: flex; flex-direction: column; gap: 18px; }
+    .product-page-back {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      transition: color 0.18s;
+    }
+    .product-page-back:hover { color: var(--text); }
+    .product-page-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-style: normal;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .product-page-desc {
+      font-size: 16px;
+      color: #1a0a02;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+    .product-page-meta {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .product-page-weight { font-size: 14px; color: var(--muted); }
+    .product-page-price { font-size: 28px; font-weight: 700; color: var(--text); }
+    .product-page-price-ask { font-size: 15px; color: var(--muted); font-style: normal; }
+    .btn-tg-big {
+      display: block;
+      padding: 16px;
+      background: var(--green);
+      color: white;
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      letter-spacing: 1px;
+      transition: background 0.18s;
+    }
+    .btn-tg-big:hover { background: var(--green2); }
+
+    @media (max-width: 700px) {
+      .product-page { grid-template-columns: 1fr; gap: 28px; padding: 0 20px; margin: 36px auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="product-page" id="product-page">
+    <div style="grid-column:1/-1;text-align:center;padding:80px;color:var(--muted)">Загрузка...</div>
+  </div>
+
+  <script src="products.js"></script>
+  <script src="nav.js"></script>
+  <script>
+    const CATEGORY_EMOJI = {
+      soap: '🧼', face: '✨', body: '🌿', hair: '💧', tea: '🍵', set: '🎁'
+    };
+    const CAT_LABEL = {
+      soap: 'Мыло', face: 'Для лица', body: 'Для тела', hair: 'Для волос', tea: 'Чаи', set: 'Наборы'
+    };
+    const CAT_PAGE = {
+      soap: 'cosmetics.html?cat=soap', face: 'cosmetics.html?cat=face',
+      body: 'cosmetics.html?cat=body', hair: 'cosmetics.html?cat=hair',
+      tea: 'teas.html', set: 'sets.html'
+    };
+
+    const id = parseInt(new URLSearchParams(location.search).get('id'));
+    const p = PRODUCTS.find(x => x.id === id);
+    const container = document.getElementById('product-page');
+
+    if (!p) {
+      container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;color:var(--muted)">Товар не найден</div>';
+    } else {
+      document.title = `${p.name} — Дами`;
+      const emoji = CATEGORY_EMOJI[p.category] || '🌿';
+      const backHref = CAT_PAGE[p.category] || 'cosmetics.html';
+      const backLabel = CAT_LABEL[p.category] || 'Каталог';
+      const priceHtml = p.price
+        ? `<span class="product-page-price">${p.price.toLocaleString('ru')} ₽</span>`
+        : '';
+      const weightHtml = p.weight
+        ? `<span class="product-page-weight">от ${p.weight}</span>` : '';
+
+      container.innerHTML = `
+        <div>
+          <img
+            class="product-page-img"
+            src="${p.image}"
+            alt="${p.name}"
+            onerror="this.outerHTML='<div class=\\'product-page-placeholder\\'>${emoji}</div>'"
+          />
+        </div>
+        <div class="product-page-info">
+          <a href="${backHref}" class="product-page-back">← ${backLabel}</a>
+          <div class="product-page-name">${p.name}</div>
+          <div class="product-page-desc">${p.description}</div>
+          <div class="product-page-meta">
+            ${weightHtml}
+            ${priceHtml}
+          </div>
+          <a
+            href="https://t.me/EmiliyaT?text=${encodeURIComponent('Хочу заказать: ' + p.name)}"
+            class="btn-tg-big"
+            target="_blank"
+          >
+            ✈ Заказать в Telegram
+          </a>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

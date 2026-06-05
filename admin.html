@@ -416,6 +416,7 @@ let configData   = {
   categoryCards: { cosmetics: 'images/cosmetics-card.jpg', teas: 'images/teas-card.jpg', sets: null }
 };
 let newConfigImages = {};
+let configDirty  = false;
 let editPhotos   = [];
 let siteEditKey  = null;
 
@@ -727,20 +728,25 @@ async function doPublish() {
       try { const ex = await ghGet(`contents/${path}`); sha = ex.sha; } catch(_) {}
       await ghPutRaw(path, b64, sha, `Admin: фото ${path.split('/').pop()}`);
     }
-    newImages = {};
 
     for (const [path, b64] of Object.entries(newConfigImages)) {
       let sha = null;
       try { const ex = await ghGet(`contents/${path}`); sha = ex.sha; } catch(_) {}
       await ghPutRaw(path, b64, sha, `Admin: фото сайта ${path.split('/').pop()}`);
     }
-    newConfigImages = {};
 
     const jsRes = await ghPut(REPO.file, makeProductsJs(products), fileSHA, 'Admin: обновление каталога');
     fileSHA = jsRes.content.sha;
 
-    const cfgRes = await ghPut('config.js', makeConfigJs(configData), configSHA, 'Admin: настройки сайта');
-    configSHA = cfgRes.content.sha;
+    if (configDirty) {
+      const cfgRes = await ghPut('config.js', makeConfigJs(configData), configSHA, 'Admin: настройки сайта');
+      configSHA = cfgRes.content.sha;
+      configDirty = false;
+    }
+
+    // Clear only after all commits succeed
+    newImages = {};
+    newConfigImages = {};
 
     toast('✅ Опубликовано! Обновление через ~1 мин.');
   } catch(e) {
@@ -859,6 +865,7 @@ function onSiteFileChange(e) {
     const path = 'images/' + sanitize(file.name);
     newConfigImages[path] = b64;
     setSiteImagePath(siteEditKey, path);
+    configDirty = true;
     closeSiteEdit();
     renderSiteTab();
     toast('Фото выбрано — нажми «Опубликовать»');
@@ -868,6 +875,7 @@ function onSiteFileChange(e) {
 
 function saveSiteText() {
   configData.about = { ...configData.about, text: document.getElementById('se-textarea').value };
+  configDirty = true;
   closeSiteEdit();
   renderSiteTab();
   toast('Текст сохранён — нажми «Опубликовать»');
@@ -899,7 +907,12 @@ function b64decode(b64) {
 }
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function jss(s) { return JSON.stringify(String(s)); }
-function sanitize(name) { return name.toLowerCase().replace(/[^a-z0-9._-]/g, '-').replace(/-+/g, '-'); }
+function sanitize(name) {
+  return name.toLowerCase()
+    .replace(/[^a-z0-9._-]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+(?=\.)/g, '') || 'photo';
+}
 
 function toast(msg) {
   document.querySelectorAll('.toast').forEach(e => e.remove());

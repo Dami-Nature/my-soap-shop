@@ -58,7 +58,8 @@
     (function() {
       if (typeof CONFIG === 'undefined') return;
       if (CONFIG.hero && CONFIG.hero.image)
-        document.getElementById('hero-section').style.backgroundImage = "url('" + CONFIG.hero.image + "')";
+        document.getElementById('hero-section').style.background =
+          "linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('" + CONFIG.hero.image + "') center 35%/cover no-repeat";
       if (CONFIG.about && CONFIG.about.image)
         document.getElementById('about-img').src = CONFIG.about.image;
       if (CONFIG.about && CONFIG.about.text)

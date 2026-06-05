@@ -9,7 +9,7 @@
 <body>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" id="hero-section">
     <div class="hero-title">Дами</div>
     <div class="hero-sub">Натуральная косметика ручной работы</div>
     <div class="hero-btns">
@@ -23,17 +23,17 @@
     <div class="section-title">Каталог</div>
     <div class="cat-grid">
       <a href="cosmetics.html" class="cat-card">
-        <img src="images/cosmetics-card.jpg" alt="Косметика" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-bottom:14px;">
+        <img id="card-cosmetics-img" src="images/cosmetics-card.jpg" alt="Косметика" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-bottom:14px;">
         <div class="cat-name">Косметика</div>
         <div class="cat-desc">мыло · кремы · масла</div>
       </a>
       <a href="teas.html" class="cat-card">
-        <img src="images/teas-card.jpg" alt="Чаи" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-bottom:14px;">
+        <img id="card-teas-img" src="images/teas-card.jpg" alt="Чаи" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-bottom:14px;">
         <div class="cat-name">Чаи</div>
         <div class="cat-desc">травяные сборы</div>
       </a>
       <a href="sets.html" class="cat-card">
-        <div class="cat-icon">❦</div>
+        <div id="card-sets-area"><div class="cat-icon">❦</div></div>
         <div class="cat-name">Наборы</div>
         <div class="cat-desc">подарочные наборы</div>
       </a>
@@ -43,24 +43,36 @@
   <!-- About -->
   <section class="section section-alt" style="background: #f9d8cc; padding: 64px 0;">
     <div style="width: 100%; display: flex; gap: 16px; align-items: center; padding: 0 60px 0 60px;">
-      <div style="flex: 1; font-size: 21px; line-height: 1.5; color: var(--text); text-align: left;">
-        Приветствую Вас!<br><br>
-        Меня зовут Эмилия ❤️<br><br>
-        Немного обо мне)<br>
-        Я родилась в Сибири, в Иркутске, в 60 км от озера Байкал. Часто время проводила на природе. Поэтому Лес для меня совершенно понятное и родное место, особенно хвойный.<br><br>
-        В 20 лет уехала учиться в Москву. И получила Медицинское и Психологическое образование, а дальше — Ароматерапия, Фитотерапия, Аюрведа, Нутрициология…<br><br>
-        Вся моя учеба всегда была и есть про здоровье 💚<br><br>
-        Я рада, когда могу минимизировать синтетические продукты в своей жизни и быть ближе к природе.<br><br>
-        Буду делиться с Вами тем, что у меня есть ❤️
-      </div>
+      <div id="about-text" style="flex: 1; font-size: 21px; line-height: 1.5; color: var(--text); text-align: left;"></div>
       <div style="flex-shrink: 0; margin-left: auto;">
-        <img src="images/about.jpg" alt="Эмилия" style="width: 380px; height: 480px; object-fit: cover; border-radius: 20px 0 0 20px; box-shadow: 0 8px 28px rgba(0,0,0,0.12);">
+        <img id="about-img" src="images/about.jpg" alt="Эмилия" style="width: 380px; height: 480px; object-fit: cover; border-radius: 20px 0 0 20px; box-shadow: 0 8px 28px rgba(0,0,0,0.12);">
       </div>
     </div>
   </section>
 
+  <script src="config.js"></script>
   <script src="products.js"></script>
   <script src="nav.js"></script>
   <script src="app.js"></script>
+  <script>
+    (function() {
+      if (typeof CONFIG === 'undefined') return;
+      if (CONFIG.hero && CONFIG.hero.image)
+        document.getElementById('hero-section').style.backgroundImage = "url('" + CONFIG.hero.image + "')";
+      if (CONFIG.about && CONFIG.about.image)
+        document.getElementById('about-img').src = CONFIG.about.image;
+      if (CONFIG.about && CONFIG.about.text)
+        document.getElementById('about-text').innerHTML = CONFIG.about.text.replace(/\n/g, '<br>');
+      if (CONFIG.categoryCards) {
+        if (CONFIG.categoryCards.cosmetics)
+          document.getElementById('card-cosmetics-img').src = CONFIG.categoryCards.cosmetics;
+        if (CONFIG.categoryCards.teas)
+          document.getElementById('card-teas-img').src = CONFIG.categoryCards.teas;
+        if (CONFIG.categoryCards.sets)
+          document.getElementById('card-sets-area').innerHTML =
+            '<img src="' + CONFIG.categoryCards.sets + '" alt="Наборы" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-bottom:14px;">';
+      }
+    })();
+  </script>
 </body>
 </html>

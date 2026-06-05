@@ -33,6 +33,72 @@
       justify-content: center;
       font-size: 100px;
     }
+    .carousel-wrap {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #dff0e6, #ede5d5);
+      aspect-ratio: 1;
+    }
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.3s ease;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+    .carousel-slide-ph {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 100px;
+      flex-shrink: 0;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.35);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .carousel-btn:hover { background: rgba(0,0,0,0.55); }
+    .carousel-prev { left: 8px; }
+    .carousel-next { right: 8px; }
+    .carousel-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .carousel-dot.active { background: #fff; }
     .product-page-info { display: flex; flex-direction: column; gap: 18px; }
     .product-page-back {
       font-family: 'Cormorant Garamond', serif;
@@ -98,62 +164,96 @@
   <script src="products.js"></script>
   <script src="nav.js"></script>
   <script>
-    const CATEGORY_EMOJI = {
-      soap: '🧼', face: '✨', body: '🌿', hair: '💧', tea: '🍵', set: '🎁'
-    };
-    const CAT_LABEL = {
-      soap: 'Мыло', face: 'Для лица', body: 'Для тела', hair: 'Для волос', tea: 'Чаи', set: 'Наборы'
-    };
-    const CAT_PAGE = {
-      soap: 'cosmetics.html?cat=soap', face: 'cosmetics.html?cat=face',
-      body: 'cosmetics.html?cat=body', hair: 'cosmetics.html?cat=hair',
-      tea: 'teas.html', set: 'sets.html'
-    };
+  const CATEGORY_EMOJI = {
+    soap: '🧼', face: '✨', body: '🌿', hair: '💧', tea: '🍵', set: '🎁'
+  };
+  const CAT_LABEL = {
+    soap: 'Мыло', face: 'Для лица', body: 'Для тела', hair: 'Для волос', tea: 'Чаи', set: 'Наборы'
+  };
+  const CAT_PAGE = {
+    soap: 'cosmetics.html?cat=soap', face: 'cosmetics.html?cat=face',
+    body: 'cosmetics.html?cat=body', hair: 'cosmetics.html?cat=hair',
+    tea: 'teas.html', set: 'sets.html'
+  };
 
-    const id = parseInt(new URLSearchParams(location.search).get('id'));
-    const p = PRODUCTS.find(x => x.id === id);
-    const container = document.getElementById('product-page');
+  const id = parseInt(new URLSearchParams(location.search).get('id'));
+  const p  = PRODUCTS.find(x => x.id === id);
+  const container = document.getElementById('product-page');
 
-    if (!p) {
-      container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;color:var(--muted)">Товар не найден</div>';
-    } else {
-      document.title = `${p.name} — Дами`;
-      const emoji = CATEGORY_EMOJI[p.category] || '🌿';
-      const backHref = CAT_PAGE[p.category] || 'cosmetics.html';
-      const backLabel = CAT_LABEL[p.category] || 'Каталог';
-      const priceHtml = p.price
-        ? `<span class="product-page-price">${p.price.toLocaleString('ru')} ₽</span>`
-        : '';
-      const weightHtml = p.weight
-        ? `<span class="product-page-weight">от ${p.weight}</span>` : '';
+  if (!p) {
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;color:var(--muted)">Товар не найден</div>';
+  } else {
+    document.title = `${p.name} — Дами`;
+    const emoji    = CATEGORY_EMOJI[p.category] || '🌿';
+    const backHref = CAT_PAGE[p.category]  || 'cosmetics.html';
+    const backLabel= CAT_LABEL[p.category] || 'Каталог';
+    const priceHtml  = p.price  ? `<span class="product-page-price">${p.price.toLocaleString('ru')} ₽</span>` : '';
+    const weightHtml = p.weight ? `<span class="product-page-weight">от ${p.weight}</span>` : '';
 
-      container.innerHTML = `
-        <div>
-          <img
-            class="product-page-img"
-            src="${p.image}"
-            alt="${p.name}"
-            onerror="this.outerHTML='<div class=\\'product-page-placeholder\\'>${emoji}</div>'"
-          />
-        </div>
-        <div class="product-page-info">
-          <a href="${backHref}" class="product-page-back">← ${backLabel}</a>
-          <div class="product-page-name">${p.name}</div>
-          <div class="product-page-desc">${p.description.replace(/\n/g, '<br>')}</div>
-          <div class="product-page-meta">
-            ${weightHtml}
-            ${priceHtml}
-          </div>
-          <a
-            href="https://t.me/EmiliyaT?text=${encodeURIComponent('Хочу заказать: ' + p.name)}"
-            class="btn-tg-big"
-            target="_blank"
-          >
-            ✈ Заказать в Telegram
-          </a>
-        </div>
-      `;
+    const allImages = [p.image, ...(p.images || [])].filter(Boolean);
+
+    container.innerHTML = `
+      <div id="carousel-container"></div>
+      <div class="product-page-info">
+        <a href="${backHref}" class="product-page-back">← ${backLabel}</a>
+        <div class="product-page-name">${p.name}</div>
+        <div class="product-page-desc">${p.description.replace(/\n/g, '<br>')}</div>
+        <div class="product-page-meta">${weightHtml}${priceHtml}</div>
+        <a href="https://t.me/EmiliyaT?text=${encodeURIComponent('Хочу заказать: ' + p.name)}"
+           class="btn-tg-big" target="_blank">✈ Заказать в Telegram</a>
+      </div>`;
+
+    buildCarousel(document.getElementById('carousel-container'), allImages, emoji);
+  }
+
+  function buildCarousel(el, images, emoji) {
+    if (images.length === 0) {
+      el.innerHTML = `<div class="product-page-placeholder">${emoji}</div>`;
+      return;
     }
-  </script>
+    if (images.length === 1) {
+      el.innerHTML = `<div class="carousel-wrap"><div class="carousel-track">
+        <img class="carousel-slide" src="${images[0]}"
+          onerror="this.outerHTML='<div class=\\'carousel-slide-ph\\'>${emoji}</div>'">
+      </div></div>`;
+      return;
+    }
+
+    const slides = images.map(src =>
+      `<img class="carousel-slide" src="${src}"
+         onerror="this.outerHTML='<div class=\\'carousel-slide-ph\\'>${emoji}</div>'">`
+    ).join('');
+    const dots = images.map((_, i) =>
+      `<div class="carousel-dot${i === 0 ? ' active' : ''}" onclick="carouselGo(${i})"></div>`
+    ).join('');
+
+    el.innerHTML = `
+      <div class="carousel-wrap" id="cw">
+        <div class="carousel-track" id="ct">${slides}</div>
+        <button class="carousel-btn carousel-prev" onclick="carouselGo(carouselIdx-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="carouselGo(carouselIdx+1)">›</button>
+        <div class="carousel-dots" id="cdots">${dots}</div>
+      </div>`;
+
+    let carouselIdx = 0;
+    const track  = document.getElementById('ct');
+    const dotEls = Array.from(document.querySelectorAll('.carousel-dot'));
+    const total  = images.length;
+    let touchX   = 0;
+
+    window.carouselGo = function(idx) {
+      carouselIdx = ((idx % total) + total) % total;
+      track.style.transform = `translateX(-${carouselIdx * 100}%)`;
+      dotEls.forEach((d, i) => d.classList.toggle('active', i === carouselIdx));
+    };
+
+    const wrap = document.getElementById('cw');
+    wrap.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend',   e => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) carouselGo(carouselIdx + (dx < 0 ? 1 : -1));
+    });
+  }
+</script>
 </body>
 </html>

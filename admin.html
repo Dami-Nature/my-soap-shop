@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ДАМИ — Управление</title>
+  <style>
+    :root {
+      --bg:      #111;
+      --surface: #1c1c1e;
+      --border:  #2c2c2e;
+      --accent:  #d4956a;
+      --text:    #f0f0ea;
+      --text2:   #8e8e93;
+      --danger:  #c46060;
+      --green:   #4caf7d;
+      --sb:      env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: -apple-system, 'Helvetica Neue', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .hidden { display: none !important; }
+
+    /* ── Шапка ─────────────────────────────── */
+    .header {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 14px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-title { font-size: 17px; font-weight: 600; color: var(--accent); }
+
+    /* ── Кнопки ─────────────────────────────── */
+    .btn {
+      display: block; width: 100%; padding: 14px 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; color: var(--text); font-size: 15px;
+      text-align: center; cursor: pointer;
+    }
+    .btn:active { opacity: 0.7; }
+    .btn-accent  { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+    .btn-danger  { color: var(--danger); border-color: #3a1e1e; background: #1e1010; }
+    .btn-small   { padding: 8px 14px; width: auto; font-size: 13px; display: inline-block; border-radius: 10px; }
+    .btn-icon    { background: none; border: none; color: var(--text2); font-size: 22px; padding: 4px 8px; cursor: pointer; }
+
+    /* ── Экран входа ─────────────────────────── */
+    #login-screen {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 32px 24px;
+    }
+    .login-logo  { font-size: 56px; margin-bottom: 8px; }
+    .login-title { font-size: 26px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+    .login-sub   { font-size: 14px; color: var(--text2); margin-bottom: 36px; }
+    .login-form  { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; }
+
+    /* ── Поля ввода ─────────────────────────── */
+    .field-group { display: flex; flex-direction: column; gap: 6px; }
+    .field-label { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.7px; }
+    .field-input {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 13px 14px;
+      color: var(--text); font-size: 16px; width: 100%; -webkit-appearance: none;
+    }
+    .field-input:focus { outline: none; border-color: var(--accent); }
+    textarea.field-input { resize: none; font-family: inherit; line-height: 1.5; }
+    select.field-input {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M5 6L0 0h10z' fill='%238e8e93'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      padding-right: 36px; -webkit-appearance: none; appearance: none;
+    }
+
+    /* ── Главный экран ──────────────────────── */
+    .main-content { padding: 12px 16px; padding-bottom: calc(90px + var(--sb)); }
+    .category-header {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text2); margin: 18px 0 8px;
+    }
+    .product-item {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px 14px; margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .product-item:active { opacity: 0.7; }
+    .product-thumb { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; background: #2a2a2a; flex-shrink: 0; }
+    .product-placeholder { width: 50px; height: 50px; border-radius: 10px; background: #2a2a2a; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px; }
+    .product-info { flex: 1; min-width: 0; }
+    .product-name { font-size: 15px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .product-meta { font-size: 12px; color: var(--text2); margin-top: 3px; }
+
+    /* ── Нижняя кнопка публикации ───────────── */
+    .publish-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 12px 16px; padding-bottom: calc(12px + var(--sb));
+    }
+    .publish-bar .btn { border-radius: 14px; padding: 16px; font-size: 16px; }
+
+    /* ── Модальное окно (снизу) ─────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.75);
+      display: flex; align-items: flex-end;
+    }
+    .modal-sheet {
+      background: var(--surface); border-radius: 20px 20px 0 0;
+      width: 100%; max-height: 94vh; overflow-y: auto;
+      padding: 12px 16px 24px; padding-bottom: calc(24px + var(--sb));
+    }
+    .modal-handle { width: 36px; height: 4px; background: #444; border-radius: 2px; margin: 0 auto 16px; }
+    .modal-title { font-size: 18px; font-weight: 600; margin-bottom: 18px; }
+    .modal-form { display: flex; flex-direction: column; gap: 14px; }
+    .row-2 { display: flex; gap: 10px; }
+    .row-2 > * { flex: 1; }
+
+    /* ── Toggle ─────────────────────────────── */
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; }
+    .toggle-label { font-size: 15px; }
+    .toggle { position: relative; width: 51px; height: 31px; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; inset: 0; background: #3a3a3a; border-radius: 31px; cursor: pointer; transition: background .2s; }
+    .toggle-slider:before { content: ''; position: absolute; width: 27px; height: 27px; left: 2px; bottom: 2px; background: #fff; border-radius: 50%; transition: transform .2s; }
+    .toggle input:checked + .toggle-slider { background: var(--accent); }
+    .toggle input:checked + .toggle-slider:before { transform: translateX(20px); }
+
+    /* ── Загрузка фото ──────────────────────── */
+    .photo-zone {
+      border: 2px dashed var(--border); border-radius: 12px;
+      min-height: 90px; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 6px; cursor: pointer; overflow: hidden; position: relative;
+    }
+    .photo-zone:active { border-color: var(--accent); }
+    .photo-zone img { width: 100%; max-height: 200px; object-fit: contain; display: block; }
+    .photo-hint { font-size: 13px; color: var(--text2); text-align: center; }
+
+    /* ── Таб-бар ─────────────────────────────── */
+    .tab-bar {
+      display: flex;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 57px;
+      z-index: 9;
+    }
+    .tab-btn {
+      flex: 1; padding: 10px;
+      background: none; border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text2); font-size: 14px;
+      cursor: pointer; font-family: inherit;
+    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+    /* ── Полоса миниатюр ─────────────────────── */
+    .photo-strip { display: flex; flex-wrap: wrap; gap: 8px; }
+    .photo-thumb-wrap { position: relative; }
+    .photo-thumb-img { width: 72px; height: 72px; border-radius: 10px; object-fit: cover; display: block; }
+    .photo-thumb-del {
+      position: absolute; top: -6px; right: -6px;
+      background: var(--danger); color: #fff; border: none;
+      border-radius: 50%; width: 20px; height: 20px;
+      font-size: 13px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .photo-add {
+      width: 72px; height: 72px; border-radius: 10px;
+      border: 2px dashed var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: var(--text2); cursor: pointer;
+    }
+    .photo-add:active { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Диалог подтверждения ───────────────── */
+    .confirm-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .confirm-box {
+      background: var(--surface); border-radius: 16px;
+      padding: 24px; width: 100%; max-width: 320px; text-align: center;
+    }
+    .confirm-box h3 { font-size: 18px; margin-bottom: 10px; }
+    .confirm-box p { font-size: 14px; color: var(--text2); margin-bottom: 22px; line-height: 1.55; white-space: pre-line; }
+    .confirm-row { display: flex; gap: 10px; }
+    .confirm-row .btn { border-radius: 12px; }
+
+    /* ── Toast ──────────────────────────────── */
+    .toast {
+      position: fixed; bottom: calc(110px + var(--sb)); left: 50%;
+      transform: translateX(-50%);
+      background: rgba(28,28,30,0.96); border: 1px solid #3a3a3a;
+      padding: 10px 20px; border-radius: 20px; font-size: 14px;
+      white-space: nowrap; z-index: 300;
+      animation: toastIn 0.2s ease;
+    }
+    @keyframes toastIn { from { opacity:0; transform:translate(-50%,8px); } to { opacity:1; transform:translate(-50%,0); } }
+
+    /* ── Спиннер ─────────────────────────────── */
+    .spinner {
+      display: inline-block; width: 22px; height: 22px;
+      border: 2px solid rgba(255,255,255,0.15); border-top-color: #fff;
+      border-radius: 50%; animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- ══════ ЭКРАН ВХОДА ══════ -->
+<div id="login-screen">
+  <div class="login-logo">🧼</div>
+  <div class="login-title">ДАМИ</div>
+  <div class="login-sub">Панель управления</div>
+  <div class="login-form">
+    <div class="field-group">
+      <div class="field-label">GitHub Token</div>
+      <input type="password" id="token-input" class="field-input"
+        placeholder="ghp_xxxxxxxxxxxxxxxx"
+        autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>
+    <button class="btn btn-accent" id="login-btn" onclick="doLogin()">Войти</button>
+    <div id="login-error" class="hidden" style="color:var(--danger);font-size:13px;text-align:center"></div>
+    <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=DAMI+admin"
+       target="_blank" style="font-size:13px;text-align:center;display:block;color:var(--text2)">
+      Как получить токен →
+    </a>
+  </div>
+</div>
+
+<!-- ══════ ГЛАВНЫЙ ЭКРАН ══════ -->
+<div id="main-screen" class="hidden">
+  <div class="header">
+    <div class="header-title">🧼 ДАМИ</div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <button class="btn btn-small btn-accent" id="add-btn" onclick="openAdd()">+ Добавить</button>
+      <button class="btn-icon" onclick="confirmLogout()">↩</button>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="tab-btn-products" onclick="switchTab('products')">Товары</button>
+    <button class="tab-btn" id="tab-btn-site" onclick="switchTab('site')">Сайт</button>
+  </div>
+
+  <div class="main-content" id="products-tab">
+    <div id="products-list"></div>
+  </div>
+
+  <div class="main-content hidden" id="site-tab">
+    <div class="category-header">🏠 Главная страница</div>
+    <div class="product-item" onclick="openSiteEdit('hero-image')">
+      <div class="product-placeholder">🌿</div>
+      <div class="product-info"><div class="product-name">Фото баннера</div><div class="product-meta" id="se-hero-path"></div></div>
+      <div style="color:#444;font-size:22px">›</div>
+    </div>
+
+    <div class="category-header">👤 Блок «О себе»</div>
+    <div class="product-item" onclick="openSiteEdit('about-image')">
+      <div class="product-placeholder">🤳</div>
+      <div class="product-info"><div class="product-name">Фото Эмилии</div><div class="product-meta" id="se-about-img"></div></div>
+      <div style="color:#444;font-size:22px">›</div>
+    </div>
+    <div class="product-item" onclick="openSiteEdit('about-text')">
+      <div class="product-placeholder">✏️</div>
+      <div class="product-info"><div class="product-name">Текст биографии</div><div class="product-meta" id="se-about-text-preview" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div></div>
+      <div style="color:#444;font-size:22px">›</div>
+    </div>
+
+    <div class="category-header">🗂 Карточки каталога</div>
+    <div class="product-item" onclick="openSiteEdit('card-cosmetics')">
+      <div class="product-placeholder">🌸</div>
+      <div class="product-info"><div class="product-name">Косметика — фото</div><div class="product-meta" id="se-card-cosmetics"></div></div>
+      <div style="color:#444;font-size:22px">›</div>
+    </div>
+    <div class="product-item" onclick="openSiteEdit('card-teas')">
+      <div class="product-placeholder">🍵</div>
+      <div class="product-info"><div class="product-name">Чаи — фото</div><div class="product-meta" id="se-card-teas"></div></div>
+      <div style="color:#444;font-size:22px">›</div>
+    </div>
+    <div class="product-item" onclick="openSiteEdit('card-sets')">
+      <div class="product-placeholder">🎁</div>
+      <div class="product-info"><div class="product-name">Наборы — фото</div><div class="product-meta" id="se-card-sets"></div></div>
+      <div style="color:#444;font-size:22px">›</div>
+    </div>
+  </div>
+
+  <div class="publish-bar">
+    <button class="btn btn-accent" id="pub-btn" onclick="openPublishConfirm()">
+      Опубликовать на сайте
+    </button>
+  </div>
+</div>
+
+<!-- ══════ МОДАЛЬНОЕ ОКНО РЕДАКТИРОВАНИЯ ══════ -->
+<div class="modal-overlay hidden" id="edit-modal" onclick="onModalBgClick(event)">
+  <div class="modal-sheet" id="edit-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="edit-title">Товар</div>
+    <div class="modal-form">
+
+      <div class="field-group">
+        <div class="field-label">Название</div>
+        <input type="text" id="f-name" class="field-input" placeholder="Название товара">
+      </div>
+
+      <div class="row-2">
+        <div class="field-group">
+          <div class="field-label">Категория</div>
+          <select id="f-cat" class="field-input" onchange="onCatChange()">
+            <option value="soap">🧼 Мыло</option>
+            <option value="face">🌸 Для лица</option>
+            <option value="body">💆 Для тела</option>
+            <option value="hair">💇 Для волос</option>
+            <option value="tea">🍵 Чаи</option>
+            <option value="set">🎁 Наборы</option>
+          </select>
+        </div>
+        <div class="field-group" id="subcat-wrap">
+          <div class="field-label">Подкатегория</div>
+          <select id="f-subcat" class="field-input">
+            <option value="all">Все виды</option>
+            <option value="household">Хозяйственное</option>
+            <option value="children">Детское</option>
+            <option value="medicinal">Лечебное</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Описание</div>
+        <textarea id="f-desc" class="field-input" rows="6" placeholder="Описание товара..."></textarea>
+      </div>
+
+      <div class="row-2">
+        <div class="field-group">
+          <div class="field-label">Вес / Объём</div>
+          <input type="text" id="f-weight" class="field-input" placeholder="100г">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Цена (₽)</div>
+          <input type="number" id="f-price" class="field-input" placeholder="—">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Фото</div>
+        <div class="photo-strip" id="photo-strip"></div>
+        <input type="file" id="f-file-add" accept="image/*" style="display:none" onchange="onPhotoAdd(event)">
+        <div style="font-size:11px;color:var(--text2);margin-top:4px">Первое фото — главное (в каталоге)</div>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">Показывать на главной ⭐</div>
+        <label class="toggle">
+          <input type="checkbox" id="f-featured">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="row-2" style="margin-top:4px">
+        <button class="btn" onclick="closeEdit()">Отмена</button>
+        <button class="btn btn-accent" style="flex:2" onclick="saveProduct()">Сохранить</button>
+      </div>
+      <button class="btn btn-danger" id="del-btn" onclick="deleteProduct()">Удалить товар</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ ДИАЛОГ ПОДТВЕРЖДЕНИЯ ══════ -->
+<div class="confirm-overlay hidden" id="confirm-modal">
+  <div class="confirm-box">
+    <h3 id="conf-title"></h3>
+    <p id="conf-text"></p>
+    <div class="confirm-row">
+      <button class="btn" style="flex:1" onclick="closeConfirm()">Отмена</button>
+      <button class="btn btn-accent" style="flex:2" id="conf-ok">ОК</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ МОДАЛ: РЕДАКТИРОВАНИЕ САЙТА ══════ -->
+<div class="modal-overlay hidden" id="site-edit-modal" onclick="onSiteModalBgClick(event)">
+  <div class="modal-sheet" id="site-edit-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="site-edit-title">Редактировать</div>
+    <div class="modal-form" id="site-edit-form"></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const REPO = { owner: 'DamirNine', name: 'my-soap-shop', branch: 'main', file: 'products.js' };
+
+const CAT = {
+  soap: { label: 'Мыло',      icon: '🧼' },
+  face: { label: 'Для лица',  icon: '🌸' },
+  body: { label: 'Для тела',  icon: '💆' },
+  hair: { label: 'Для волос', icon: '💇' },
+  tea:  { label: 'Чаи',       icon: '🍵' },
+  set:  { label: 'Наборы',    icon: '🎁' },
+};
+
+let products = [];
+let fileSHA  = null;
+let editIdx  = null;   // null = новый товар
+let newImages = {};    // 'images/fname.jpg' → base64
+let currentTab   = 'products';
+let configSHA    = null;
+let configData   = {
+  hero: { image: 'images/hero.jpg' },
+  about: { image: 'images/about.jpg', text: '' },
+  categoryCards: { cosmetics: 'images/cosmetics-card.jpg', teas: 'images/teas-card.jpg', sets: null }
+};
+let newConfigImages = {};
+let editPhotos   = [];
+let siteEditKey  = null;
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tab-btn-products').classList.toggle('active', tab === 'products');
+  document.getElementById('tab-btn-site').classList.toggle('active', tab === 'site');
+  document.getElementById('products-tab').classList.toggle('hidden', tab !== 'products');
+  document.getElementById('site-tab').classList.toggle('hidden', tab !== 'site');
+  document.getElementById('add-btn').classList.toggle('hidden', tab !== 'products');
+}
+
+function renderPhotoStrip() {
+  const strip = document.getElementById('photo-strip');
+  if (!strip) return;
+  let html = editPhotos.map((ph, i) => {
+    const src = ph.b64
+      ? `data:image/jpeg;base64,${ph.b64}`
+      : `https://raw.githubusercontent.com/${REPO.owner}/${REPO.name}/${REPO.branch}/${ph.path}`;
+    return `<div class="photo-thumb-wrap">
+      <img class="photo-thumb-img" src="${src}" onerror="this.style.opacity=0.3">
+      <button class="photo-thumb-del" onclick="removePhoto(${i})">×</button>
+    </div>`;
+  }).join('');
+  html += `<div class="photo-add" onclick="document.getElementById('f-file-add').click()">＋</div>`;
+  strip.innerHTML = html;
+}
+
+function removePhoto(i) {
+  editPhotos.splice(i, 1);
+  renderPhotoStrip();
+}
+
+function onPhotoAdd(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const b64  = ev.target.result.split(',')[1];
+    const path = 'images/' + sanitize(file.name);
+    editPhotos.push({ path, b64, isNew: true });
+    renderPhotoStrip();
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+// ─── Auth ────────────────────────────────────────────────────────────────────
+
+const getToken = () => localStorage.getItem('dami_gh_token');
+
+async function doLogin() {
+  const token = document.getElementById('token-input').value.trim();
+  if (!token) return;
+  const btn = document.getElementById('login-btn');
+  btn.innerHTML = '<div class="spinner" style="margin:0 auto"></div>';
+  btn.disabled = true;
+
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.name}`, {
+      headers: { Authorization: `token ${token}` }
+    });
+    if (!r.ok) throw new Error('Токен неверный или нет доступа к репозиторию');
+    localStorage.setItem('dami_gh_token', token);
+    await loadMain();
+  } catch(e) {
+    showLoginError(e.message);
+    btn.textContent = 'Войти';
+    btn.disabled = false;
+  }
+}
+
+function showLoginError(msg) {
+  const el = document.getElementById('login-error');
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+
+function confirmLogout() {
+  openConfirm('Выйти?', 'Токен будет удалён с этого устройства.', () => {
+    localStorage.removeItem('dami_gh_token');
+    location.reload();
+  });
+}
+
+// ─── GitHub API ───────────────────────────────────────────────────────────────
+
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.name}/${path}`, {
+    headers: { Authorization: `token ${getToken()}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if (!r.ok) throw new Error(`GitHub ${r.status}: ${path}`);
+  return r.json();
+}
+
+async function ghPut(path, contentStr, sha, msg) {
+  return ghPutRaw(path, b64encode(contentStr), sha, msg);
+}
+
+async function ghPutRaw(path, base64, sha, msg) {
+  const body = { message: msg, content: base64, branch: REPO.branch };
+  if (sha) body.sha = sha;
+  const r = await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${getToken()}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) { const e = await r.json(); throw new Error(e.message || `GitHub PUT error ${r.status}`); }
+  return r.json();
+}
+
+// ─── Load & render ────────────────────────────────────────────────────────────
+
+async function loadMain() {
+  try {
+    const data = await ghGet(`contents/${REPO.file}`);
+    fileSHA = data.sha;
+    const js = b64decode(data.content);
+    products = new Function(js + '\n;return typeof PRODUCTS!=="undefined"?PRODUCTS:[];')();
+
+    try {
+      const cfgData = await ghGet('contents/config.js');
+      configSHA = cfgData.sha;
+      const cfgJs = b64decode(cfgData.content);
+      configData = new Function(cfgJs + '\n;return typeof CONFIG!=="undefined"?CONFIG:{};')();
+    } catch(_) {
+      configSHA = null;
+    }
+
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('main-screen').classList.remove('hidden');
+    render();
+    renderSiteTab();
+  } catch(e) {
+    throw e;
+  }
+}
+
+function render() {
+  const el = document.getElementById('products-list');
+  let html = '';
+
+  for (const [cat, info] of Object.entries(CAT)) {
+    const items = products.filter(p => p.category === cat);
+    if (!items.length) continue;
+    html += `<div class="category-header">${info.icon} ${info.label} <span style="color:#555">(${items.length})</span></div>`;
+
+    for (const p of items) {
+      const idx = products.indexOf(p);
+      const rawUrl = p.image
+        ? `https://raw.githubusercontent.com/${REPO.owner}/${REPO.name}/${REPO.branch}/${p.image}`
+        : null;
+
+      // Если только что загрузили новое фото — показываем из памяти
+      const pendingB64 = p.image && newImages[p.image];
+      const thumbSrc = pendingB64
+        ? `data:image/jpeg;base64,${pendingB64}`
+        : rawUrl;
+
+      const star = p.featured ? ' ⭐' : '';
+      const meta = [p.weight, p.price ? p.price + ' ₽' : null].filter(Boolean).join(' · ');
+
+      html += `<div class="product-item" onclick="openEdit(${idx})">
+        ${thumbSrc
+          ? `<img class="product-thumb" src="${thumbSrc}" alt="" onerror="this.style.display='none'">`
+          : `<div class="product-placeholder">${info.icon}</div>`
+        }
+        <div class="product-info">
+          <div class="product-name">${esc(p.name)}${star}</div>
+          ${meta ? `<div class="product-meta">${meta}</div>` : ''}
+        </div>
+        <div style="color:#444;font-size:22px">›</div>
+      </div>`;
+    }
+  }
+
+  el.innerHTML = html || '<div style="color:#555;text-align:center;padding:60px">Товаров нет</div>';
+}
+
+// ─── Edit modal ───────────────────────────────────────────────────────────────
+
+function openEdit(idx) {
+  editIdx = idx;
+  const p = products[idx];
+  document.getElementById('edit-title').textContent = 'Редактировать';
+  document.getElementById('f-name').value    = p.name        || '';
+  document.getElementById('f-cat').value     = p.category    || 'soap';
+  document.getElementById('f-subcat').value  = p.subcategory || 'all';
+  document.getElementById('f-desc').value    = p.description || '';
+  document.getElementById('f-weight').value  = p.weight      || '';
+  document.getElementById('f-price').value   = p.price       || '';
+  document.getElementById('f-featured').checked = !!p.featured;
+  document.getElementById('del-btn').classList.remove('hidden');
+  onCatChange();
+  editPhotos = [];
+  if (p.image) editPhotos.push({ path: p.image, b64: newImages[p.image] || null, isNew: false });
+  (p.images || []).forEach(img => editPhotos.push({ path: img, b64: newImages[img] || null, isNew: false }));
+  renderPhotoStrip();
+  showModal();
+}
+
+function openAdd() {
+  editIdx = null;
+  document.getElementById('edit-title').textContent = 'Новый товар';
+  document.getElementById('f-name').value    = '';
+  document.getElementById('f-cat').value     = 'soap';
+  document.getElementById('f-subcat').value  = 'all';
+  document.getElementById('f-desc').value    = '';
+  document.getElementById('f-weight').value  = '';
+  document.getElementById('f-price').value   = '';
+  document.getElementById('f-featured').checked = false;
+  document.getElementById('del-btn').classList.add('hidden');
+  onCatChange();
+  editPhotos = [];
+  renderPhotoStrip();
+  showModal();
+}
+
+function showModal() {
+  document.getElementById('edit-modal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  // Скроллим шит наверх
+  document.getElementById('edit-sheet').scrollTop = 0;
+}
+
+function closeEdit() {
+  document.getElementById('edit-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function onModalBgClick(e) {
+  if (e.target === document.getElementById('edit-modal')) closeEdit();
+}
+
+function onCatChange() {
+  const cat = document.getElementById('f-cat').value;
+  document.getElementById('subcat-wrap').style.display = cat === 'soap' ? '' : 'none';
+}
+
+// ─── Save / Delete ────────────────────────────────────────────────────────────
+
+function saveProduct() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { toast('Введите название'); return; }
+
+  const cat      = document.getElementById('f-cat').value;
+  const subcat   = cat === 'soap' ? document.getElementById('f-subcat').value : null;
+  const desc     = document.getElementById('f-desc').value.trim();
+  const weight   = document.getElementById('f-weight').value.trim() || null;
+  const priceRaw = document.getElementById('f-price').value.trim();
+  const price    = priceRaw ? Number(priceRaw) : null;
+  const featured = document.getElementById('f-featured').checked;
+
+  editPhotos.forEach(ph => { if (ph.isNew) newImages[ph.path] = ph.b64; });
+  const paths  = editPhotos.map(ph => ph.path);
+  const image  = paths[0] || null;
+  const images = paths.slice(1);
+
+  if (editIdx !== null) {
+    products[editIdx] = {
+      ...products[editIdx],
+      name, category: cat, subcategory: subcat,
+      description: desc, weight, price, image,
+      images: images.length ? images : undefined,
+      featured
+    };
+  } else {
+    const maxId = products.reduce((m, p) => Math.max(m, p.id || 0), 0);
+    products.push({
+      id: maxId + 1, name, category: cat, subcategory: subcat,
+      description: desc, weight, price, image,
+      images: images.length ? images : undefined,
+      featured
+    });
+  }
+
+  closeEdit();
+  render();
+  toast('Сохранено — нажми «Опубликовать» чтобы выложить');
+}
+
+function deleteProduct() {
+  if (editIdx === null) return;
+  const name = products[editIdx].name;
+  openConfirm('Удалить товар?', `«${name}» будет удалён.\nНажми «Опубликовать» чтобы изменения вступили в силу.`, () => {
+    products.splice(editIdx, 1);
+    closeEdit();
+    render();
+    toast('Удалено');
+  });
+}
+
+// ─── Publish ──────────────────────────────────────────────────────────────────
+
+function openPublishConfirm() {
+  const imgN = Object.keys(newImages).length + Object.keys(newConfigImages).length;
+  let text = 'Изменения сохранятся на GitHub.\nСайт обновится примерно через 1 минуту.';
+  if (imgN) text += `\n\nНовых фото для загрузки: ${imgN}`;
+  openConfirm('Опубликовать на сайте?', text, doPublish);
+}
+
+async function doPublish() {
+  const btn = document.getElementById('pub-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner" style="margin:0 auto"></div>';
+  try {
+    for (const [path, b64] of Object.entries(newImages)) {
+      let sha = null;
+      try { const ex = await ghGet(`contents/${path}`); sha = ex.sha; } catch(_) {}
+      await ghPutRaw(path, b64, sha, `Admin: фото ${path.split('/').pop()}`);
+    }
+    newImages = {};
+
+    for (const [path, b64] of Object.entries(newConfigImages)) {
+      let sha = null;
+      try { const ex = await ghGet(`contents/${path}`); sha = ex.sha; } catch(_) {}
+      await ghPutRaw(path, b64, sha, `Admin: фото сайта ${path.split('/').pop()}`);
+    }
+    newConfigImages = {};
+
+    const jsRes = await ghPut(REPO.file, makeProductsJs(products), fileSHA, 'Admin: обновление каталога');
+    fileSHA = jsRes.content.sha;
+
+    const cfgRes = await ghPut('config.js', makeConfigJs(configData), configSHA, 'Admin: настройки сайта');
+    configSHA = cfgRes.content.sha;
+
+    toast('✅ Опубликовано! Обновление через ~1 мин.');
+  } catch(e) {
+    toast('❌ Ошибка: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Опубликовать на сайте';
+  }
+}
+
+function makeProductsJs(arr) {
+  const ts = new Date().toLocaleString('ru-RU');
+  const lines = arr.map(p => {
+    const imagesStr = (p.images && p.images.length)
+      ? `, images: [${p.images.map(jss).join(', ')}]`
+      : '';
+    return `  { id: ${p.id}, name: ${jss(p.name)}, category: ${jss(p.category)}, subcategory: ${p.subcategory === null ? 'null' : jss(p.subcategory)},\n    description: ${jss(p.description || '')},\n    weight: ${p.weight == null ? 'null' : jss(p.weight)}, price: ${p.price == null ? 'null' : p.price}, image: ${p.image == null ? 'null' : jss(p.image)}${imagesStr}, featured: ${!!p.featured} }`;
+  });
+  return `// Обновлено через панель управления ДАМИ: ${ts}\n\nconst PRODUCTS = [\n\n${lines.join(',\n\n')}\n\n];\n`;
+}
+
+// ─── Site tab ─────────────────────────────────────────────────────────────────
+
+function renderSiteTab() {
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val || '—'; };
+  set('se-hero-path',         configData.hero && configData.hero.image);
+  set('se-about-img',         configData.about && configData.about.image);
+  const t = (configData.about && configData.about.text) || '';
+  set('se-about-text-preview', t.slice(0, 50) + (t.length > 50 ? '…' : ''));
+  set('se-card-cosmetics',    configData.categoryCards && configData.categoryCards.cosmetics);
+  set('se-card-teas',         configData.categoryCards && configData.categoryCards.teas);
+  set('se-card-sets',         configData.categoryCards && configData.categoryCards.sets);
+}
+
+const SITE_TITLES = {
+  'hero-image': 'Фото баннера', 'about-image': 'Фото Эмилии',
+  'about-text': 'Текст биографии', 'card-cosmetics': 'Косметика — фото',
+  'card-teas': 'Чаи — фото', 'card-sets': 'Наборы — фото',
+};
+
+function getSiteImagePath(key) {
+  const c = configData;
+  if (key === 'hero-image')     return c.hero && c.hero.image;
+  if (key === 'about-image')    return c.about && c.about.image;
+  if (key === 'card-cosmetics') return c.categoryCards && c.categoryCards.cosmetics;
+  if (key === 'card-teas')      return c.categoryCards && c.categoryCards.teas;
+  if (key === 'card-sets')      return c.categoryCards && c.categoryCards.sets;
+  return null;
+}
+
+function setSiteImagePath(key, path) {
+  const c = configData;
+  if (key === 'hero-image')     c.hero = { ...c.hero, image: path };
+  if (key === 'about-image')    c.about = { ...c.about, image: path };
+  if (key === 'card-cosmetics') c.categoryCards = { ...c.categoryCards, cosmetics: path };
+  if (key === 'card-teas')      c.categoryCards = { ...c.categoryCards, teas: path };
+  if (key === 'card-sets')      c.categoryCards = { ...c.categoryCards, sets: path };
+}
+
+function openSiteEdit(key) {
+  siteEditKey = key;
+  document.getElementById('site-edit-title').textContent = SITE_TITLES[key] || key;
+  const form = document.getElementById('site-edit-form');
+
+  if (key === 'about-text') {
+    const txt = (configData.about && configData.about.text) || '';
+    form.innerHTML = `
+      <div class="field-group">
+        <div class="field-label">Текст (Enter = новая строка)</div>
+        <textarea id="se-textarea" class="field-input" rows="12">${esc(txt)}</textarea>
+      </div>
+      <div class="row-2">
+        <button class="btn" onclick="closeSiteEdit()">Отмена</button>
+        <button class="btn btn-accent" style="flex:2" onclick="saveSiteText()">Сохранить</button>
+      </div>`;
+  } else {
+    const curPath = getSiteImagePath(key);
+    const pendB64 = curPath && newConfigImages[curPath];
+    const prevSrc = pendB64
+      ? `data:image/jpeg;base64,${pendB64}`
+      : curPath ? `https://raw.githubusercontent.com/${REPO.owner}/${REPO.name}/${REPO.branch}/${curPath}` : null;
+    form.innerHTML = `
+      <div class="field-group">
+        <div class="field-label">Фото</div>
+        <div class="photo-zone" onclick="document.getElementById('se-file').click()">
+          ${prevSrc
+            ? `<img src="${prevSrc}" style="width:100%;max-height:220px;object-fit:contain">`
+            : `<div style="text-align:center"><div style="font-size:34px">📷</div><div class="photo-hint">Нажмите чтобы выбрать фото</div></div>`}
+        </div>
+        <input type="file" id="se-file" accept="image/*" style="display:none" onchange="onSiteFileChange(event)">
+        ${curPath ? `<div style="font-size:11px;color:var(--text2);margin-top:4px">📁 ${curPath}</div>` : ''}
+      </div>
+      <div class="row-2"><button class="btn" style="flex:1" onclick="closeSiteEdit()">Закрыть</button></div>`;
+  }
+
+  document.getElementById('site-edit-modal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('site-edit-sheet').scrollTop = 0;
+}
+
+function closeSiteEdit() {
+  document.getElementById('site-edit-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function onSiteModalBgClick(e) {
+  if (e.target === document.getElementById('site-edit-modal')) closeSiteEdit();
+}
+
+function onSiteFileChange(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const b64  = ev.target.result.split(',')[1];
+    const path = 'images/' + sanitize(file.name);
+    newConfigImages[path] = b64;
+    setSiteImagePath(siteEditKey, path);
+    closeSiteEdit();
+    renderSiteTab();
+    toast('Фото выбрано — нажми «Опубликовать»');
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveSiteText() {
+  configData.about = { ...configData.about, text: document.getElementById('se-textarea').value };
+  closeSiteEdit();
+  renderSiteTab();
+  toast('Текст сохранён — нажми «Опубликовать»');
+}
+
+function makeConfigJs(cfg) {
+  const ts = new Date().toLocaleString('ru-RU');
+  const q  = v => v == null ? 'null' : jss(v);
+  return `// Настройки сайта ДАМИ. Обновлено: ${ts}\n\nconst CONFIG = {\n  hero: {\n    image: ${q(cfg.hero && cfg.hero.image)}\n  },\n  about: {\n    image: ${q(cfg.about && cfg.about.image)},\n    text: ${jss((cfg.about && cfg.about.text) || '')}\n  },\n  categoryCards: {\n    cosmetics: ${q(cfg.categoryCards && cfg.categoryCards.cosmetics)},\n    teas: ${q(cfg.categoryCards && cfg.categoryCards.teas)},\n    sets: ${q(cfg.categoryCards && cfg.categoryCards.sets)}\n  }\n};\n`;
+}
+
+// ─── Confirm ──────────────────────────────────────────────────────────────────
+
+function openConfirm(title, text, onOk) {
+  document.getElementById('conf-title').textContent = title;
+  document.getElementById('conf-text').textContent  = text;
+  document.getElementById('conf-ok').onclick = () => { closeConfirm(); onOk(); };
+  document.getElementById('confirm-modal').classList.remove('hidden');
+}
+function closeConfirm() { document.getElementById('confirm-modal').classList.add('hidden'); }
+
+// ─── Utils ────────────────────────────────────────────────────────────────────
+
+function b64encode(str) {
+  return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p) => String.fromCharCode(parseInt(p, 16))));
+}
+function b64decode(b64) {
+  return decodeURIComponent(Array.from(atob(b64.replace(/\s/g,'')), c => '%' + c.charCodeAt(0).toString(16).padStart(2,'0')).join(''));
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function jss(s) { return JSON.stringify(String(s)); }
+function sanitize(name) { return name.toLowerCase().replace(/[^a-z0-9._-]/g, '-').replace(/-+/g, '-'); }
+
+function toast(msg) {
+  document.querySelectorAll('.toast').forEach(e => e.remove());
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3500);
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+
+document.getElementById('token-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+(async () => {
+  if (!getToken()) return;
+  // Авто-вход если токен сохранён
+  document.getElementById('login-screen').innerHTML =
+    '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center"><div class="spinner" style="width:40px;height:40px;border-width:3px"></div></div>';
+  try {
+    await loadMain();
+  } catch(e) {
+    localStorage.removeItem('dami_gh_token');
+    location.reload();
+  }
+})();
+</script>
+</body>
+</html>

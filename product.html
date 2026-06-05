@@ -229,8 +229,8 @@
     el.innerHTML = `
       <div class="carousel-wrap" id="cw">
         <div class="carousel-track" id="ct">${slides}</div>
-        <button class="carousel-btn carousel-prev" onclick="carouselGo(carouselIdx-1)">‹</button>
-        <button class="carousel-btn carousel-next" onclick="carouselGo(carouselIdx+1)">›</button>
+        <button class="carousel-btn carousel-prev" onclick="carouselPrev()">‹</button>
+        <button class="carousel-btn carousel-next" onclick="carouselNext()">›</button>
         <div class="carousel-dots" id="cdots">${dots}</div>
       </div>`;
 
@@ -240,17 +240,19 @@
     const total  = images.length;
     let touchX   = 0;
 
-    window.carouselGo = function(idx) {
+    window.carouselGo   = function(idx) {
       carouselIdx = ((idx % total) + total) % total;
       track.style.transform = `translateX(-${carouselIdx * 100}%)`;
       dotEls.forEach((d, i) => d.classList.toggle('active', i === carouselIdx));
     };
+    window.carouselPrev = function() { window.carouselGo(carouselIdx - 1); };
+    window.carouselNext = function() { window.carouselGo(carouselIdx + 1); };
 
     const wrap = document.getElementById('cw');
     wrap.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
     wrap.addEventListener('touchend',   e => {
       const dx = e.changedTouches[0].clientX - touchX;
-      if (Math.abs(dx) > 40) carouselGo(carouselIdx + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 40) window.carouselGo(carouselIdx + (dx < 0 ? 1 : -1));
     });
   }
 </script>

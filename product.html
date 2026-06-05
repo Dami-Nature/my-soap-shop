@@ -213,10 +213,8 @@
       return;
     }
     if (images.length === 1) {
-      el.innerHTML = `<div class="carousel-wrap"><div class="carousel-track">
-        <img class="carousel-slide" src="${images[0]}"
-          onerror="this.outerHTML='<div class=\\'carousel-slide-ph\\'>${emoji}</div>'">
-      </div></div>`;
+      el.innerHTML = `<img class="product-page-img" src="${images[0]}" alt=""
+        onerror="this.outerHTML='<div class=\\'product-page-placeholder\\'>${emoji}</div>'">`;
       return;
     }
 

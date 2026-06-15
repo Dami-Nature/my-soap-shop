@@ -169,6 +169,17 @@
     }
     .photo-add:active { border-color: var(--accent); color: var(--accent); }
 
+    /* ── Битое фото (файл не найден) ─────────── */
+    .img-broken {
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 2px; text-align: center;
+      background: #3a2424; color: #e08a8a; border-radius: 10px;
+    }
+    .img-broken .lbl { font-size: 10px; line-height: 1.2; }
+    .img-broken.size-s { width: 50px; height: 50px; font-size: 18px; flex-shrink: 0; }
+    .img-broken.size-m { width: 72px; height: 72px; font-size: 20px; }
+    .img-broken.size-l { width: 100%; height: 120px; font-size: 28px; }
+
     /* ── Диалог подтверждения ───────────────── */
     .confirm-overlay {
       position: fixed; inset: 0; z-index: 200;
@@ -437,7 +448,7 @@ function renderPhotoStrip() {
       ? `data:image/jpeg;base64,${ph.b64}`
       : `https://raw.githubusercontent.com/${REPO.owner}/${REPO.name}/${REPO.branch}/${ph.path}`;
     return `<div class="photo-thumb-wrap">
-      <img class="photo-thumb-img" src="${src}" onerror="this.style.opacity=0.3">
+      <img class="photo-thumb-img" src="${src}" onerror="imgErr(this,'m')">
       <button class="photo-thumb-del" onclick="removePhoto(${i})">×</button>
     </div>`;
   }).join('');
@@ -450,18 +461,18 @@ function removePhoto(i) {
   renderPhotoStrip();
 }
 
-function onPhotoAdd(e) {
+async function onPhotoAdd(e) {
   const file = e.target.files[0];
+  e.target.value = '';
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const b64  = ev.target.result.split(',')[1];
-    const path = 'images/' + sanitize(file.name);
+  try {
+    const b64  = await fileToJpegB64(file);
+    const path = jpgPath(file.name);
     editPhotos.push({ path, b64, isNew: true });
     renderPhotoStrip();
-  };
-  reader.readAsDataURL(file);
-  e.target.value = '';
+  } catch(_) {
+    toast('❌ Этот формат фото не открывается в браузере. На iPhone: Настройки → Камера → Форматы → «Совместимые», или отправь фото себе через Сообщения/AirDrop — так оно станет JPG.');
+  }
 }
 
 // ─── Auth ────────────────────────────────────────────────────────────────────
@@ -581,7 +592,7 @@ function render() {
 
       html += `<div class="product-item" onclick="openEdit(${idx})">
         ${thumbSrc
-          ? `<img class="product-thumb" src="${thumbSrc}" alt="" onerror="this.style.display='none'">`
+          ? `<img class="product-thumb" src="${thumbSrc}" alt="" onerror="imgErr(this,'s')">`
           : `<div class="product-placeholder">${info.icon}</div>`
         }
         <div class="product-info">
@@ -833,7 +844,7 @@ function openSiteEdit(key) {
         <div class="field-label">Фото</div>
         <div class="photo-zone" onclick="document.getElementById('se-file').click()">
           ${prevSrc
-            ? `<img src="${prevSrc}" style="width:100%;max-height:220px;object-fit:contain">`
+            ? `<img src="${prevSrc}" style="width:100%;max-height:220px;object-fit:contain" onerror="imgErr(this,'l')">`
             : `<div style="text-align:center"><div style="font-size:34px">📷</div><div class="photo-hint">Нажмите чтобы выбрать фото</div></div>`}
         </div>
         <input type="file" id="se-file" accept="image/*" style="display:none" onchange="onSiteFileChange(event)">
@@ -856,21 +867,22 @@ function onSiteModalBgClick(e) {
   if (e.target === document.getElementById('site-edit-modal')) closeSiteEdit();
 }
 
-function onSiteFileChange(e) {
+async function onSiteFileChange(e) {
   const file = e.target.files[0];
+  e.target.value = '';
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const b64  = ev.target.result.split(',')[1];
-    const path = 'images/' + sanitize(file.name);
+  try {
+    const b64  = await fileToJpegB64(file);
+    const path = jpgPath(file.name);
     newConfigImages[path] = b64;
     setSiteImagePath(siteEditKey, path);
     configDirty = true;
     closeSiteEdit();
     renderSiteTab();
     toast('Фото выбрано — нажми «Опубликовать»');
-  };
-  reader.readAsDataURL(file);
+  } catch(_) {
+    toast('❌ Этот формат фото не открывается в браузере. На iPhone: Настройки → Камера → Форматы → «Совместимые», или отправь фото себе через Сообщения/AirDrop — так оно станет JPG.');
+  }
 }
 
 function saveSiteText() {
@@ -912,6 +924,54 @@ function sanitize(name) {
     .replace(/[^a-z0-9._-]/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-+|-+(?=\.)/g, '') || 'photo';
+}
+
+// Путь для нового фото — всегда .jpg (исходный формат не важен, см. fileToJpegB64)
+function jpgPath(name) {
+  const base = sanitize(name).replace(/\.[^.]*$/, '');
+  return 'images/' + (base || 'photo') + '.jpg';
+}
+
+// Показать заглушку «файл не найден» вместо битой картинки
+function imgErr(el, size) {
+  const div = document.createElement('div');
+  div.className = 'img-broken size-' + size;
+  div.title = 'Файл фото не найден в репозитории';
+  div.innerHTML = '⚠️<div class="lbl">нет файла</div>';
+  el.replaceWith(div);
+}
+
+// Перекодировать любое выбранное изображение в JPEG через canvas.
+// Это решает 2 проблемы:
+//  1) превью раньше всегда подписывалось как image/jpeg, даже если файл был PNG/др. — теперь это правда.
+//  2) фото с iPhone в формате HEIC: Safari умеет декодировать HEIC в <img>,
+//     поэтому конвертация в JPEG проходит успешно и на сайте фото видно во всех браузерах.
+//     В браузерах, которые HEIC не понимают (Chrome/Edge), img.onerror подскажет, что делать.
+const MAX_SIDE = 1600;
+function fileToJpegB64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > MAX_SIDE || height > MAX_SIDE) {
+          const scale = MAX_SIDE / Math.max(width, height);
+          width = Math.round(width * scale);
+          height = Math.round(height * scale);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', 0.88).split(',')[1]);
+      };
+      img.onerror = () => reject(new Error('unsupported-format'));
+      img.src = ev.target.result;
+    };
+    reader.onerror = () => reject(new Error('read-error'));
+    reader.readAsDataURL(file);
+  });
 }
 
 function toast(msg) {

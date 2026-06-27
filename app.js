@@ -46,29 +46,19 @@ function initIndex() {
   renderGrid(grid, featured);
 }
 
-// ─── COSMETICS PAGE ──────────────────────────────────
-let _cosmeticsCat = 'soap';
-let _cosmeticsSub = null;
-
-function selectSoapFolder(el) {
-  const sub = el.dataset.sub || null;
-  _cosmeticsSub = sub;
-  history.replaceState(null, '', _cosmeticsSub ? `?cat=soap&sub=${_cosmeticsSub}` : '?cat=soap');
-  updateCosmetics();
-}
+// ─── COSMETICS PAGE (лицо/тело/волосы — без мыла) ─────
+let _cosmeticsCat = 'face';
 
 function initCosmetics() {
   const grid = document.getElementById('products-grid');
   if (!grid) return;
 
   const params = new URLSearchParams(location.search);
-  _cosmeticsCat = params.get('cat') || 'soap';
-  _cosmeticsSub = params.get('sub') || null;
+  _cosmeticsCat = params.get('cat') || 'face';
 
   document.querySelectorAll('.filter-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       _cosmeticsCat = tab.dataset.cat;
-      _cosmeticsSub = null;
       history.replaceState(null, '', `?cat=${_cosmeticsCat}`);
       updateCosmetics();
     });
@@ -79,42 +69,49 @@ function initCosmetics() {
 
 function updateCosmetics() {
   const grid = document.getElementById('products-grid');
-  const foldersEl = document.getElementById('soap-folders');
-  const labelEl = document.getElementById('grid-label');
   const cat = _cosmeticsCat;
-  const sub = _cosmeticsSub;
 
-  // Update tab active states
   document.querySelectorAll('.filter-tab').forEach(t =>
     t.classList.toggle('active', t.dataset.cat === cat));
 
-  // Folders: show only on soap tab
-  foldersEl.style.display = cat === 'soap' ? 'block' : 'none';
+  renderGrid(grid, PRODUCTS.filter(p => p.category === cat));
+}
 
-  // Highlight active folder
+// ─── SOAP PAGE (своя страница, без лица/тела/волос) ───
+let _soapSub = null;
+
+function selectSoapFolder(el) {
+  _soapSub = el.dataset.sub || null;
+  history.replaceState(null, '', _soapSub ? `?sub=${_soapSub}` : location.pathname);
+  updateSoap();
+}
+
+function initSoap() {
+  const grid = document.getElementById('products-grid');
+  if (!grid) return;
+
+  const params = new URLSearchParams(location.search);
+  _soapSub = params.get('sub') || null;
+
+  updateSoap();
+}
+
+function updateSoap() {
+  const grid = document.getElementById('products-grid');
+  const labelEl = document.getElementById('grid-label');
+  const sub = _soapSub;
+
   document.querySelectorAll('.soap-folder').forEach(f =>
-    f.classList.toggle('active', f.dataset.sub === sub));
+    f.classList.toggle('active', (f.dataset.sub || null) === sub));
 
-  // Grid label
   const labels = { household: 'Хозяйственное мыло', children: 'Детское мыло', medicinal: 'Лечебное мыло' };
-  if (cat === 'soap' && sub) {
-    labelEl.style.display = 'block';
-    labelEl.textContent = labels[sub] || '';
-  } else if (cat === 'soap') {
-    labelEl.style.display = 'block';
-    labelEl.textContent = 'Всё мыло';
-  } else {
-    labelEl.style.display = 'none';
-  }
+  labelEl.style.display = 'block';
+  labelEl.textContent = sub ? (labels[sub] || '') : 'Всё мыло';
 
-  // Filter products
-  let items = PRODUCTS.filter(p => {
-    if (cat === 'soap') {
-      if (p.category !== 'soap') return false;
-      if (!sub) return p.subcategory === 'all' || !p.subcategory;
-      return p.subcategory === sub;
-    }
-    return p.category === cat;
+  const items = PRODUCTS.filter(p => {
+    if (p.category !== 'soap') return false;
+    if (!sub) return p.subcategory === 'all' || !p.subcategory;
+    return p.subcategory === sub;
   });
 
   renderGrid(grid, items);
@@ -139,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const page = location.pathname.split('/').pop() || 'index.html';
   if (page === 'index.html' || page === '') initIndex();
   else if (page === 'cosmetics.html') initCosmetics();
+  else if (page === 'soap.html') initSoap();
   else if (page === 'teas.html') initTeas();
   else if (page === 'sets.html') initSets();
 });

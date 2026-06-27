@@ -5,90 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Косметика — Дами</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .soap-folders {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      max-width: 900px;
-      margin: 0 auto 8px;
-    }
-    .soap-folder {
-      background: white;
-      border-radius: 12px;
-      padding: 0 16px;
-      text-align: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.18s;
-      border: 2px solid transparent;
-    }
-    .soap-folder:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.11); }
-    .soap-folder.active { border-color: #4a7c59; background: #f0f8f3; }
-    .soap-folder-icon { font-size: 32px; margin-bottom: -8px; font-family: 'Raleway', serif; color: #4a7c59; }
-    .soap-folder-name { font-family: 'Raleway', sans-serif; font-size: 16px; font-weight: 600; color: #1a0a02; letter-spacing: 1.5px; text-transform: uppercase; }
-
-    .section-label {
-      font-family: 'Raleway', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #1a0a02;
-      margin-bottom: 20px;
-      max-width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @media (max-width: 500px) {
-      .soap-folders { grid-template-columns: 1fr; max-width: 280px; }
-    }
-  </style>
 </head>
 <body>
 
   <div class="page-hero">
-    <div class="page-hero-title" id="page-title">Косметика</div>
-    <div class="page-hero-sub" id="page-sub">Натуральные составы, ручная работа</div>
+    <div class="page-hero-title">Косметика</div>
+    <div class="page-hero-sub">Натуральные составы, ручная работа</div>
   </div>
 
   <section class="section">
 
-    <!-- Главные табы -->
     <div class="filter-bar">
-      <button class="filter-tab" data-cat="soap">Мыло</button>
       <button class="filter-tab" data-cat="face">Для лица</button>
       <button class="filter-tab" data-cat="body">Для тела</button>
       <button class="filter-tab" data-cat="hair">Для волос</button>
     </div>
 
-    <!-- Папки мыла (только когда cat=soap) -->
-    <div id="soap-folders" style="display:none">
-      <div class="soap-folders">
-        <div class="soap-folder" data-sub="" onclick="selectSoapFolder(this)">
-          <div class="soap-folder-icon">✾</div>
-          <div class="soap-folder-name">Всё</div>
-        </div>
-        <div class="soap-folder" data-sub="children" onclick="selectSoapFolder(this)">
-          <div class="soap-folder-icon">✾</div>
-          <div class="soap-folder-name">Детское</div>
-        </div>
-        <div class="soap-folder" data-sub="household" onclick="selectSoapFolder(this)">
-          <div class="soap-folder-icon">✾</div>
-          <div class="soap-folder-name">Хозяйственное</div>
-        </div>
-        <div class="soap-folder" data-sub="medicinal" onclick="selectSoapFolder(this)">
-          <div class="soap-folder-icon">✾</div>
-          <div class="soap-folder-name">Лечебное</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Подпись над сеткой -->
-    <div class="section-label" id="grid-label" style="display:none"></div>
-
-    <!-- Сетка товаров -->
     <div class="products-grid" id="products-grid"></div>
 
   </section>

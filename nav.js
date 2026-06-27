@@ -29,16 +29,10 @@ document.addEventListener('click', (e) => {
       </a>
       <nav class="main-nav">
         <a href="index.html" class="nav-link ${isActive('index.html')}">Главная</a>
-        <a href="cosmetics.html?cat=soap" class="nav-link">Мыло</a>
+        <a href="soap.html" class="nav-link ${isActive('soap.html')}">Мыло</a>
         <div class="nav-item">
           <a href="cosmetics.html" class="nav-link ${isActive('cosmetics.html')}">Косметика</a>
           <div class="dropdown">
-            <div class="dropdown-section">Мыло</div>
-            <a href="cosmetics.html?cat=soap" class="dropdown-link">— Все</a>
-            <a href="cosmetics.html?cat=soap&sub=household" class="dropdown-link">— Хозяйственное</a>
-            <a href="cosmetics.html?cat=soap&sub=children" class="dropdown-link">— Детское</a>
-            <a href="cosmetics.html?cat=soap&sub=medicinal" class="dropdown-link">— Лечебное</a>
-            <hr class="dropdown-divider">
             <a href="cosmetics.html?cat=face" class="dropdown-link">Для лица</a>
             <a href="cosmetics.html?cat=body" class="dropdown-link">Для тела</a>
             <a href="cosmetics.html?cat=hair" class="dropdown-link">Для волос</a>

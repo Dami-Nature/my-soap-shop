@@ -19,8 +19,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { font-family: -apple-system, 'Helvetica Neue', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     .hidden { display: none !important; }
-
-    /* ── Шапка ─────────────────────────────── */
     .header {
       position: sticky; top: 0; z-index: 10;
       background: var(--surface); border-bottom: 1px solid var(--border);
@@ -28,8 +26,6 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .header-title { font-size: 17px; font-weight: 600; color: var(--accent); }
-
-    /* ── Кнопки ─────────────────────────────── */
     .btn {
       display: block; width: 100%; padding: 14px 16px;
       background: var(--surface); border: 1px solid var(--border);
@@ -41,8 +37,6 @@
     .btn-danger  { color: var(--danger); border-color: #3a1e1e; background: #1e1010; }
     .btn-small   { padding: 8px 14px; width: auto; font-size: 13px; display: inline-block; border-radius: 10px; }
     .btn-icon    { background: none; border: none; color: var(--text2); font-size: 22px; padding: 4px 8px; cursor: pointer; }
-
-    /* ── Экран входа ─────────────────────────── */
     #login-screen {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       min-height: 100vh; padding: 32px 24px;
@@ -51,8 +45,6 @@
     .login-title { font-size: 26px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
     .login-sub   { font-size: 14px; color: var(--text2); margin-bottom: 36px; }
     .login-form  { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; }
-
-    /* ── Поля ввода ─────────────────────────── */
     .field-group { display: flex; flex-direction: column; gap: 6px; }
     .field-label { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.7px; }
     .field-input {
@@ -67,8 +59,6 @@
       background-repeat: no-repeat; background-position: right 14px center;
       padding-right: 36px; -webkit-appearance: none; appearance: none;
     }
-
-    /* ── Главный экран ──────────────────────── */
     .main-content { padding: 12px 16px; padding-bottom: calc(90px + var(--sb)); }
     .category-header {
       font-size: 11px; font-weight: 600; text-transform: uppercase;
@@ -86,16 +76,12 @@
     .product-info { flex: 1; min-width: 0; }
     .product-name { font-size: 15px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .product-meta { font-size: 12px; color: var(--text2); margin-top: 3px; }
-
-    /* ── Нижняя кнопка публикации ───────────── */
     .publish-bar {
       position: fixed; bottom: 0; left: 0; right: 0;
       background: var(--surface); border-top: 1px solid var(--border);
       padding: 12px 16px; padding-bottom: calc(12px + var(--sb));
     }
     .publish-bar .btn { border-radius: 14px; padding: 16px; font-size: 16px; }
-
-    /* ── Модальное окно (снизу) ─────────────── */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 100;
       background: rgba(0,0,0,0.75);
@@ -111,8 +97,6 @@
     .modal-form { display: flex; flex-direction: column; gap: 14px; }
     .row-2 { display: flex; gap: 10px; }
     .row-2 > * { flex: 1; }
-
-    /* ── Toggle ─────────────────────────────── */
     .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; }
     .toggle-label { font-size: 15px; }
     .toggle { position: relative; width: 51px; height: 31px; flex-shrink: 0; }
@@ -121,8 +105,6 @@
     .toggle-slider:before { content: ''; position: absolute; width: 27px; height: 27px; left: 2px; bottom: 2px; background: #fff; border-radius: 50%; transition: transform .2s; }
     .toggle input:checked + .toggle-slider { background: var(--accent); }
     .toggle input:checked + .toggle-slider:before { transform: translateX(20px); }
-
-    /* ── Загрузка фото ──────────────────────── */
     .photo-zone {
       border: 2px dashed var(--border); border-radius: 12px;
       min-height: 90px; display: flex; align-items: center; justify-content: center;
@@ -131,8 +113,6 @@
     .photo-zone:active { border-color: var(--accent); }
     .photo-zone img { width: 100%; max-height: 200px; object-fit: contain; display: block; }
     .photo-hint { font-size: 13px; color: var(--text2); text-align: center; }
-
-    /* ── Таб-бар ─────────────────────────────── */
     .tab-bar {
       display: flex;
       background: var(--surface);
@@ -149,8 +129,6 @@
       cursor: pointer; font-family: inherit;
     }
     .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
-
-    /* ── Полоса миниатюр ─────────────────────── */
     .photo-strip { display: flex; flex-wrap: wrap; gap: 8px; }
     .photo-thumb-wrap { position: relative; }
     .photo-thumb-img { width: 72px; height: 72px; border-radius: 10px; object-fit: cover; display: block; }
@@ -168,8 +146,6 @@
       font-size: 28px; color: var(--text2); cursor: pointer;
     }
     .photo-add:active { border-color: var(--accent); color: var(--accent); }
-
-    /* ── Битое фото (файл не найден) ─────────── */
     .img-broken {
       display: flex; align-items: center; justify-content: center;
       flex-direction: column; gap: 2px; text-align: center;
@@ -179,8 +155,6 @@
     .img-broken.size-s { width: 50px; height: 50px; font-size: 18px; flex-shrink: 0; }
     .img-broken.size-m { width: 72px; height: 72px; font-size: 20px; }
     .img-broken.size-l { width: 100%; height: 120px; font-size: 28px; }
-
-    /* ── Диалог подтверждения ───────────────── */
     .confirm-overlay {
       position: fixed; inset: 0; z-index: 200;
       background: rgba(0,0,0,0.85);
@@ -195,8 +169,6 @@
     .confirm-box p { font-size: 14px; color: var(--text2); margin-bottom: 22px; line-height: 1.55; white-space: pre-line; }
     .confirm-row { display: flex; gap: 10px; }
     .confirm-row .btn { border-radius: 12px; }
-
-    /* ── Toast ──────────────────────────────── */
     .toast {
       position: fixed; bottom: calc(110px + var(--sb)); left: 50%;
       transform: translateX(-50%);
@@ -206,21 +178,17 @@
       animation: toastIn 0.2s ease;
     }
     @keyframes toastIn { from { opacity:0; transform:translate(-50%,8px); } to { opacity:1; transform:translate(-50%,0); } }
-
-    /* ── Спиннер ─────────────────────────────── */
     .spinner {
       display: inline-block; width: 22px; height: 22px;
       border: 2px solid rgba(255,255,255,0.15); border-top-color: #fff;
       border-radius: 50%; animation: spin .7s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-
     a { color: var(--accent); }
   </style>
 </head>
 <body>
 
-<!-- ══════ ЭКРАН ВХОДА ══════ -->
 <div id="login-screen">
   <div class="login-logo">🧼</div>
   <div class="login-title">ДАМИ</div>
@@ -241,7 +209,6 @@
   </div>
 </div>
 
-<!-- ══════ ГЛАВНЫЙ ЭКРАН ══════ -->
 <div id="main-screen" class="hidden">
   <div class="header">
     <div class="header-title">🧼 ДАМИ</div>
@@ -281,6 +248,11 @@
     </div>
 
     <div class="category-header">🗂 Карточки каталога</div>
+    <div class="product-item" onclick="openSiteEdit('card-soap')">
+      <div class="product-placeholder">🧼</div>
+      <div class="product-info"><div class="product-name">Мыло — фото</div><div class="product-meta" id="se-card-soap"></div></div>
+      <div style="color:#444;font-size:22px">›</div>
+    </div>
     <div class="product-item" onclick="openSiteEdit('card-cosmetics')">
       <div class="product-placeholder">🌸</div>
       <div class="product-info"><div class="product-name">Косметика — фото</div><div class="product-meta" id="se-card-cosmetics"></div></div>
@@ -312,7 +284,6 @@
   </div>
 </div>
 
-<!-- ══════ МОДАЛЬНОЕ ОКНО РЕДАКТИРОВАНИЯ ══════ -->
 <div class="modal-overlay hidden" id="edit-modal" onclick="onModalBgClick(event)">
   <div class="modal-sheet" id="edit-sheet">
     <div class="modal-handle"></div>
@@ -387,7 +358,6 @@
   </div>
 </div>
 
-<!-- ══════ ДИАЛОГ ПОДТВЕРЖДЕНИЯ ══════ -->
 <div class="confirm-overlay hidden" id="confirm-modal">
   <div class="confirm-box">
     <h3 id="conf-title"></h3>
@@ -399,7 +369,6 @@
   </div>
 </div>
 
-<!-- ══════ МОДАЛ: РЕДАКТИРОВАНИЕ САЙТА ══════ -->
 <div class="modal-overlay hidden" id="site-edit-modal" onclick="onSiteModalBgClick(event)">
   <div class="modal-sheet" id="site-edit-sheet">
     <div class="modal-handle"></div>
@@ -424,14 +393,14 @@ const CAT = {
 
 let products = [];
 let fileSHA  = null;
-let editIdx  = null;   // null = новый товар
-let newImages = {};    // 'images/fname.jpg' → base64
+let editIdx  = null;
+let newImages = {};
 let currentTab   = 'products';
 let configSHA    = null;
 let configData   = {
   hero: { image: 'images/hero.jpg' },
   about: { image: 'images/about.jpg', text: '' },
-  categoryCards: { cosmetics: 'images/cosmetics-card.jpg', teas: 'images/teas-card.jpg', sets: null },
+  categoryCards: { soap: null, cosmetics: 'images/cosmetics-card.jpg', teas: 'images/teas-card.jpg', sets: null },
   setsGallery: []
 };
 let newConfigImages = {};
@@ -484,8 +453,6 @@ async function onPhotoAdd(e) {
   }
 }
 
-// ─── Auth ────────────────────────────────────────────────────────────────────
-
 const getToken = () => localStorage.getItem('dami_gh_token');
 
 async function doLogin() {
@@ -522,8 +489,6 @@ function confirmLogout() {
   });
 }
 
-// ─── GitHub API ───────────────────────────────────────────────────────────────
-
 async function ghGet(path) {
   const r = await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.name}/${path}`, {
     headers: { Authorization: `token ${getToken()}`, Accept: 'application/vnd.github.v3+json' }
@@ -547,8 +512,6 @@ async function ghPutRaw(path, base64, sha, msg) {
   if (!r.ok) { const e = await r.json(); throw new Error(e.message || `GitHub PUT error ${r.status}`); }
   return r.json();
 }
-
-// ─── Load & render ────────────────────────────────────────────────────────────
 
 async function loadMain() {
   try {
@@ -589,8 +552,6 @@ function render() {
       const rawUrl = p.image
         ? `https://raw.githubusercontent.com/${REPO.owner}/${REPO.name}/${REPO.branch}/${p.image}`
         : null;
-
-      // Если только что загрузили новое фото — показываем из памяти
       const pendingB64 = p.image && newImages[p.image];
       const thumbSrc = pendingB64
         ? `data:image/jpeg;base64,${pendingB64}`
@@ -615,8 +576,6 @@ function render() {
 
   el.innerHTML = html || '<div style="color:#555;text-align:center;padding:60px">Товаров нет</div>';
 }
-
-// ─── Edit modal ───────────────────────────────────────────────────────────────
 
 function openEdit(idx) {
   editIdx = idx;
@@ -658,7 +617,6 @@ function openAdd() {
 function showModal() {
   document.getElementById('edit-modal').classList.remove('hidden');
   document.body.style.overflow = 'hidden';
-  // Скроллим шит наверх
   document.getElementById('edit-sheet').scrollTop = 0;
 }
 
@@ -675,8 +633,6 @@ function onCatChange() {
   const cat = document.getElementById('f-cat').value;
   document.getElementById('subcat-wrap').style.display = cat === 'soap' ? '' : 'none';
 }
-
-// ─── Save / Delete ────────────────────────────────────────────────────────────
 
 function saveProduct() {
   const name = document.getElementById('f-name').value.trim();
@@ -729,8 +685,6 @@ function deleteProduct() {
   });
 }
 
-// ─── Publish ──────────────────────────────────────────────────────────────────
-
 function openPublishConfirm() {
   const imgN = Object.keys(newImages).length + Object.keys(newConfigImages).length;
   let text = 'Изменения сохранятся на GitHub.\nСайт обновится примерно через 1 минуту.';
@@ -764,7 +718,6 @@ async function doPublish() {
       configDirty = false;
     }
 
-    // Clear only after all commits succeed
     newImages = {};
     newConfigImages = {};
 
@@ -788,14 +741,13 @@ function makeProductsJs(arr) {
   return `// Обновлено через панель управления ДАМИ: ${ts}\n\nconst PRODUCTS = [\n\n${lines.join(',\n\n')}\n\n];\n`;
 }
 
-// ─── Site tab ─────────────────────────────────────────────────────────────────
-
 function renderSiteTab() {
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val || '—'; };
   set('se-hero-path',         configData.hero && configData.hero.image);
   set('se-about-img',         configData.about && configData.about.image);
   const t = (configData.about && configData.about.text) || '';
   set('se-about-text-preview', t.slice(0, 50) + (t.length > 50 ? '…' : ''));
+  set('se-card-soap',         configData.categoryCards && configData.categoryCards.soap);
   set('se-card-cosmetics',    configData.categoryCards && configData.categoryCards.cosmetics);
   set('se-card-teas',         configData.categoryCards && configData.categoryCards.teas);
   set('se-card-sets',         configData.categoryCards && configData.categoryCards.sets);
@@ -805,7 +757,7 @@ function renderSiteTab() {
 
 const SITE_TITLES = {
   'hero-image': 'Фото баннера', 'about-image': 'Фото Эмилии',
-  'about-text': 'Текст биографии', 'card-cosmetics': 'Косметика — фото',
+  'about-text': 'Текст биографии', 'card-soap': 'Мыло — фото', 'card-cosmetics': 'Косметика — фото',
   'card-teas': 'Чаи — фото', 'card-sets': 'Наборы — фото',
   'sets-gallery': 'Наборы — фото на странице',
 };
@@ -814,6 +766,7 @@ function getSiteImagePath(key) {
   const c = configData;
   if (key === 'hero-image')     return c.hero && c.hero.image;
   if (key === 'about-image')    return c.about && c.about.image;
+  if (key === 'card-soap')      return c.categoryCards && c.categoryCards.soap;
   if (key === 'card-cosmetics') return c.categoryCards && c.categoryCards.cosmetics;
   if (key === 'card-teas')      return c.categoryCards && c.categoryCards.teas;
   if (key === 'card-sets')      return c.categoryCards && c.categoryCards.sets;
@@ -824,6 +777,7 @@ function setSiteImagePath(key, path) {
   const c = configData;
   if (key === 'hero-image')     c.hero = { ...c.hero, image: path };
   if (key === 'about-image')    c.about = { ...c.about, image: path };
+  if (key === 'card-soap')      c.categoryCards = { ...c.categoryCards, soap: path };
   if (key === 'card-cosmetics') c.categoryCards = { ...c.categoryCards, cosmetics: path };
   if (key === 'card-teas')      c.categoryCards = { ...c.categoryCards, teas: path };
   if (key === 'card-sets')      c.categoryCards = { ...c.categoryCards, sets: path };
@@ -905,7 +859,7 @@ async function onSiteFileChange(e) {
     configDirty = true;
     closeSiteEdit();
     renderSiteTab();
-    toast('Фото выбрано — нажми «Опубликовать»');
+    toast('фото выбрано — нажми «Опубликовать»');
   } catch(_) {
     toast('❌ Этот формат фото не открывается в браузере. На iPhone: Настройки → Камера → Форматы → «Совместимые», или отправь фото себе через Сообщения/AirDrop — так оно станет JPG.');
   }
@@ -916,7 +870,7 @@ function saveSiteText() {
   configDirty = true;
   closeSiteEdit();
   renderSiteTab();
-  toast('Текст сохранён — нажми «Опубликовать»');
+  toast('текст сохранён — нажми «Опубликовать»');
 }
 
 function renderGalleryStrip() {
@@ -967,10 +921,8 @@ function makeConfigJs(cfg) {
   const ts = new Date().toLocaleString('ru-RU');
   const q  = v => v == null ? 'null' : jss(v);
   const gallery = (cfg.setsGallery || []).map(jss).join(', ');
-  return `// Настройки сайта ДАМИ. Обновлено: ${ts}\n\nconst CONFIG = {\n  hero: {\n    image: ${q(cfg.hero && cfg.hero.image)}\n  },\n  about: {\n    image: ${q(cfg.about && cfg.about.image)},\n    text: ${jss((cfg.about && cfg.about.text) || '')}\n  },\n  categoryCards: {\n    cosmetics: ${q(cfg.categoryCards && cfg.categoryCards.cosmetics)},\n    teas: ${q(cfg.categoryCards && cfg.categoryCards.teas)},\n    sets: ${q(cfg.categoryCards && cfg.categoryCards.sets)}\n  },\n  setsGallery: [${gallery}]\n};\n`;
+  return `// Настройки сайта ДАМИ. Обновлено: ${ts}\n\nconst CONFIG = {\n  hero: {\n    image: ${q(cfg.hero && cfg.hero.image)}\n  },\n  about: {\n    image: ${q(cfg.about && cfg.about.image)},\n    text: ${jss((cfg.about && cfg.about.text) || '')}\n  },\n  categoryCards: {\n    soap: ${q(cfg.categoryCards && cfg.categoryCards.soap)},\n    cosmetics: ${q(cfg.categoryCards && cfg.categoryCards.cosmetics)},\n    teas: ${q(cfg.categoryCards && cfg.categoryCards.teas)},\n    sets: ${q(cfg.categoryCards && cfg.categoryCards.sets)}\n  },\n  setsGallery: [${gallery}]\n};\n`;
 }
-
-// ─── Confirm ──────────────────────────────────────────────────────────────────
 
 function openConfirm(title, text, onOk) {
   document.getElementById('conf-title').textContent = title;
@@ -979,8 +931,6 @@ function openConfirm(title, text, onOk) {
   document.getElementById('confirm-modal').classList.remove('hidden');
 }
 function closeConfirm() { document.getElementById('confirm-modal').classList.add('hidden'); }
-
-// ─── Utils ────────────────────────────────────────────────────────────────────
 
 function b64encode(str) {
   return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p) => String.fromCharCode(parseInt(p, 16))));
@@ -997,27 +947,19 @@ function sanitize(name) {
     .replace(/^-+|-+(?=\.)/g, '') || 'photo';
 }
 
-// Путь для нового фото — всегда .jpg (исходный формат не важен, см. fileToJpegB64)
 function jpgPath(name) {
   const base = sanitize(name).replace(/\.[^.]*$/, '');
   return 'images/' + (base || 'photo') + '.jpg';
 }
 
-// Показать заглушку «файл не найден» вместо битой картинки
 function imgErr(el, size) {
   const div = document.createElement('div');
   div.className = 'img-broken size-' + size;
-  div.title = 'Файл фото не найден в репозитории';
+  div.title = 'файл фото не найден в репозитории';
   div.innerHTML = '⚠️<div class="lbl">нет файла</div>';
   el.replaceWith(div);
 }
 
-// Перекодировать любое выбранное изображение в JPEG через canvas.
-// Это решает 2 проблемы:
-//  1) превью раньше всегда подписывалось как image/jpeg, даже если файл был PNG/др. — теперь это правда.
-//  2) фото с iPhone в формате HEIC: Safari умеет декодировать HEIC в <img>,
-//     поэтому конвертация в JPEG проходит успешно и на сайте фото видно во всех браузерах.
-//     В браузерах, которые HEIC не понимают (Chrome/Edge), img.onerror подскажет, что делать.
 const MAX_SIDE = 1600;
 function fileToJpegB64(file) {
   return new Promise((resolve, reject) => {
@@ -1054,15 +996,12 @@ function toast(msg) {
   setTimeout(() => el.remove(), 3500);
 }
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
-
 document.getElementById('token-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
 
 (async () => {
   if (!getToken()) return;
-  // Авто-вход если токен сохранён
   document.getElementById('login-screen').innerHTML =
     '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center"><div class="spinner" style="width:40px;height:40px;border-width:3px"></div></div>';
   try {

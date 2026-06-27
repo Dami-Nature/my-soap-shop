@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 27.06.2026, 22:45:33
+// Обновлено через панель управления ДАМИ: 27.06.2026, 22:46:44
 
 const PRODUCTS = [
 
@@ -92,6 +92,10 @@ const PRODUCTS = [
 
   { id: 26, name: "Наборы", category: "set", subcategory: null,
     description: "",
-    weight: null, price: null, image: "images/img_9802.jpg", featured: false }
+    weight: null, price: null, image: "images/img_9802.jpg", featured: false },
+
+  { id: 27, name: "Наборы", category: "set", subcategory: null,
+    description: "",
+    weight: null, price: null, image: "images/img_9801.jpg", featured: false }
 
 ];

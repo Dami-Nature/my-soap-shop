@@ -6,28 +6,6 @@
   <title>Мыло — Дами</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .soap-folders {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      max-width: 900px;
-      margin: 0 auto 8px;
-    }
-    .soap-folder {
-      background: white;
-      border-radius: 12px;
-      padding: 0 16px;
-      text-align: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.18s;
-      border: 2px solid transparent;
-    }
-    .soap-folder:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.11); }
-    .soap-folder.active { border-color: #4a7c59; background: #f0f8f3; }
-    .soap-folder-icon { font-size: 32px; margin-bottom: -8px; font-family: 'Raleway', serif; color: #4a7c59; }
-    .soap-folder-name { font-family: 'Raleway', sans-serif; font-size: 16px; font-weight: 600; color: #1a0a02; letter-spacing: 1.5px; text-transform: uppercase; }
-
     .section-label {
       font-family: 'Raleway', sans-serif;
       font-size: 13px;
@@ -40,10 +18,6 @@
       margin-left: auto;
       margin-right: auto;
     }
-
-    @media (max-width: 500px) {
-      .soap-folders { grid-template-columns: 1fr; max-width: 280px; }
-    }
   </style>
 </head>
 <body>
@@ -55,23 +29,11 @@
 
   <section class="section">
 
-    <div class="soap-folders">
-      <div class="soap-folder" data-sub="" onclick="selectSoapFolder(this)">
-        <div class="soap-folder-icon">✦</div>
-        <div class="soap-folder-name">Всё</div>
-      </div>
-      <div class="soap-folder" data-sub="children" onclick="selectSoapFolder(this)">
-        <div class="soap-folder-icon">✦</div>
-        <div class="soap-folder-name">Детское</div>
-      </div>
-      <div class="soap-folder" data-sub="household" onclick="selectSoapFolder(this)">
-        <div class="soap-folder-icon">✦</div>
-        <div class="soap-folder-name">Хозяйственное</div>
-      </div>
-      <div class="soap-folder" data-sub="medicinal" onclick="selectSoapFolder(this)">
-        <div class="soap-folder-icon">✦</div>
-        <div class="soap-folder-name">Лечебное</div>
-      </div>
+    <div class="filter-bar">
+      <button class="filter-tab" data-sub="" onclick="selectSoapFolder(this)">Всё</button>
+      <button class="filter-tab" data-sub="children" onclick="selectSoapFolder(this)">Детское</button>
+      <button class="filter-tab" data-sub="household" onclick="selectSoapFolder(this)">Хозяйственное</button>
+      <button class="filter-tab" data-sub="medicinal" onclick="selectSoapFolder(this)">Лечебное</button>
     </div>
 
     <div class="section-label" id="grid-label" style="display:none"></div>

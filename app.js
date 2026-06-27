@@ -101,7 +101,7 @@ function updateSoap() {
   const labelEl = document.getElementById('grid-label');
   const sub = _soapSub;
 
-  document.querySelectorAll('.soap-folder').forEach(f =>
+  document.querySelectorAll('.filter-tab').forEach(f =>
     f.classList.toggle('active', (f.dataset.sub || null) === sub));
 
   const labels = { household: 'Хозяйственное мыло', children: 'Детское мыло', medicinal: 'Лечебное мыло' };

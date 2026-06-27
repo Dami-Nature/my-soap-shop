@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 27.06.2026, 22:47:10
+// Обновлено через панель управления ДАМИ: 27.06.2026, 22:48:46
 
 const PRODUCTS = [
 
@@ -91,11 +91,11 @@ const PRODUCTS = [
     weight: "50 гр", price: null, image: "images/tea-baikal.jpg", featured: true },
 
   { id: 26, name: "Наборы", category: "set", subcategory: null,
-    description: "",
+    description: "Наборы могут быть уже собраны или можно собрать под запрос.",
     weight: null, price: null, image: "images/img_9802.jpg", featured: false },
 
   { id: 27, name: "Наборы", category: "set", subcategory: null,
-    description: "",
+    description: "Наборы могут быть уже собраны или можно собрать под запрос.",
     weight: null, price: null, image: "images/img_9801.jpg", featured: false }
 
 ];

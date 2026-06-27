@@ -1,7 +1,7 @@
 // Rendering and filtering logic
 
 const TG_LINK = 'https://t.me/EmiliyaT';
-// MAX_LINK обявлен в nav.js, которое грузится раньше на всех страницах с app.js
+// MAX_LINK и WA_LINK обявлены в nav.js, которое грузится раньше на всех страницах с app.js
 
 // Emoji placeholders when no image
 const CATEGORY_EMOJI = {
@@ -32,6 +32,7 @@ function productCard(p) {
           <button class="product-btn" onclick="event.stopPropagation();toggleContactMenu(this)">Написать</button>
           <div class="contact-dropdown" onclick="event.stopPropagation()">
             <a href="${TG_LINK}?text=${encodeURIComponent('Хочу заказать: ' + p.name)}" target="_blank">Telegram</a>
+            <a href="${WA_LINK}?text=${encodeURIComponent('Хочу заказать: ' + p.name)}" target="_blank">WhatsApp</a>
             <a href="${MAX_LINK}" target="_blank">MAX</a>
           </div>
         </div>

@@ -1,6 +1,7 @@
 // Shared header and footer — injected into every page
 
 const MAX_LINK = 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg';
+const WA_LINK = 'https://wa.me/79646418016';
 
 // Toggle the Telegram/MAX dropdown under a "Написать"/"Заказать" button
 window.toggleContactMenu = function (btn) {
@@ -48,6 +49,7 @@ document.addEventListener('click', (e) => {
           <button class="btn-tg" onclick="toggleContactMenu(this)">Написать</button>
           <div class="contact-dropdown">
             <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+            <a href="${WA_LINK}" target="_blank">WhatsApp</a>
             <a href="${MAX_LINK}" target="_blank">MAX</a>
           </div>
         </div>
@@ -65,6 +67,7 @@ document.addEventListener('click', (e) => {
           <button onclick="toggleContactMenu(this)">Написать</button>
           <div class="contact-dropdown">
             <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+            <a href="${WA_LINK}" target="_blank">WhatsApp</a>
             <a href="${MAX_LINK}" target="_blank">MAX</a>
           </div>
         </div>

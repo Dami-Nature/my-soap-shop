@@ -2,6 +2,19 @@
 
 const MAX_LINK = 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg';
 
+// Toggle the Telegram/MAX dropdown under a "Написать"/"Заказать" button
+window.toggleContactMenu = function (btn) {
+  const menu = btn.nextElementSibling;
+  const wasOpen = menu.classList.contains('open');
+  document.querySelectorAll('.contact-dropdown.open').forEach(m => m.classList.remove('open'));
+  if (!wasOpen) menu.classList.add('open');
+};
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.contact-menu')) {
+    document.querySelectorAll('.contact-dropdown.open').forEach(m => m.classList.remove('open'));
+  }
+});
+
 (function () {
   const page = location.pathname.split('/').pop() || 'index.html';
 
@@ -31,8 +44,13 @@ const MAX_LINK = 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6y
         </div>
         <a href="teas.html" class="nav-link ${isActive('teas.html')}">Чаи</a>
         <a href="sets.html" class="nav-link ${isActive('sets.html')}">Наборы</a>
-        <a href="https://t.me/EmiliyaT" class="btn-tg" target="_blank">Написать в Telegram</a>
-        <a href="${MAX_LINK}" class="btn-tg" target="_blank">Написать в MAX</a>
+        <div class="contact-menu">
+          <button class="btn-tg" onclick="toggleContactMenu(this)">Написать</button>
+          <div class="contact-dropdown">
+            <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+            <a href="${MAX_LINK}" target="_blank">MAX</a>
+          </div>
+        </div>
       </nav>
     </header>
   `;
@@ -43,8 +61,13 @@ const MAX_LINK = 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6y
       <div class="footer-sub">Натуральная косметика ручной работы</div>
       <div class="footer-links">
         <a href="https://t.me/DamiNature" target="_blank">Telegram канал</a>
-        <a href="https://t.me/EmiliyaT" target="_blank">Написать в Telegram</a>
-        <a href="${MAX_LINK}" target="_blank">Написать в MAX</a>
+        <div class="contact-menu">
+          <button onclick="toggleContactMenu(this)">Написать</button>
+          <div class="contact-dropdown">
+            <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+            <a href="${MAX_LINK}" target="_blank">MAX</a>
+          </div>
+        </div>
         <a href="https://instagram.com/dami.nature" target="_blank">Instagram</a>
       </div>
       <div class="footer-copy">© 2026 Дами</div>

@@ -29,6 +29,7 @@ document.addEventListener('click', (e) => {
       </a>
       <nav class="main-nav">
         <a href="index.html" class="nav-link ${isActive('index.html')}">Главная</a>
+        <a href="cosmetics.html?cat=soap" class="nav-link">Мыло</a>
         <div class="nav-item">
           <a href="cosmetics.html" class="nav-link ${isActive('cosmetics.html')}">Косметика</a>
           <div class="dropdown">

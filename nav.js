@@ -64,6 +64,11 @@ document.addEventListener('click', (e) => {
         </a>
         <a href="https://instagram.com/dami.nature" target="_blank" class="footer-icon">
           <img src="https://cdn.simpleicons.org/instagram/4a7c59" alt="Instagram" onerror="this.outerHTML='Instagram'">
+          <span>Instagram</span>
+        </a>
+        <a href="https://vk.ru/daminature" target="_blank" class="footer-icon">
+          <img src="https://cdn.simpleicons.org/vk/4a7c59" alt="VK" onerror="this.outerHTML='VK'">
+          <span>VK</span>
         </a>
       </div>
       <div class="footer-copy">© 2026 Дами</div>

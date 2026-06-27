@@ -1,4 +1,4 @@
-// Настройки сайта ДАМИ. Обновлено: 27.06.2026, 20:19:45
+// Настройки сайта ДАМИ. Обновлено: 27.06.2026, 20:20:44
 
 const CONFIG = {
   hero: {
@@ -11,6 +11,6 @@ const CONFIG = {
   categoryCards: {
     cosmetics: "images/cosmetics-card.jpg",
     teas: "images/teas-card.jpg",
-    sets: null
+    sets: "images/img_9800.jpg"
   }
 };

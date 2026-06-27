@@ -50,7 +50,10 @@ document.addEventListener('click', (e) => {
       <div class="footer-logo">Дами</div>
       <div class="footer-sub">Натуральная косметика ручной работы</div>
       <div class="footer-links">
-        <a href="https://t.me/DamiNature" target="_blank">Telegram канал</a>
+        <a href="https://t.me/DamiNature" target="_blank" class="footer-icon">
+          <img src="https://cdn.simpleicons.org/telegram/4a7c59" alt="Telegram" onerror="this.outerHTML='Telegram'">
+          <span>канал</span>
+        </a>
         <div class="contact-menu">
           <button onclick="toggleContactMenu(this)">Написать</button>
           <div class="contact-dropdown">
@@ -59,7 +62,9 @@ document.addEventListener('click', (e) => {
             <a href="${MAX_LINK}" target="_blank">MAX</a>
           </div>
         </div>
-        <a href="https://instagram.com/dami.nature" target="_blank">Instagram</a>
+        <a href="https://instagram.com/dami.nature" target="_blank" class="footer-icon">
+          <img src="https://cdn.simpleicons.org/instagram/4a7c59" alt="Instagram" onerror="this.outerHTML='Instagram'">
+        </a>
       </div>
       <div class="footer-copy">© 2026 Дами</div>
     </footer>

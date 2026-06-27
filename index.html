@@ -29,6 +29,11 @@
   <section class="section" style="background: #4a7c59;">
     <div class="section-title">Каталог</div>
     <div class="cat-grid">
+      <a href="soap.html" class="cat-card">
+        <div id="card-soap-area"><div class="cat-icon">✦</div></div>
+        <div class="cat-name">Мыло</div>
+        <div class="cat-desc">ручная работа</div>
+      </a>
       <a href="cosmetics.html" class="cat-card">
         <img id="card-cosmetics-img" src="images/cosmetics-card.jpg" alt="Косметика" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-bottom:14px;">
         <div class="cat-name">Косметика</div>
@@ -70,6 +75,9 @@
       if (CONFIG.about && CONFIG.about.text)
         document.getElementById('about-text').innerHTML = CONFIG.about.text.replace(/\n/g, '<br>');
       if (CONFIG.categoryCards) {
+        if (CONFIG.categoryCards.soap)
+          document.getElementById('card-soap-area').innerHTML =
+            '<img src="' + CONFIG.categoryCards.soap + '" alt="Мыло" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-bottom:14px;">';
         if (CONFIG.categoryCards.cosmetics)
           document.getElementById('card-cosmetics-img').src = CONFIG.categoryCards.cosmetics;
         if (CONFIG.categoryCards.teas)

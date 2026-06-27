@@ -1,6 +1,7 @@
 // Rendering and filtering logic
 
 const TG_LINK = 'https://t.me/EmiliyaT';
+const MAX_LINK = 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg';
 
 // Emoji placeholders when no image
 const CATEGORY_EMOJI = {
@@ -27,9 +28,14 @@ function productCard(p) {
       <div class="product-info">
         <div class="product-name">${p.name}</div>
         <div class="product-meta">${weight}${price}</div>
-        <button class="product-btn" onclick="event.stopPropagation();window.open('${TG_LINK}?text=Хочу заказать: ${encodeURIComponent(p.name)}','_blank')">
-          Написать
-        </button>
+        <div class="product-btns">
+          <button class="product-btn" onclick="event.stopPropagation();window.open('${TG_LINK}?text=Хочу заказать: ${encodeURIComponent(p.name)}','_blank')">
+            Написать в Telegram
+          </button>
+          <button class="product-btn" onclick="event.stopPropagation();window.open('${MAX_LINK}','_blank')">
+            Написать в MAX
+          </button>
+        </div>
       </div>
     </div>
   `;

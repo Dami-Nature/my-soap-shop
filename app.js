@@ -28,7 +28,7 @@ function productCard(p) {
         <div class="product-name">${p.name}</div>
         <div class="product-meta">${weight}${price}</div>
         <button class="product-btn" onclick="event.stopPropagation();window.open('${TG_LINK}?text=Хочу заказать: ${encodeURIComponent(p.name)}','_blank')">
-          Написать в Telegram
+          Написать
         </button>
       </div>
     </div>

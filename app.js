@@ -1,11 +1,8 @@
 // Rendering and filtering logic
 
-const TG_LINK = 'https://t.me/EmiliyaT';
-// MAX_LINK и WA_LINK обявлены в nav.js, которое грузится раньше на всех страницах с app.js
-
 // Emoji placeholders when no image
 const CATEGORY_EMOJI = {
-  soap: '✦', face: '❋', body: '✾', hair: '❧', tea: '🫖', set: '❦'
+  soap: '✦', face: '❋', body: '✾', hair: '❧', tea: '🤖', set: '❦'
 };
 
 function productCard(p) {
@@ -28,14 +25,6 @@ function productCard(p) {
       <div class="product-info">
         <div class="product-name">${p.name}</div>
         <div class="product-meta">${weight}${price}</div>
-        <div class="contact-menu">
-          <button class="product-btn" onclick="event.stopPropagation();toggleContactMenu(this)">Написать</button>
-          <div class="contact-dropdown" onclick="event.stopPropagation()">
-            <a href="${TG_LINK}?text=${encodeURIComponent('Хочу заказать: ' + p.name)}" target="_blank">Telegram</a>
-            <a href="${WA_LINK}?text=${encodeURIComponent('Хочу заказать: ' + p.name)}" target="_blank">WhatsApp</a>
-            <a href="${MAX_LINK}" target="_blank">MAX</a>
-          </div>
-        </div>
       </div>
     </div>
   `;
@@ -49,7 +38,7 @@ function renderGrid(container, items) {
   container.innerHTML = items.map(productCard).join('');
 }
 
-// ─── MAIN PAGE ───────────────────────────────────────────────
+// ─── MAIN PAGE ───────────────────────────────────────
 function initIndex() {
   const grid = document.getElementById('featured-grid');
   if (!grid) return;
@@ -57,7 +46,7 @@ function initIndex() {
   renderGrid(grid, featured);
 }
 
-// ─── COSMETICS PAGE ──────────────────────────────────────────
+// ─── COSMETICS PAGE ──────────────────────────────────
 let _cosmeticsCat = 'soap';
 let _cosmeticsSub = null;
 
@@ -131,21 +120,21 @@ function updateCosmetics() {
   renderGrid(grid, items);
 }
 
-// ─── TEAS PAGE ───────────────────────────────────────────────
+// ─── TEAS PAGE ─────────────────────────────────────
 function initTeas() {
   const grid = document.getElementById('products-grid');
   if (!grid) return;
   renderGrid(grid, PRODUCTS.filter(p => p.category === 'tea'));
 }
 
-// ─── SETS PAGE ───────────────────────────────────────────────
+// ─── SETS PAGE ─────────────────────────────────────
 function initSets() {
   const grid = document.getElementById('products-grid');
   if (!grid) return;
   renderGrid(grid, PRODUCTS.filter(p => p.category === 'set'));
 }
 
-// ─── BOOT ────────────────────────────────────────────────────
+// ─── BOOT ─────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   const page = location.pathname.split('/').pop() || 'index.html';
   if (page === 'index.html' || page === '') initIndex();

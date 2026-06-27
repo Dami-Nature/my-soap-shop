@@ -49,19 +49,19 @@ document.addEventListener('click', (e) => {
     <footer>
       <div class="footer-logo">Дами</div>
       <div class="footer-sub">Натуральная косметика ручной работы</div>
+      <div class="contact-menu footer-cta-wrap">
+        <button class="footer-cta" onclick="toggleContactMenu(this)">Написать</button>
+        <div class="contact-dropdown">
+          <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+          <a href="${WA_LINK}" target="_blank">WhatsApp</a>
+          <a href="${MAX_LINK}" target="_blank">MAX</a>
+        </div>
+      </div>
       <div class="footer-links">
         <a href="https://t.me/DamiNature" target="_blank" class="footer-icon">
           <img src="https://cdn.simpleicons.org/telegram/4a7c59" alt="Telegram" onerror="this.outerHTML='Telegram'">
           <span>канал</span>
         </a>
-        <div class="contact-menu">
-          <button onclick="toggleContactMenu(this)">Написать</button>
-          <div class="contact-dropdown">
-            <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
-            <a href="${WA_LINK}" target="_blank">WhatsApp</a>
-            <a href="${MAX_LINK}" target="_blank">MAX</a>
-          </div>
-        </div>
         <a href="https://instagram.com/dami.nature" target="_blank" class="footer-icon">
           <img src="https://cdn.simpleicons.org/instagram/4a7c59" alt="Instagram" onerror="this.outerHTML='Instagram'">
         </a>

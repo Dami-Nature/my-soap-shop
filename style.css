@@ -402,6 +402,20 @@ footer {
   color: var(--muted);
   margin-bottom: 20px;
 }
+.footer-cta-wrap { display: inline-block; margin-bottom: 22px; }
+.footer-cta {
+  padding: 10px 30px;
+  border: 1.5px solid var(--text);
+  border-radius: 30px;
+  background: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.footer-cta:hover { background: var(--text); color: var(--white); }
 .footer-links { display: flex; align-items: center; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
 .footer-links a, .footer-links button {
   font-size: 18px;

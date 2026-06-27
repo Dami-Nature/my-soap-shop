@@ -125,9 +125,24 @@ function initTeas() {
 }
 
 // ─── SETS PAGE ─────────────────────────────────────
+function renderSetsGallery() {
+  const wrap = document.getElementById('sets-gallery');
+  if (!wrap) return;
+  const photos = (typeof CONFIG !== 'undefined' && CONFIG.setsGallery) || [];
+  if (!photos.length) {
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = 'grid';
+  wrap.innerHTML = photos.map(src =>
+    `<img class="sets-gallery-img" src="${src}" alt="" onerror="this.outerHTML='<div class=\\'sets-gallery-ph\\'>🎁</div>'">`
+  ).join('');
+}
+
 function initSets() {
   const grid = document.getElementById('products-grid');
   if (!grid) return;
+  renderSetsGallery();
   renderGrid(grid, PRODUCTS.filter(p => p.category === 'set'));
 }
 

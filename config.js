@@ -12,5 +12,6 @@ const CONFIG = {
     cosmetics: "images/cosmetics-card.jpg",
     teas: "images/teas-card.jpg",
     sets: "images/img_9800.jpg"
-  }
+  },
+  setsGallery: []
 };

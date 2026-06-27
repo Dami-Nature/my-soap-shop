@@ -296,6 +296,13 @@
       <div class="product-info"><div class="product-name">Наборы — фото</div><div class="product-meta" id="se-card-sets"></div></div>
       <div style="color:#444;font-size:22px">›</div>
     </div>
+
+    <div class="category-header">🖼 Страница «Наборы»</div>
+    <div class="product-item" onclick="openSiteEdit('sets-gallery')">
+      <div class="product-placeholder">🖼️</div>
+      <div class="product-info"><div class="product-name">Фото на странице</div><div class="product-meta" id="se-sets-gallery"></div></div>
+      <div style="color:#444;font-size:22px">›</div>
+    </div>
   </div>
 
   <div class="publish-bar">
@@ -424,11 +431,13 @@ let configSHA    = null;
 let configData   = {
   hero: { image: 'images/hero.jpg' },
   about: { image: 'images/about.jpg', text: '' },
-  categoryCards: { cosmetics: 'images/cosmetics-card.jpg', teas: 'images/teas-card.jpg', sets: null }
+  categoryCards: { cosmetics: 'images/cosmetics-card.jpg', teas: 'images/teas-card.jpg', sets: null },
+  setsGallery: []
 };
 let newConfigImages = {};
 let configDirty  = false;
 let editPhotos   = [];
+let galleryPhotos = [];
 let siteEditKey  = null;
 
 function switchTab(tab) {
@@ -790,12 +799,15 @@ function renderSiteTab() {
   set('se-card-cosmetics',    configData.categoryCards && configData.categoryCards.cosmetics);
   set('se-card-teas',         configData.categoryCards && configData.categoryCards.teas);
   set('se-card-sets',         configData.categoryCards && configData.categoryCards.sets);
+  const galleryN = (configData.setsGallery || []).length;
+  set('se-sets-gallery', galleryN ? `${galleryN} фото` : null);
 }
 
 const SITE_TITLES = {
   'hero-image': 'Фото баннера', 'about-image': 'Фото Эмилии',
   'about-text': 'Текст биографии', 'card-cosmetics': 'Косметика — фото',
   'card-teas': 'Чаи — фото', 'card-sets': 'Наборы — фото',
+  'sets-gallery': 'Наборы — фото на странице',
 };
 
 function getSiteImagePath(key) {
@@ -833,6 +845,20 @@ function openSiteEdit(key) {
         <button class="btn" onclick="closeSiteEdit()">Отмена</button>
         <button class="btn btn-accent" style="flex:2" onclick="saveSiteText()">Сохранить</button>
       </div>`;
+  } else if (key === 'sets-gallery') {
+    galleryPhotos = (configData.setsGallery || []).map(path =>
+      ({ path, b64: newConfigImages[path] || null, isNew: false }));
+    form.innerHTML = `
+      <div class="field-group">
+        <div class="field-label">Фото на странице «Наборы» (показываются над товарами)</div>
+        <div class="photo-strip" id="gallery-photo-strip"></div>
+        <input type="file" id="gallery-file-add" accept="image/*" style="display:none" onchange="onGalleryPhotoAdd(event)">
+      </div>
+      <div class="row-2">
+        <button class="btn" onclick="closeSiteEdit()">Отмена</button>
+        <button class="btn btn-accent" style="flex:2" onclick="saveGallery()">Сохранить</button>
+      </div>`;
+    renderGalleryStrip();
   } else {
     const curPath = getSiteImagePath(key);
     const pendB64 = curPath && newConfigImages[curPath];
@@ -893,10 +919,55 @@ function saveSiteText() {
   toast('Текст сохранён — нажми «Опубликовать»');
 }
 
+function renderGalleryStrip() {
+  const strip = document.getElementById('gallery-photo-strip');
+  if (!strip) return;
+  let html = galleryPhotos.map((ph, i) => {
+    const src = ph.b64
+      ? `data:image/jpeg;base64,${ph.b64}`
+      : `https://raw.githubusercontent.com/${REPO.owner}/${REPO.name}/${REPO.branch}/${ph.path}`;
+    return `<div class="photo-thumb-wrap">
+      <img class="photo-thumb-img" src="${src}" onerror="imgErr(this,'m')">
+      <button class="photo-thumb-del" onclick="removeGalleryPhoto(${i})">×</button>
+    </div>`;
+  }).join('');
+  html += `<div class="photo-add" onclick="document.getElementById('gallery-file-add').click()">＋</div>`;
+  strip.innerHTML = html;
+}
+
+function removeGalleryPhoto(i) {
+  galleryPhotos.splice(i, 1);
+  renderGalleryStrip();
+}
+
+async function onGalleryPhotoAdd(e) {
+  const file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  try {
+    const b64  = await fileToJpegB64(file);
+    const path = jpgPath(file.name);
+    galleryPhotos.push({ path, b64, isNew: true });
+    renderGalleryStrip();
+  } catch(_) {
+    toast('❌ Этот формат фото не открывается в браузере. На iPhone: Настройки → Камера → Форматы → «Совместимые», или отправь фото себе через Сообщения/AirDrop — так оно станет JPG.');
+  }
+}
+
+function saveGallery() {
+  galleryPhotos.forEach(ph => { if (ph.isNew) newConfigImages[ph.path] = ph.b64; });
+  configData.setsGallery = galleryPhotos.map(ph => ph.path);
+  configDirty = true;
+  closeSiteEdit();
+  renderSiteTab();
+  toast('Сохранено — нажми «Опубликовать»');
+}
+
 function makeConfigJs(cfg) {
   const ts = new Date().toLocaleString('ru-RU');
   const q  = v => v == null ? 'null' : jss(v);
-  return `// Настройки сайта ДАМИ. Обновлено: ${ts}\n\nconst CONFIG = {\n  hero: {\n    image: ${q(cfg.hero && cfg.hero.image)}\n  },\n  about: {\n    image: ${q(cfg.about && cfg.about.image)},\n    text: ${jss((cfg.about && cfg.about.text) || '')}\n  },\n  categoryCards: {\n    cosmetics: ${q(cfg.categoryCards && cfg.categoryCards.cosmetics)},\n    teas: ${q(cfg.categoryCards && cfg.categoryCards.teas)},\n    sets: ${q(cfg.categoryCards && cfg.categoryCards.sets)}\n  }\n};\n`;
+  const gallery = (cfg.setsGallery || []).map(jss).join(', ');
+  return `// Настройки сайта ДАМИ. Обновлено: ${ts}\n\nconst CONFIG = {\n  hero: {\n    image: ${q(cfg.hero && cfg.hero.image)}\n  },\n  about: {\n    image: ${q(cfg.about && cfg.about.image)},\n    text: ${jss((cfg.about && cfg.about.text) || '')}\n  },\n  categoryCards: {\n    cosmetics: ${q(cfg.categoryCards && cfg.categoryCards.cosmetics)},\n    teas: ${q(cfg.categoryCards && cfg.categoryCards.teas)},\n    sets: ${q(cfg.categoryCards && cfg.categoryCards.sets)}\n  },\n  setsGallery: [${gallery}]\n};\n`;
 }
 
 // ─── Confirm ──────────────────────────────────────────────────────────────────

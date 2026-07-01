@@ -5,11 +5,10 @@ const CATEGORY_EMOJI = {
   soap: '✦', face: '❋', body: '✾', hair: '❧', tea: '🤖', set: '❦'
 };
 
-function extractSkinType(desc) {
-  if (!desc) return '';
-  const first = desc.split('\n')[0].trim();
-  if (first.toLowerCase().startsWith('для')) return first.replace(/\.$/, '');
-  return '';
+function splitProductName(name) {
+  const idx = name.indexOf(' для ');
+  if (idx === -1) return { main: name, sub: '' };
+  return { main: name.slice(0, idx), sub: name.slice(idx + 1) };
 }
 
 function productCard(p) {
@@ -20,7 +19,7 @@ function productCard(p) {
     ? `<span class="product-weight">от ${p.weight}</span>`
     : `<span></span>`;
   const emoji = CATEGORY_EMOJI[p.category] || '🌿';
-  const skinType = p.category === 'soap' ? extractSkinType(p.description) : '';
+  const { main, sub } = splitProductName(p.name);
 
   return `
     <div class="product-card" onclick="location.href='product.html?id=${p.id}'" style="cursor:pointer">
@@ -31,8 +30,8 @@ function productCard(p) {
         onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${emoji}</div>'"
       />
       <div class="product-info">
-        <div class="product-name">${p.name}</div>
-        ${skinType ? `<div class="product-skin">${skinType}</div>` : ''}
+        <div class="product-name">${main}</div>
+        ${sub ? `<div class="product-skin">${sub}</div>` : ''}
         <div class="product-meta">${weight}${price}</div>
       </div>
     </div>

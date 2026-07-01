@@ -120,6 +120,12 @@
       color: var(--text);
       line-height: 1.2;
     }
+    .product-page-skin {
+      font-size: 14px;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: -10px;
+    }
     .product-page-desc {
       font-size: 16px;
       color: #1a0a02;
@@ -187,12 +193,16 @@
   if (!p) {
     container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;color:var(--muted)">Товар не найден</div>';
   } else {
-    document.title = `${p.name} — Дами`;
+    document.title = `${p.name.replace(/ для .+/, '')} — Дами`;
     const emoji    = CATEGORY_EMOJI[p.category] || '🌿';
     const backHref = CAT_PAGE[p.category]  || 'cosmetics.html';
     const backLabel= CAT_LABEL[p.category] || 'Каталог';
     const priceHtml  = p.price  ? `<span class="product-page-price">${p.price.toLocaleString('ru')} ₽</span>` : '';
     const weightHtml = p.weight ? `<span class="product-page-weight">от ${p.weight}</span>` : '';
+
+    const nameIdx = p.name.indexOf(' для ');
+    const mainName = nameIdx === -1 ? p.name : p.name.slice(0, nameIdx);
+    const nameSub  = nameIdx === -1 ? '' : p.name.slice(nameIdx + 1);
 
     const allImages = [p.image, ...(p.images || [])].filter(Boolean);
 
@@ -200,7 +210,8 @@
       <div id="carousel-container"></div>
       <div class="product-page-info">
         <a href="${backHref}" class="product-page-back">← ${backLabel}</a>
-        <div class="product-page-name">${p.name}</div>
+        <div class="product-page-name">${mainName}</div>
+        ${nameSub ? `<div class="product-page-skin">${nameSub}</div>` : ''}
         <div class="product-page-desc">${p.description.replace(/\n/g, '<br>')}</div>
         <div class="product-page-meta">${weightHtml}${priceHtml}</div>
         <div class="contact-menu">

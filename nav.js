@@ -60,7 +60,7 @@ document.addEventListener('click', (e) => {
       <div class="footer-links">
         <a href="https://t.me/DamiNature" target="_blank" class="footer-icon">
           <img src="https://cdn.simpleicons.org/telegram/4a7c59" alt="Telegram" onerror="this.outerHTML='Telegram'">
-          <span>Telegram канал</span>
+          <span>Telegram<br>канал</span>
         </a>
         <a href="https://instagram.com/dami.nature" target="_blank" class="footer-icon">
           <img src="https://cdn.simpleicons.org/instagram/4a7c59" alt="Instagram" onerror="this.outerHTML='Instagram'">

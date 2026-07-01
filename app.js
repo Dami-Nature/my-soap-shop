@@ -5,6 +5,13 @@ const CATEGORY_EMOJI = {
   soap: '✦', face: '❋', body: '✾', hair: '❧', tea: '🤖', set: '❦'
 };
 
+function extractSkinType(desc) {
+  if (!desc) return '';
+  const first = desc.split('\n')[0].trim();
+  if (first.toLowerCase().startsWith('для')) return first.replace(/\.$/, '');
+  return '';
+}
+
 function productCard(p) {
   const price = p.price
     ? `<span class="product-price">${p.price.toLocaleString('ru')} ₽</span>`
@@ -13,6 +20,7 @@ function productCard(p) {
     ? `<span class="product-weight">от ${p.weight}</span>`
     : `<span></span>`;
   const emoji = CATEGORY_EMOJI[p.category] || '🌿';
+  const skinType = p.category === 'soap' ? extractSkinType(p.description) : '';
 
   return `
     <div class="product-card" onclick="location.href='product.html?id=${p.id}'" style="cursor:pointer">
@@ -24,6 +32,7 @@ function productCard(p) {
       />
       <div class="product-info">
         <div class="product-name">${p.name}</div>
+        ${skinType ? `<div class="product-skin">${skinType}</div>` : ''}
         <div class="product-meta">${weight}${price}</div>
       </div>
     </div>

@@ -416,7 +416,7 @@ footer {
   transition: background 0.18s, color 0.18s;
 }
 .footer-cta:hover { background: var(--text); color: var(--white); }
-.footer-links { display: flex; align-items: center; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+.footer-links { display: flex; align-items: flex-start; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
 .footer-links a, .footer-links button {
   font-size: 18px;
   color: var(--muted);

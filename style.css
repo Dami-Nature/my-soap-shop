@@ -276,7 +276,6 @@ header {
   color: var(--muted);
   letter-spacing: 0.3px;
   margin-bottom: 6px;
-  font-style: italic;
 }
 .product-desc {
   font-size: 13px;

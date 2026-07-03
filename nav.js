@@ -63,7 +63,6 @@ document.addEventListener('click', (e) => {
           <button class="btn-tg" onclick="toggleContactMenu(this)">Написать</button>
           <div class="contact-dropdown">
             <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
-            <a href="${WA_LINK}" target="_blank">с Эмилией</a>
             <a href="${MAX_LINK}" target="_blank">MAX</a>
           </div>
         </div>
@@ -78,7 +77,7 @@ document.addEventListener('click', (e) => {
         <button class="footer-cta" onclick="toggleContactMenu(this)">Написать</button>
         <div class="contact-dropdown">
           <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
-          <a href="${WA_LINK}" target="_blank">с Эмилией</a>
+          <a href="${WA_LINK}" target="_blank">WhatsApp</a>
           <a href="${MAX_LINK}" target="_blank">MAX</a>
         </div>
       </div>

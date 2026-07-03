@@ -33,6 +33,15 @@
 
   <section class="section">
 
+    <div class="filter-bar">
+      <button class="filter-tab active" data-sub="" onclick="selectSub(this)">Всё</button>
+      <button class="filter-tab" data-sub="all" onclick="selectSub(this)">Для всех типов кожи</button>
+      <button class="filter-tab" data-sub="dry" onclick="selectSub(this)">Для сухой</button>
+      <button class="filter-tab" data-sub="cleansing" onclick="selectSub(this)">Очищающее</button>
+      <button class="filter-tab" data-sub="children" onclick="selectSub(this)">Детское</button>
+      <button class="filter-tab" data-sub="archive" onclick="selectSub(this)">Прошлые коллекции</button>
+    </div>
+
     <div id="soap-groups"></div>
 
   </section>
@@ -41,28 +50,52 @@
   <script src="nav.js?v=5"></script>
   <script src="app.js?v=3"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const wrap = document.getElementById('soap-groups');
-      const groups = [
-        { sub: 'all',       label: 'Для всех типов кожи' },
-        { sub: 'dry',       label: 'Для сухой кожи' },
-        { sub: 'cleansing', label: 'Очищающее' },
-        { sub: 'children',  label: 'Детское мыло' },
-        { sub: 'archive',   label: 'Прошлые коллекции' },
-      ];
-      groups.forEach(function(g) {
-        const items = PRODUCTS.filter(function(p) { return p.category === 'soap' && p.subcategory === g.sub; });
-        if (!items.length) return;
-        const label = document.createElement('div');
-        label.className = 'section-label';
-        label.textContent = g.label;
-        const grid = document.createElement('div');
+    var _soapSub = '';
+
+    var GROUPS = [
+      { sub: 'all',       label: 'Для всех типов кожи' },
+      { sub: 'dry',       label: 'Для сухой кожи' },
+      { sub: 'cleansing', label: 'Очищающее' },
+      { sub: 'children',  label: 'Детское мыло' },
+      { sub: 'archive',   label: 'Прошлые коллекции' },
+    ];
+
+    function selectSub(el) {
+      _soapSub = el.dataset.sub;
+      document.querySelectorAll('.filter-tab').forEach(function(t) {
+        t.classList.toggle('active', t.dataset.sub === _soapSub);
+      });
+      renderSoap();
+    }
+
+    function renderSoap() {
+      var wrap = document.getElementById('soap-groups');
+      wrap.innerHTML = '';
+      if (_soapSub === '') {
+        // Show all grouped
+        GROUPS.forEach(function(g) {
+          var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && p.subcategory === g.sub; });
+          if (!items.length) return;
+          var label = document.createElement('div');
+          label.className = 'section-label';
+          label.textContent = g.label;
+          var grid = document.createElement('div');
+          grid.className = 'products-grid';
+          renderGrid(grid, items);
+          wrap.appendChild(label);
+          wrap.appendChild(grid);
+        });
+      } else {
+        // Show single subcategory flat
+        var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && p.subcategory === _soapSub; });
+        var grid = document.createElement('div');
         grid.className = 'products-grid';
         renderGrid(grid, items);
-        wrap.appendChild(label);
         wrap.appendChild(grid);
-      });
-    });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderSoap);
   </script>
 </body>
 </html>

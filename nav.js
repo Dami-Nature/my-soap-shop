@@ -35,6 +35,14 @@ document.addEventListener('click', (e) => {
         <a href="index.html#catalog" class="nav-link ${catalogActive}">Каталог</a>
         <a href="index.html#contacts" class="nav-link">Контакты</a>
         <a href="index.html#about" class="nav-link">Обо мне</a>
+        <div class="contact-menu">
+          <button class="btn-tg" onclick="toggleContactMenu(this)">Написать</button>
+          <div class="contact-dropdown">
+            <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+            <a href="${WA_LINK}" target="_blank">WhatsApp</a>
+            <a href="${MAX_LINK}" target="_blank">MAX</a>
+          </div>
+        </div>
       </nav>
     </header>
   `;

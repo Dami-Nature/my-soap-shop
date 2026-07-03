@@ -210,7 +210,8 @@
         const qty = item.qty || 1;
         const p = PRODUCTS.find(x => x.id === item.id);
         const weight = p && p.weight ? `, ${p.weight}` : '';
-        return `- ${main} × ${qty} шт${weight}`;
+        const catPrefix = p && p.category === 'soap' ? 'Мыло: ' : '';
+        return `- ${catPrefix}${main} × ${qty} шт${weight}`;
       }).join('\n');
       const msg = 'Мой список:\n' + lines;
       const urls = {

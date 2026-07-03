@@ -209,9 +209,11 @@
     const priceHtml  = p.price  ? `<span class="product-page-price">${p.price.toLocaleString('ru')} ₽</span>` : '';
     const weightHtml = p.weight ? `<span class="product-page-weight">от ${p.weight}</span>` : '';
 
-    const nameIdx = p.name.indexOf(' для ');
-    const mainName = nameIdx === -1 ? p.name : p.name.slice(0, nameIdx);
-    const nameSub  = nameIdx === -1 ? '' : p.name.slice(nameIdx + 1);
+    const _skinRe  = /^(всех|сухой|жирной|комбинированной|нормальной|чувствительной)/i;
+    const _dIdx    = p.name.indexOf(' для ');
+    const _isSkin  = _dIdx !== -1 && _skinRe.test(p.name.slice(_dIdx + 5));
+    const mainName = _isSkin ? p.name.slice(0, _dIdx) : p.name;
+    const nameSub  = _isSkin ? p.name.slice(_dIdx + 1) : '';
 
     const allImages = [p.image, ...(p.images || [])].filter(Boolean);
 

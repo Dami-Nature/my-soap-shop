@@ -192,8 +192,9 @@
       const cart = getCart();
       if (!cart.length) return;
       const lines = cart.map(item => {
-        const idx = item.name.indexOf(' для ');
-        const main = idx === -1 ? item.name : item.name.slice(0, idx);
+        const _sr2 = /^(всех|сухой|жирной|комбинированной|нормальной|чувствительной)/i;
+        const _di2 = item.name.indexOf(' для ');
+        const main = (_di2 !== -1 && _sr2.test(item.name.slice(_di2 + 5))) ? item.name.slice(0, _di2) : item.name;
         const qty = item.qty || 1;
         const p = PRODUCTS.find(x => x.id === item.id);
         const weight = p && p.weight ? `, ${p.weight}` : '';
@@ -231,9 +232,11 @@
         const imgHtml = p && p.image
           ? `<img class="cart-item-img" src="${p.image}" alt="" onerror="this.outerHTML='<div class=\\'cart-item-img-ph\\'>🌿</div>'">`
           : `<div class="cart-item-img-ph">🌿</div>`;
-        const nameIdx = item.name.indexOf(' для ');
-        const mainName = nameIdx === -1 ? item.name : item.name.slice(0, nameIdx);
-        const sub      = nameIdx === -1 ? '' : item.name.slice(nameIdx + 1);
+        const _sr = /^(всех|сухой|жирной|комбинированной|нормальной|чувствительной)/i;
+        const _di = item.name.indexOf(' для ');
+        const _sk = _di !== -1 && _sr.test(item.name.slice(_di + 5));
+        const mainName = _sk ? item.name.slice(0, _di) : item.name;
+        const sub      = _sk ? item.name.slice(_di + 1) : '';
         const qty = item.qty || 1;
         return `
           <div class="cart-item">

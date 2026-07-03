@@ -5,9 +5,12 @@ const CATEGORY_EMOJI = {
   soap: '✦', face: '❋', body: '✾', hair: '❧', tea: '🤖', set: '❦'
 };
 
+const SKIN_RE = /^(всех|сухой|жирной|комбинированной|нормальной|чувствительной)/i;
+
 function splitProductName(name) {
   const idx = name.indexOf(' для ');
   if (idx === -1) return { main: name, sub: '' };
+  if (!SKIN_RE.test(name.slice(idx + 5))) return { main: name, sub: '' };
   return { main: name.slice(0, idx), sub: name.slice(idx + 1) };
 }
 

@@ -59,6 +59,7 @@ document.addEventListener('click', (e) => {
           <a href="${MAX_LINK}" target="_blank">MAX</a>
         </div>
       </div>
+      <div class="footer-sub" style="margin-bottom: 12px;">Социальные сети</div>
       <div id="contacts" class="footer-links">
         <a href="https://t.me/DamiNature" target="_blank" class="footer-icon">
           <img src="https://cdn.simpleicons.org/telegram/4a7c59" alt="Telegram" onerror="this.outerHTML='Telegram'">

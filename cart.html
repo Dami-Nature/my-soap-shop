@@ -134,6 +134,21 @@
       transition: background 0.18s;
     }
     .btn-cart-order:hover { background: var(--green2); }
+    .btn-cart-share {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: none;
+      color: var(--green);
+      border: 1.5px solid var(--green);
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+    .btn-cart-share:hover { background: var(--green); color: #fff; }
     .btn-cart-clear {
       display: block;
       width: 100%;
@@ -287,6 +302,7 @@
               <a href="#" onclick="event.preventDefault(); sendCart('max')">MAX</a>
             </div>
           </div>
+          <button id="btn-share" class="btn-cart-share" onclick="shareCart()">Поделиться корзиной</button>
           <button class="btn-cart-clear" onclick="clearCart()">Очистить корзину</button>
         </div>`;
     }
@@ -297,6 +313,34 @@
       if ([2,3,4].includes(mod10) && ![12,13,14].includes(mod100)) return `${n} ${few}`;
       return `${n} ${many}`;
     }
+
+    function shareCart() {
+      const cart = getCart();
+      if (!cart.length) return;
+      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(cart))));
+      const url = location.origin + location.pathname + '?cart=' + encoded;
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = document.getElementById('btn-share');
+        const orig = btn.textContent;
+        btn.textContent = 'Ссылка скопирована ✓';
+        setTimeout(() => { btn.textContent = orig; }, 2500);
+      }).catch(() => {
+        prompt('Скопируй ссылку:', url);
+      });
+    }
+
+    // Import cart from URL if ?cart= param present
+    (function() {
+      const param = new URLSearchParams(location.search).get('cart');
+      if (!param) return;
+      try {
+        const imported = JSON.parse(decodeURIComponent(escape(atob(param))));
+        if (Array.isArray(imported) && imported.length) {
+          saveCart(imported);
+        }
+      } catch(e) {}
+      history.replaceState(null, '', location.pathname);
+    })();
 
     renderCart();
   </script>

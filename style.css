@@ -584,6 +584,10 @@ footer {
   .section { padding: 48px 20px; }
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .cat-card { padding: 18px 12px; border-radius: 10px; }
+  .cat-icon { font-size: 28px; margin-bottom: 8px; }
+  .cat-name { font-size: 15px; }
+  .cat-desc { font-size: 11px; }
   .about-section { padding: 28px 0 4px; }
   .about-inner { padding: 0 12px; flex-direction: column; gap: 16px; }
   .about-img { width: 75%; }

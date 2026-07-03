@@ -582,7 +582,7 @@ footer {
   .products-grid { grid-template-columns: repeat(2, 1fr); }
   .about-section { padding: 24px 0; }
   .about-inner { padding: 0 12px; flex-direction: column; }
-  .about-img { width: 60%; }
+  .about-img { width: 75%; }
   .about-text { font-size: 17px; text-align: center; }
   .page-hero { padding: 36px 20px; }
 }

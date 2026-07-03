@@ -577,6 +577,7 @@ footer {
   .main-nav { flex-wrap: wrap; gap: 4px; }
   html { scroll-padding-top: 100px; }
   .hero { padding: 60px 20px; padding-bottom: 80px; gap: 20px; }
+  .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 16px; justify-content: center; }
   .hero-title { font-size: 100px; margin-top: 40px; }
   .hero-sub { font-size: 17px; letter-spacing: 2px; }
   .section { padding: 48px 20px; }

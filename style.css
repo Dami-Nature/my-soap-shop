@@ -375,8 +375,9 @@ header {
   text-align: center;
 }
 .page-hero-title {
-  font-family: 'Raleway', sans-serif;
-  font-size: 40px;
+  font-family: 'Marck Script', cursive;
+  font-size: 52px;
+  font-weight: 400;
   font-style: normal;
   letter-spacing: 5px;
   color: var(--text);

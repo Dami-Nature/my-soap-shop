@@ -550,9 +550,9 @@ footer {
 .about-inner {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 32px;
+  gap: 48px;
   padding: 0 60px;
 }
 .about-text {
@@ -580,7 +580,7 @@ footer {
   .section { padding: 48px 20px; }
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .products-grid { grid-template-columns: repeat(2, 1fr); }
-  .about-inner { padding: 0 24px; }
+  .about-inner { padding: 0 24px; flex-direction: column; }
   .about-img { width: 75%; }
   .about-text { font-size: 17px; }
   .page-hero { padding: 36px 20px; }

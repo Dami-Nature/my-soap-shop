@@ -469,7 +469,7 @@ footer {
   font-family: 'Marck Script', cursive;
   font-size: 52px;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   font-weight: 400;
 }
 .footer-sub {

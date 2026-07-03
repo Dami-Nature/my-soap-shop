@@ -14,10 +14,13 @@
       text-transform: uppercase;
       color: #1a0a02;
       margin-bottom: 20px;
+      margin-top: 40px;
       max-width: 1100px;
       margin-left: auto;
       margin-right: auto;
     }
+    #soap-groups .section-label:first-child { margin-top: 0; }
+    #soap-groups .products-grid { margin-bottom: 0; }
   </style>
 </head>
 <body>
@@ -30,23 +33,36 @@
 
   <section class="section">
 
-    <div class="filter-bar">
-      <button class="filter-tab" data-sub="" onclick="selectSoapFolder(this)">Всё</button>
-      <button class="filter-tab" data-sub="all" onclick="selectSoapFolder(this)">Для всех типов кожи</button>
-      <button class="filter-tab" data-sub="dry" onclick="selectSoapFolder(this)">Для сухой</button>
-      <button class="filter-tab" data-sub="cleansing" onclick="selectSoapFolder(this)">Очищающее</button>
-      <button class="filter-tab" data-sub="children" onclick="selectSoapFolder(this)">Детское</button>
-      <button class="filter-tab" data-sub="archive" onclick="selectSoapFolder(this)">Прошлые коллекции</button>
-    </div>
-
-    <div class="section-label" id="grid-label" style="display:none"></div>
-
-    <div class="products-grid" id="products-grid"></div>
+    <div id="soap-groups"></div>
 
   </section>
 
   <script src="products.js?v=3"></script>
   <script src="nav.js?v=5"></script>
   <script src="app.js?v=3"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const wrap = document.getElementById('soap-groups');
+      const groups = [
+        { sub: 'all',       label: 'Для всех типов кожи' },
+        { sub: 'dry',       label: 'Для сухой кожи' },
+        { sub: 'cleansing', label: 'Очищающее' },
+        { sub: 'children',  label: 'Детское мыло' },
+        { sub: 'archive',   label: 'Прошлые коллекции' },
+      ];
+      groups.forEach(function(g) {
+        const items = PRODUCTS.filter(function(p) { return p.category === 'soap' && p.subcategory === g.sub; });
+        if (!items.length) return;
+        const label = document.createElement('div');
+        label.className = 'section-label';
+        label.textContent = g.label;
+        const grid = document.createElement('div');
+        grid.className = 'products-grid';
+        renderGrid(grid, items);
+        wrap.appendChild(label);
+        wrap.appendChild(grid);
+      });
+    });
+  </script>
 </body>
 </html>

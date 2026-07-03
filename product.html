@@ -158,6 +158,16 @@
       transition: background 0.18s;
     }
     .btn-tg-big:hover { background: var(--green2); }
+    .btn-cart { margin-top: 10px; background: var(--green2); }
+    .btn-cart:hover { background: #2e5039; }
+    .cart-toast {
+      display: none;
+      margin-top: 8px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--green);
+      font-weight: 600;
+    }
 
     @media (max-width: 700px) {
       .product-page { grid-template-columns: 1fr; gap: 28px; padding: 0 20px; margin: 36px auto; }
@@ -214,16 +224,27 @@
         <div class="product-page-desc">${p.description.replace(/\n/g, '<br>')}</div>
         <div class="product-page-meta">${weightHtml}${priceHtml}</div>
         <div class="contact-menu">
-          <button class="btn-tg-big" onclick="toggleContactMenu(this)">Заказать</button>
+          <button class="btn-tg-big" onclick="toggleContactMenu(this)">Написать</button>
           <div class="contact-dropdown">
             <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
             <a href="https://wa.me/79646418016" target="_blank">WhatsApp</a>
             <a href="https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg" target="_blank">MAX</a>
           </div>
         </div>
+        <button class="btn-tg-big btn-cart" onclick="addToCart(${p.id}, '${p.name.replace(/'/g,"\\'")}')">В корзину</button>
+        <div class="cart-toast" id="cart-toast">Добавлено в корзину ✓</div>
       </div>`;
 
     buildCarousel(document.getElementById('carousel-container'), allImages, emoji);
+  }
+
+  function addToCart(id, name) {
+    const cart = JSON.parse(localStorage.getItem('dami_cart') || '[]');
+    if (!cart.find(i => i.id === id)) cart.push({ id, name });
+    localStorage.setItem('dami_cart', JSON.stringify(cart));
+    const toast = document.getElementById('cart-toast');
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2000);
   }
 
   function buildCarousel(el, images, emoji) {

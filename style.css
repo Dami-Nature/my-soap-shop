@@ -580,7 +580,8 @@ footer {
   .section { padding: 48px 20px; }
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .products-grid { grid-template-columns: repeat(2, 1fr); }
-  .about-inner { padding: 0 24px; flex-direction: column; }
+  .about-section { padding: 24px 0; }
+  .about-inner { padding: 0 12px; flex-direction: column; }
   .about-img { width: 60%; }
   .about-text { font-size: 17px; text-align: center; }
   .page-hero { padding: 36px 20px; }

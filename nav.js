@@ -74,7 +74,6 @@ document.addEventListener('click', (e) => {
   const footer = `
     <footer>
       <div class="footer-logo">Дами</div>
-      <div class="footer-sub">Здесь всё от природы</div>
       <div class="contact-menu footer-cta-wrap">
         <button class="footer-cta" onclick="toggleContactMenu(this)">Написать</button>
         <div class="contact-dropdown">

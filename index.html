@@ -86,6 +86,29 @@
             '<img src="' + CONFIG.categoryCards.sets + '" alt="Наборы" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-bottom:14px;">';
       }
     })();
+
+    // Scroll to hash with exact header offset
+    function scrollToHash(hash) {
+      const el = document.querySelector(hash);
+      if (!el) return;
+      const header = document.querySelector('header');
+      const offset = header ? header.getBoundingClientRect().height : 0;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset - 8;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+    // On load if hash present
+    if (location.hash) {
+      setTimeout(() => scrollToHash(location.hash), 100);
+    }
+    // Intercept all anchor clicks on this page
+    document.addEventListener('click', function(e) {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      e.preventDefault();
+      const hash = a.getAttribute('href');
+      history.pushState(null, '', hash);
+      scrollToHash(hash);
+    });
   </script>
 </body>
 </html>

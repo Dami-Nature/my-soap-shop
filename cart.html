@@ -226,7 +226,7 @@
         const p = PRODUCTS.find(x => x.id === item.id);
         const weight = p && p.weight ? `, ${p.weight}` : '';
         const catPrefix = p && p.category === 'soap' ? 'Мыло ' : '';
-        return `- ${catPrefix}${main} × ${qty} шт${weight}`;
+        return `- ${catPrefix}${main}${weight} × ${qty} шт`;
       }).join('\n');
       const msg = 'Мой список:\n' + lines;
       const urls = {

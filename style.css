@@ -366,6 +366,26 @@ header {
 }
 .btn-add-cart:hover { background: var(--green); color: #fff; }
 .btn-add-cart:disabled { background: var(--green); color: #fff; opacity: 0.8; cursor: default; }
+.card-qty-ctrl { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.card-in-cart-label { font-size: 11px; color: var(--green); letter-spacing: 0.3px; font-weight: 600; }
+.card-qty-row { display: flex; align-items: center; gap: 8px; }
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--green);
+  border-radius: 50%;
+  background: none;
+  color: var(--green);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, color 0.18s;
+}
+.qty-btn:hover { background: var(--green); color: #fff; }
+.qty-val { font-size: 16px; font-weight: 600; min-width: 22px; text-align: center; color: var(--text); }
 .btn-cart-send { background: none; border: 1.5px solid var(--green); color: var(--green); }
 .btn-cart-send:hover { background: var(--green); color: #fff; }
 

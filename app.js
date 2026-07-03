@@ -23,10 +23,38 @@ function addToCart(id, name, btn) {
   if (window.updateCartCount) window.updateCartCount();
   const toast = document.getElementById('cart-toast');
   if (toast) { toast.style.display = 'block'; setTimeout(() => { toast.style.display = 'none'; }, 2000); }
-  if (btn) {
-    btn.textContent = '✓';
-    btn.disabled = true;
-    setTimeout(() => { btn.textContent = 'В корзину'; btn.disabled = false; }, 1400);
+  refreshCardQtyCtrl(id, name);
+}
+
+function cardChangeQty(id, name, delta) {
+  const cart = JSON.parse(localStorage.getItem('dami_cart') || '[]');
+  const existing = cart.find(i => i.id === id);
+  if (!existing) return;
+  existing.qty = (existing.qty || 1) + delta;
+  if (existing.qty <= 0) localStorage.setItem('dami_cart', JSON.stringify(cart.filter(i => i.id !== id)));
+  else localStorage.setItem('dami_cart', JSON.stringify(cart));
+  if (window.updateCartCount) window.updateCartCount();
+  refreshCardQtyCtrl(id, name);
+}
+
+function refreshCardQtyCtrl(id, name) {
+  const el = document.getElementById('card-qty-' + id);
+  if (!el) return;
+  const cart = JSON.parse(localStorage.getItem('dami_cart') || '[]');
+  const cartItem = cart.find(i => i.id === id);
+  const qty = cartItem ? (cartItem.qty || 1) : 0;
+  const safe = name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  if (qty > 0) {
+    el.outerHTML = `<div class="card-qty-ctrl" id="card-qty-${id}">
+      <div class="card-in-cart-label">Уже в корзине</div>
+      <div class="card-qty-row">
+        <button class="qty-btn" onclick="event.stopPropagation(); cardChangeQty(${id}, '${safe}', -1)">−</button>
+        <span class="qty-val">${qty}</span>
+        <button class="qty-btn" onclick="event.stopPropagation(); cardChangeQty(${id}, '${safe}', 1)">+</button>
+      </div>
+    </div>`;
+  } else {
+    el.outerHTML = `<button class="btn-add-cart" id="card-qty-${id}" onclick="event.stopPropagation(); addToCart(${id}, '${safe}', this)">В корзину</button>`;
   }
 }
 
@@ -40,6 +68,19 @@ function productCard(p) {
   const emoji = CATEGORY_EMOJI[p.category] || '🌿';
   const { main, sub } = splitProductName(p.name);
   const safeName = p.name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  const _cartNow = JSON.parse(localStorage.getItem('dami_cart') || '[]');
+  const _cartItem = _cartNow.find(i => i.id === p.id);
+  const _cartQty  = _cartItem ? (_cartItem.qty || 1) : 0;
+  const cartCtrl  = _cartQty > 0
+    ? `<div class="card-qty-ctrl" id="card-qty-${p.id}">
+         <div class="card-in-cart-label">Уже в корзине</div>
+         <div class="card-qty-row">
+           <button class="qty-btn" onclick="event.stopPropagation(); cardChangeQty(${p.id}, '${safeName}', -1)">−</button>
+           <span class="qty-val">${_cartQty}</span>
+           <button class="qty-btn" onclick="event.stopPropagation(); cardChangeQty(${p.id}, '${safeName}', 1)">+</button>
+         </div>
+       </div>`
+    : `<button class="btn-add-cart" id="card-qty-${p.id}" onclick="event.stopPropagation(); addToCart(${p.id}, '${safeName}', this)">В корзину</button>`;
 
   return `
     <div class="product-card" onclick="location.href='product.html?id=${p.id}'" style="cursor:pointer">
@@ -54,7 +95,7 @@ function productCard(p) {
         <div class="product-name">${main}</div>
         ${sub ? `<div class="product-skin">${sub}</div>` : ''}
         <div class="product-meta">${weight}${price}</div>
-        <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(${p.id}, '${safeName}', this)">В корзину</button>
+        ${cartCtrl}
       </div>
     </div>
   `;

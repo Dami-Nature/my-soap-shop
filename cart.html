@@ -89,6 +89,18 @@
       font-size: 13px;
       color: var(--muted);
     }
+    .cart-cat-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .cart-item-weight {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
     .cart-item-remove {
       background: none;
       border: none;
@@ -238,12 +250,16 @@
         const mainName = _sk ? item.name.slice(0, _di) : item.name;
         const sub      = _sk ? item.name.slice(_di + 1) : '';
         const qty = item.qty || 1;
+        const catLabel = p && p.category === 'soap' ? '<div class="cart-cat-label">Мыло</div>' : '';
+        const weightHtml = p && p.weight ? `<div class="cart-item-weight">${p.weight}</div>` : '';
         return `
           <div class="cart-item">
             ${imgHtml}
             <div class="cart-item-info">
+              ${catLabel}
               <div class="cart-item-name">${mainName}</div>
               ${sub ? `<div class="cart-item-sub">${sub}</div>` : ''}
+              ${weightHtml}
             </div>
             <div class="cart-item-qty">
               <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>

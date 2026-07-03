@@ -399,7 +399,21 @@ header {
   background: #f5e2cc;
   padding: 50px 48px;
   text-align: center;
+  position: relative;
 }
+.page-hero-back {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.18s;
+}
+.page-hero-back:hover { color: var(--text); }
 .page-hero-title {
   font-family: 'Marck Script', cursive;
   font-size: 52px;

@@ -50,7 +50,7 @@
   <script src="nav.js?v=5"></script>
   <script src="app.js?v=3"></script>
   <script>
-    var _soapSub = '';
+    var _activeSub = '';
 
     var GROUPS = [
       { sub: 'all',       label: 'Для всех типов кожи' },
@@ -61,9 +61,9 @@
     ];
 
     function selectSub(el) {
-      _soapSub = el.dataset.sub;
+      _activeSub = el.dataset.sub;
       document.querySelectorAll('.filter-tab').forEach(function(t) {
-        t.classList.toggle('active', t.dataset.sub === _soapSub);
+        t.classList.toggle('active', t.dataset.sub === _activeSub);
       });
       renderSoap();
     }
@@ -71,7 +71,7 @@
     function renderSoap() {
       var wrap = document.getElementById('soap-groups');
       wrap.innerHTML = '';
-      if (_soapSub === '') {
+      if (_activeSub === '') {
         // Show all grouped
         GROUPS.forEach(function(g) {
           var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && p.subcategory === g.sub; });
@@ -87,7 +87,7 @@
         });
       } else {
         // Show single subcategory flat
-        var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && p.subcategory === _soapSub; });
+        var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && p.subcategory === _activeSub; });
         var grid = document.createElement('div');
         grid.className = 'products-grid';
         renderGrid(grid, items);

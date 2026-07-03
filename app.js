@@ -50,6 +50,7 @@ function productCard(p) {
         onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${emoji}</div>'"
       />
       <div class="product-info">
+        ${p.category === 'soap' ? '<div class="product-cat-label">Мыло</div>' : ''}
         <div class="product-name">${main}</div>
         ${sub ? `<div class="product-skin">${sub}</div>` : ''}
         <div class="product-meta">${weight}${price}</div>

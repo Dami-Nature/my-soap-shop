@@ -53,11 +53,10 @@
     var _activeSub = '';
 
     var GROUPS = [
-      { sub: 'all',       label: 'Для всех типов кожи' },
-      { sub: 'dry',       label: 'Для сухой кожи' },
-      { sub: 'cleansing', label: 'Очищающее' },
-      { sub: 'children',  label: 'Детское мыло' },
-      { sub: 'archive',   label: 'Прошлые коллекции' },
+      { subs: ['all'],               label: 'Для всех типов кожи' },
+      { subs: ['dry', 'children'],   label: 'Для сухой кожи' },
+      { subs: ['cleansing'],         label: 'Очищающее' },
+      { subs: ['archive'],           label: 'Прошлые коллекции' },
     ];
 
     function selectSub(el) {
@@ -74,7 +73,7 @@
       if (_activeSub === '') {
         // Show all grouped
         GROUPS.forEach(function(g) {
-          var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && p.subcategory === g.sub; });
+          var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && g.subs.indexOf(p.subcategory) !== -1; });
           if (!items.length) return;
           var label = document.createElement('div');
           label.className = 'section-label';

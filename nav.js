@@ -21,6 +21,9 @@ document.addEventListener('click', (e) => {
 
   const isActive = (p) => page === p ? 'active' : '';
 
+  const catalogPages = ['soap.html','cosmetics.html','teas.html','sets.html'];
+  const catalogActive = catalogPages.includes(page) ? 'active' : '';
+
   const header = `
     <header>
       <a href="index.html" class="logo">
@@ -29,18 +32,24 @@ document.addEventListener('click', (e) => {
       </a>
       <nav class="main-nav">
         <a href="index.html" class="nav-link ${isActive('index.html')}">Главная</a>
-        <a href="soap.html" class="nav-link ${isActive('soap.html')}">Мыло</a>
-        <a href="cosmetics.html" class="nav-link ${isActive('cosmetics.html')}">Косметика</a>
-        <a href="teas.html" class="nav-link ${isActive('teas.html')}">Чаи</a>
-        <a href="sets.html" class="nav-link ${isActive('sets.html')}">Наборы</a>
+        <div class="nav-item">
+          <a href="soap.html" class="nav-link ${catalogActive}">Каталог</a>
+          <div class="dropdown">
+            <a href="soap.html" class="dropdown-link">Мыло</a>
+            <a href="cosmetics.html" class="dropdown-link">Косметика</a>
+            <a href="teas.html" class="dropdown-link">Чаи</a>
+            <a href="sets.html" class="dropdown-link">Наборы</a>
+          </div>
+        </div>
         <div class="contact-menu">
-          <button class="btn-tg" onclick="toggleContactMenu(this)">Написать</button>
+          <button class="nav-link nav-contact-btn" onclick="toggleContactMenu(this)">Контакты</button>
           <div class="contact-dropdown">
             <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
             <a href="${WA_LINK}" target="_blank">WhatsApp</a>
             <a href="${MAX_LINK}" target="_blank">MAX</a>
           </div>
         </div>
+        <a href="index.html#about" class="nav-link">Обо мне</a>
       </nav>
     </header>
   `;

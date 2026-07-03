@@ -77,6 +77,17 @@ header {
   color: var(--text);
 }
 
+.nav-contact-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
 .btn-tg {
   margin-left: 12px;
   padding: 10px 20px;

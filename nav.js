@@ -73,6 +73,7 @@ document.addEventListener('click', (e) => {
           <span>VK</span>
         </a>
       </div>
+      <div class="footer-sub" style="margin-top: 16px; margin-bottom: 12px;">Москва</div>
       <div class="footer-copy">© 2026 Дами</div>
     </footer>
   `;

@@ -3,6 +3,17 @@
 const MAX_LINK = 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg';
 const WA_LINK = 'https://wa.me/79646418016';
 
+// Toggle catalog dropdown and navigate to catalog page
+window.toggleCatalogMenu = function (btn) {
+  const menu = btn.nextElementSibling;
+  const wasOpen = menu.classList.contains('open');
+  document.querySelectorAll('.contact-dropdown.open').forEach(m => m.classList.remove('open'));
+  if (!wasOpen) {
+    menu.classList.add('open');
+    location.href = 'index.html#catalog';
+  }
+};
+
 // Toggle the Telegram/MAX dropdown under a "Написать"/"Заказать" button
 window.toggleContactMenu = function (btn) {
   const menu = btn.nextElementSibling;
@@ -33,8 +44,9 @@ document.addEventListener('click', (e) => {
       <nav class="main-nav">
         <a href="index.html" class="nav-link ${isActive('index.html')}">Главная</a>
         <div class="contact-menu catalog-menu">
-          <button class="nav-link nav-contact-btn ${catalogActive}" onclick="toggleContactMenu(this)">Каталог ▾</button>
+          <button class="nav-link nav-contact-btn ${catalogActive}" onclick="toggleCatalogMenu(this)">Каталог ▾</button>
           <div class="contact-dropdown">
+            <a href="index.html#catalog" style="font-weight:600;border-bottom:1px solid var(--border);margin-bottom:4px;padding-bottom:12px;">Весь каталог →</a>
             <a href="soap.html">Мыло</a>
             <a href="cosmetics.html">Косметика</a>
             <a href="teas.html">Чаи</a>

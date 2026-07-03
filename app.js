@@ -11,6 +11,20 @@ function splitProductName(name) {
   return { main: name.slice(0, idx), sub: name.slice(idx + 1) };
 }
 
+function addToCart(id, name, btn) {
+  const cart = JSON.parse(localStorage.getItem('dami_cart') || '[]');
+  if (!cart.find(i => i.id === id)) cart.push({ id, name });
+  localStorage.setItem('dami_cart', JSON.stringify(cart));
+  if (window.updateCartCount) window.updateCartCount();
+  const toast = document.getElementById('cart-toast');
+  if (toast) { toast.style.display = 'block'; setTimeout(() => { toast.style.display = 'none'; }, 2000); }
+  if (btn) {
+    btn.textContent = '✓';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'В корзину'; btn.disabled = false; }, 1400);
+  }
+}
+
 function productCard(p) {
   const price = p.price
     ? `<span class="product-price">${p.price.toLocaleString('ru')} ₽</span>`
@@ -20,6 +34,7 @@ function productCard(p) {
     : `<span></span>`;
   const emoji = CATEGORY_EMOJI[p.category] || '🌿';
   const { main, sub } = splitProductName(p.name);
+  const safeName = p.name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
 
   return `
     <div class="product-card" onclick="location.href='product.html?id=${p.id}'" style="cursor:pointer">
@@ -33,6 +48,7 @@ function productCard(p) {
         <div class="product-name">${main}</div>
         ${sub ? `<div class="product-skin">${sub}</div>` : ''}
         <div class="product-meta">${weight}${price}</div>
+        <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(${p.id}, '${safeName}', this)">В корзину</button>
       </div>
     </div>
   `;

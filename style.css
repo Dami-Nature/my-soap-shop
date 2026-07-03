@@ -343,6 +343,24 @@ header {
   transition: background 0.18s;
 }
 .product-btn:hover { background: var(--green2); }
+.btn-add-cart {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  background: none;
+  border: 1.5px solid var(--green);
+  border-radius: 8px;
+  color: var(--green);
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.btn-add-cart:hover { background: var(--green); color: #fff; }
+.btn-add-cart:disabled { background: var(--green); color: #fff; opacity: 0.8; cursor: default; }
+.btn-cart-send { background: none; border: 1.5px solid var(--green); color: var(--green); }
+.btn-cart-send:hover { background: var(--green); color: #fff; }
 
 /* ─── FILTER TABS (cosmetics page) ─── */
 .filter-bar {

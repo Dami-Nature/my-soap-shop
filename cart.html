@@ -114,6 +114,7 @@
       font-weight: 400;
       color: var(--text);
       margin-bottom: 8px;
+      text-align: center;
     }
     .cart-count-label {
       font-size: 14px;
@@ -133,9 +134,6 @@
   <script src="products.js"></script>
   <script src="nav.js"></script>
   <script>
-    const MAX_LINK = 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg';
-    const WA_LINK  = 'https://wa.me/79646418016';
-
     function getCart() {
       return JSON.parse(localStorage.getItem('dami_cart') || '[]');
     }
@@ -150,6 +148,22 @@
     function clearCart() {
       saveCart([]);
       renderCart();
+    }
+
+    function sendCart(type) {
+      const cart = getCart();
+      if (!cart.length) return;
+      const lines = cart.map(item => {
+        const idx = item.name.indexOf(' для ');
+        return '- ' + (idx === -1 ? item.name : item.name.slice(0, idx));
+      }).join('\n');
+      const msg = 'Хочу заказать:\n' + lines;
+      const urls = {
+        tg:  'https://t.me/EmiliyaT?text='    + encodeURIComponent(msg),
+        wa:  'https://wa.me/79646418016?text=' + encodeURIComponent(msg),
+        max: 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg'
+      };
+      window.open(urls[type], '_blank');
     }
 
     function renderCart() {
@@ -194,8 +208,16 @@
             <button class="btn-cart-order" onclick="toggleContactMenu(this)">Написать</button>
             <div class="contact-dropdown">
               <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
-              <a href="${WA_LINK}" target="_blank">WhatsApp</a>
-              <a href="${MAX_LINK}" target="_blank">MAX</a>
+              <a href="https://wa.me/79646418016" target="_blank">WhatsApp</a>
+              <a href="https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg" target="_blank">MAX</a>
+            </div>
+          </div>
+          <div class="contact-menu">
+            <button class="btn-cart-order btn-cart-send" onclick="toggleContactMenu(this)">Отправить выбранное</button>
+            <div class="contact-dropdown">
+              <a href="#" onclick="event.preventDefault(); sendCart('tg')">Telegram</a>
+              <a href="#" onclick="event.preventDefault(); sendCart('wa')">WhatsApp</a>
+              <a href="#" onclick="event.preventDefault(); sendCart('max')">MAX</a>
             </div>
           </div>
           <button class="btn-cart-clear" onclick="clearCart()">Очистить корзину</button>

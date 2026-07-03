@@ -585,7 +585,7 @@ footer {
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .products-grid { grid-template-columns: repeat(2, 1fr); }
   .about-section { padding: 4px 0; }
-  .about-inner { padding: 0 12px; flex-direction: column; }
+  .about-inner { padding: 0 12px; flex-direction: column; gap: 16px; }
   .about-img { width: 75%; }
   .about-text { font-size: 17px; text-align: center; }
   .page-hero { padding: 36px 20px; }

@@ -511,17 +511,17 @@ footer {
 .footer-cta-wrap { display: inline-block; margin-bottom: 36px; }
 .footer-cta {
   padding: 10px 30px;
-  border: 1.5px solid var(--green);
+  border: 1.5px solid #8b2252;
   border-radius: 30px;
   background: none;
   font-family: 'Raleway', sans-serif;
   font-size: 15px;
   letter-spacing: 1px;
-  color: var(--green);
+  color: #8b2252;
   cursor: pointer;
   transition: background 0.18s, color 0.18s;
 }
-.footer-cta:hover { background: var(--green); color: var(--white); }
+.footer-cta:hover { background: #8b2252; color: var(--white); }
 .footer-links { display: flex; align-items: flex-start; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
 .footer-links a, .footer-links button {
   font-size: 18px;

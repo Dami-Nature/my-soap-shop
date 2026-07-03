@@ -112,7 +112,7 @@ function updateSoap() {
   document.querySelectorAll('.filter-tab').forEach(f =>
     f.classList.toggle('active', (f.dataset.sub || null) === sub));
 
-  const labels = { household: 'Хозяйственное мыло', children: 'Детское мыло', medicinal: 'Лечебное мыло' };
+  const labels = { household: 'Хозяйственное мыло', children: 'Детское мыло', archive: 'Прошлые коллекции' };
   labelEl.style.display = 'block';
   labelEl.textContent = sub ? (labels[sub] || '') : 'Всё мыло';
 

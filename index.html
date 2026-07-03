@@ -93,12 +93,12 @@
       if (!el) return;
       const header = document.querySelector('header');
       const offset = header ? header.getBoundingClientRect().height : 0;
-      const top = el.getBoundingClientRect().top + window.scrollY - offset - 8;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset - 20;
       window.scrollTo({ top, behavior: 'smooth' });
     }
     // On load if hash present
     if (location.hash) {
-      setTimeout(() => scrollToHash(location.hash), 100);
+      setTimeout(() => scrollToHash(location.hash), 350);
     }
     // Intercept all anchor clicks on this page
     document.addEventListener('click', function(e) {

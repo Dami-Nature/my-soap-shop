@@ -26,9 +26,38 @@
     .cart-item {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 14px;
       padding: 18px 0;
       border-bottom: 1px solid var(--border);
+    }
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid var(--green);
+      border-radius: 50%;
+      background: none;
+      color: var(--green);
+      font-size: 17px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s, color 0.18s;
+    }
+    .qty-btn:hover { background: var(--green); color: #fff; }
+    .qty-val {
+      font-size: 16px;
+      font-weight: 600;
+      min-width: 22px;
+      text-align: center;
+      color: var(--text);
     }
     .cart-item-img {
       width: 80px;
@@ -141,6 +170,15 @@
       localStorage.setItem('dami_cart', JSON.stringify(cart));
       if (window.updateCartCount) window.updateCartCount();
     }
+    function changeQty(id, delta) {
+      const cart = getCart();
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty = (item.qty || 1) + delta;
+      if (item.qty <= 0) saveCart(cart.filter(i => i.id !== id));
+      else saveCart(cart);
+      renderCart();
+    }
     function removeItem(id) {
       saveCart(getCart().filter(i => i.id !== id));
       renderCart();
@@ -155,7 +193,9 @@
       if (!cart.length) return;
       const lines = cart.map(item => {
         const idx = item.name.indexOf(' для ');
-        return '- ' + (idx === -1 ? item.name : item.name.slice(0, idx));
+        const main = idx === -1 ? item.name : item.name.slice(0, idx);
+        const qty = item.qty || 1;
+        return qty > 1 ? `- ${main} × ${qty}` : `- ${main}`;
       }).join('\n');
       const msg = 'Хочу заказать:\n' + lines;
       const urls = {
@@ -181,7 +221,8 @@
         return;
       }
 
-      label.textContent = `${cart.length} ${noun(cart.length, 'товар', 'товара', 'товаров')}`;
+      const total = cart.reduce((s, i) => s + (i.qty || 1), 0);
+      label.textContent = noun(total, 'товар', 'товара', 'товаров');
 
       list.innerHTML = cart.map(item => {
         const p = PRODUCTS.find(x => x.id === item.id);
@@ -191,12 +232,18 @@
         const nameIdx = item.name.indexOf(' для ');
         const mainName = nameIdx === -1 ? item.name : item.name.slice(0, nameIdx);
         const sub      = nameIdx === -1 ? '' : item.name.slice(nameIdx + 1);
+        const qty = item.qty || 1;
         return `
           <div class="cart-item">
             ${imgHtml}
             <div class="cart-item-info">
               <div class="cart-item-name">${mainName}</div>
               ${sub ? `<div class="cart-item-sub">${sub}</div>` : ''}
+            </div>
+            <div class="cart-item-qty">
+              <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+              <span class="qty-val">${qty}</span>
+              <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
             </div>
             <button class="cart-item-remove" onclick="removeItem(${item.id})" title="Удалить">✕</button>
           </div>`;
@@ -205,7 +252,7 @@
       list.innerHTML += `
         <div class="cart-actions">
           <div class="contact-menu">
-            <button class="btn-cart-order" onclick="toggleContactMenu(this)">Написать</button>
+            <button class="btn-cart-order" onclick="toggleContactMenu(this)">Задать вопрос</button>
             <div class="contact-dropdown">
               <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
               <a href="https://wa.me/79646418016" target="_blank">WhatsApp</a>
@@ -213,7 +260,7 @@
             </div>
           </div>
           <div class="contact-menu">
-            <button class="btn-cart-order btn-cart-send" onclick="toggleContactMenu(this)">Отправить выбранное</button>
+            <button class="btn-cart-order btn-cart-send" onclick="toggleContactMenu(this)">Отправить</button>
             <div class="contact-dropdown">
               <a href="#" onclick="event.preventDefault(); sendCart('tg')">Telegram</a>
               <a href="#" onclick="event.preventDefault(); sendCart('wa')">WhatsApp</a>

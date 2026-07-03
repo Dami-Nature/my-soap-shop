@@ -13,7 +13,9 @@ function splitProductName(name) {
 
 function addToCart(id, name, btn) {
   const cart = JSON.parse(localStorage.getItem('dami_cart') || '[]');
-  if (!cart.find(i => i.id === id)) cart.push({ id, name });
+  const existing = cart.find(i => i.id === id);
+  if (existing) existing.qty = (existing.qty || 1) + 1;
+  else cart.push({ id, name, qty: 1 });
   localStorage.setItem('dami_cart', JSON.stringify(cart));
   if (window.updateCartCount) window.updateCartCount();
   const toast = document.getElementById('cart-toast');

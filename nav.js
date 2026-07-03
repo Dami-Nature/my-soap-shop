@@ -110,8 +110,9 @@ document.addEventListener('click', (e) => {
     const cart  = JSON.parse(localStorage.getItem('dami_cart') || '[]');
     const badge = document.getElementById('nav-cart-count');
     if (!badge) return;
-    if (cart.length) {
-      badge.textContent = cart.length;
+    const total = cart.reduce((s, i) => s + (i.qty || 1), 0);
+    if (total) {
+      badge.textContent = total;
       badge.style.display = 'flex';
     } else {
       badge.style.display = 'none';

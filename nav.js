@@ -32,15 +32,7 @@ document.addEventListener('click', (e) => {
       </a>
       <nav class="main-nav">
         <a href="index.html" class="nav-link ${isActive('index.html')}">Главная</a>
-        <div class="nav-item">
-          <a href="soap.html" class="nav-link ${catalogActive}">Каталог</a>
-          <div class="dropdown">
-            <a href="soap.html" class="dropdown-link">Мыло</a>
-            <a href="cosmetics.html" class="dropdown-link">Косметика</a>
-            <a href="teas.html" class="dropdown-link">Чаи</a>
-            <a href="sets.html" class="dropdown-link">Наборы</a>
-          </div>
-        </div>
+        <a href="index.html#catalog" class="nav-link ${catalogActive}">Каталог</a>
         <div class="contact-menu">
           <button class="nav-link nav-contact-btn" onclick="toggleContactMenu(this)">Контакты</button>
           <div class="contact-dropdown">

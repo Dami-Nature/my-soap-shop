@@ -59,7 +59,14 @@ document.addEventListener('click', (e) => {
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           <span class="cart-badge" id="nav-cart-count" style="display:none">0</span>
         </a>
-        <a href="https://t.me/EmiliyaT" target="_blank" class="btn-tg" style="text-decoration:none">Написать</a>
+        <div class="contact-menu">
+          <button class="btn-tg" onclick="toggleContactMenu(this)">Написать</button>
+          <div class="contact-dropdown">
+            <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+            <a href="${WA_LINK}" target="_blank">WhatsApp</a>
+            <a href="${MAX_LINK}" target="_blank">MAX</a>
+          </div>
+        </div>
       </nav>
     </header>
   `;
@@ -68,7 +75,14 @@ document.addEventListener('click', (e) => {
     <footer>
       <div class="footer-logo">Дами</div>
       <div class="footer-sub">Здесь всё от природы</div>
-      <a href="https://t.me/EmiliyaT" target="_blank" class="footer-cta footer-cta-wrap" style="text-decoration:none;display:inline-block">Перейти в Мессенджер Дами</a>
+      <div class="contact-menu footer-cta-wrap">
+        <button class="footer-cta" onclick="toggleContactMenu(this)">Написать</button>
+        <div class="contact-dropdown">
+          <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+          <a href="${WA_LINK}" target="_blank">WhatsApp</a>
+          <a href="${MAX_LINK}" target="_blank">MAX</a>
+        </div>
+      </div>
       <div class="footer-sub" style="margin-bottom: 12px;">Социальные сети</div>
       <div id="contacts" class="footer-links">
         <a href="https://t.me/DamiNature" target="_blank" class="footer-icon">

@@ -256,8 +256,22 @@
 
       list.innerHTML += `
         <div class="cart-actions">
-          <a href="https://t.me/EmiliyaT" target="_blank" class="btn-cart-order" style="text-decoration:none">Перейти в Мессенджер Дами</a>
-          <button class="btn-cart-order btn-cart-send" onclick="sendCart('tg')">Отправить</button>
+          <div class="contact-menu">
+            <button class="btn-cart-order" onclick="toggleContactMenu(this)">Задать вопрос</button>
+            <div class="contact-dropdown">
+              <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+              <a href="https://wa.me/79646418016" target="_blank">WhatsApp</a>
+              <a href="https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg" target="_blank">MAX</a>
+            </div>
+          </div>
+          <div class="contact-menu">
+            <button class="btn-cart-order btn-cart-send" onclick="toggleContactMenu(this)">Отправить</button>
+            <div class="contact-dropdown">
+              <a href="#" onclick="event.preventDefault(); sendCart('tg')">Telegram</a>
+              <a href="#" onclick="event.preventDefault(); sendCart('wa')">WhatsApp</a>
+              <a href="#" onclick="event.preventDefault(); sendCart('max')">MAX</a>
+            </div>
+          </div>
           <button class="btn-cart-clear" onclick="clearCart()">Очистить корзину</button>
         </div>`;
     }

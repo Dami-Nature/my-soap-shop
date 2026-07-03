@@ -223,7 +223,7 @@
         <a href="${backHref}" class="product-page-back">← ${backLabel}</a>
         <div class="product-page-name">${mainName}</div>
         ${nameSub ? `<div class="product-page-skin">${nameSub}</div>` : ''}
-        <div class="product-page-desc">${p.description.replace(/\n/g, '<br>')}</div>
+        <div class="product-page-desc">${p.description.replace(/^Для [^\n]*\n*/i, '').replace(/\n/g, '<br>')}</div>
         <div class="product-page-meta">${weightHtml}${priceHtml}</div>
         <div class="contact-menu">
           <button class="btn-tg-big" onclick="toggleContactMenu(this)">Написать</button>

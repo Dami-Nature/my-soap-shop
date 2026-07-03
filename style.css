@@ -172,7 +172,6 @@ header {
   align-items: center;
   justify-content: flex-end;
   padding-bottom: 280px;
-  gap: 30px;
 }
 .hero-title {
   font-family: 'Marck Script', cursive;
@@ -180,6 +179,7 @@ header {
   color: #ffffff;
   line-height: 1;
   margin-top: 180px;
+  margin-bottom: 8px;
   font-weight: 400;
 }
 .hero-sub {
@@ -188,6 +188,7 @@ header {
   letter-spacing: 5px;
   color: #f0e8d8;
   text-transform: uppercase;
+  margin-bottom: 30px;
 }
 .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .btn-primary {
@@ -576,10 +577,10 @@ footer {
   header { padding: 0 20px; height: auto; flex-wrap: wrap; gap: 10px; padding: 12px 20px; }
   .main-nav { flex-wrap: wrap; gap: 4px; }
   html { scroll-padding-top: 100px; }
-  .hero { padding: 60px 20px; padding-bottom: 80px; gap: 20px; }
+  .hero { padding: 60px 20px; padding-bottom: 80px; }
   .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 16px; justify-content: center; }
-  .hero-title { font-size: 100px; margin-top: 40px; }
-  .hero-sub { font-size: 17px; letter-spacing: 2px; }
+  .hero-title { font-size: 100px; margin-top: 40px; margin-bottom: 6px; }
+  .hero-sub { font-size: 17px; letter-spacing: 2px; margin-bottom: 20px; }
   .section { padding: 48px 20px; }
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .products-grid { grid-template-columns: repeat(2, 1fr); }
@@ -591,8 +592,8 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .hero-title { font-size: 80px; margin-top: 20px; }
-  .hero-sub { font-size: 15px; letter-spacing: 1.5px; }
+  .hero-title { font-size: 80px; margin-top: 20px; margin-bottom: 6px; }
+  .hero-sub { font-size: 15px; letter-spacing: 1.5px; margin-bottom: 20px; }
   .cat-grid { grid-template-columns: 1fr; }
   .products-grid { grid-template-columns: 1fr; }
 }

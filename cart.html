@@ -195,9 +195,11 @@
         const idx = item.name.indexOf(' для ');
         const main = idx === -1 ? item.name : item.name.slice(0, idx);
         const qty = item.qty || 1;
-        return qty > 1 ? `- ${main} × ${qty}` : `- ${main}`;
+        const p = PRODUCTS.find(x => x.id === item.id);
+        const weight = p && p.weight ? `, ${p.weight}` : '';
+        return `- ${main} × ${qty} шт${weight}`;
       }).join('\n');
-      const msg = 'Хочу заказать:\n' + lines;
+      const msg = 'Мой список:\n' + lines;
       const urls = {
         tg:  'https://t.me/EmiliyaT?text='    + encodeURIComponent(msg),
         wa:  'https://wa.me/79646418016?text=' + encodeURIComponent(msg),

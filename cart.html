@@ -317,7 +317,7 @@
     function shareCart() {
       const cart = getCart();
       if (!cart.length) return;
-      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(cart))));
+      const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(cart)))));
       const url = location.origin + location.pathname + '?cart=' + encoded;
       navigator.clipboard.writeText(url).then(() => {
         const btn = document.getElementById('btn-share');

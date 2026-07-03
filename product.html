@@ -242,6 +242,7 @@
     const cart = JSON.parse(localStorage.getItem('dami_cart') || '[]');
     if (!cart.find(i => i.id === id)) cart.push({ id, name });
     localStorage.setItem('dami_cart', JSON.stringify(cart));
+    if (window.updateCartCount) window.updateCartCount();
     const toast = document.getElementById('cart-toast');
     toast.style.display = 'block';
     setTimeout(() => { toast.style.display = 'none'; }, 2000);

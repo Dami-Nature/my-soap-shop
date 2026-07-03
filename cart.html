@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Корзина — Дами</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cart-page {
+      max-width: 700px;
+      margin: 48px auto;
+      padding: 0 24px;
+    }
+    .cart-empty {
+      text-align: center;
+      padding: 80px 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .cart-empty a {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--green);
+      text-decoration: underline;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-item-img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #dff0e6, #ede5d5);
+      flex-shrink: 0;
+    }
+    .cart-item-img-ph {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #dff0e6, #ede5d5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .cart-item-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .cart-item-remove {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 20px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: color 0.18s, background 0.18s;
+    }
+    .cart-item-remove:hover { color: #c0392b; background: #fff0ee; }
+    .cart-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn-cart-order {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .btn-cart-order:hover { background: var(--green2); }
+    .btn-cart-clear {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: none;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .btn-cart-clear:hover { border-color: #c0392b; color: #c0392b; }
+    .cart-title {
+      font-family: 'Marck Script', cursive;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .cart-count-label {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cart-page">
+    <div class="cart-title">Корзина</div>
+    <div class="cart-count-label" id="cart-count-label"></div>
+    <div id="cart-list"></div>
+  </div>
+
+  <script src="products.js"></script>
+  <script src="nav.js"></script>
+  <script>
+    const MAX_LINK = 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg';
+    const WA_LINK  = 'https://wa.me/79646418016';
+
+    function getCart() {
+      return JSON.parse(localStorage.getItem('dami_cart') || '[]');
+    }
+    function saveCart(cart) {
+      localStorage.setItem('dami_cart', JSON.stringify(cart));
+      if (window.updateCartCount) window.updateCartCount();
+    }
+    function removeItem(id) {
+      saveCart(getCart().filter(i => i.id !== id));
+      renderCart();
+    }
+    function clearCart() {
+      saveCart([]);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cart  = getCart();
+      const list  = document.getElementById('cart-list');
+      const label = document.getElementById('cart-count-label');
+
+      if (!cart.length) {
+        label.textContent = '';
+        list.innerHTML = `
+          <div class="cart-empty">
+            Корзина пуста
+            <br><a href="soap.html">Перейти в каталог</a>
+          </div>`;
+        return;
+      }
+
+      label.textContent = `${cart.length} ${noun(cart.length, 'товар', 'товара', 'товаров')}`;
+
+      list.innerHTML = cart.map(item => {
+        const p = PRODUCTS.find(x => x.id === item.id);
+        const imgHtml = p && p.image
+          ? `<img class="cart-item-img" src="${p.image}" alt="" onerror="this.outerHTML='<div class=\\'cart-item-img-ph\\'>🌿</div>'">`
+          : `<div class="cart-item-img-ph">🌿</div>`;
+        const nameIdx = item.name.indexOf(' для ');
+        const mainName = nameIdx === -1 ? item.name : item.name.slice(0, nameIdx);
+        const sub      = nameIdx === -1 ? '' : item.name.slice(nameIdx + 1);
+        return `
+          <div class="cart-item">
+            ${imgHtml}
+            <div class="cart-item-info">
+              <div class="cart-item-name">${mainName}</div>
+              ${sub ? `<div class="cart-item-sub">${sub}</div>` : ''}
+            </div>
+            <button class="cart-item-remove" onclick="removeItem(${item.id})" title="Удалить">✕</button>
+          </div>`;
+      }).join('');
+
+      list.innerHTML += `
+        <div class="cart-actions">
+          <div class="contact-menu">
+            <button class="btn-cart-order" onclick="toggleContactMenu(this)">Написать</button>
+            <div class="contact-dropdown">
+              <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
+              <a href="${WA_LINK}" target="_blank">WhatsApp</a>
+              <a href="${MAX_LINK}" target="_blank">MAX</a>
+            </div>
+          </div>
+          <button class="btn-cart-clear" onclick="clearCart()">Очистить корзину</button>
+        </div>`;
+    }
+
+    function noun(n, one, few, many) {
+      const mod10 = n % 10, mod100 = n % 100;
+      if (mod10 === 1 && mod100 !== 11) return `${n} ${one}`;
+      if ([2,3,4].includes(mod10) && ![12,13,14].includes(mod100)) return `${n} ${few}`;
+      return `${n} ${many}`;
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>

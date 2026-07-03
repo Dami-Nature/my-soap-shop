@@ -175,13 +175,20 @@ function updateSoap() {
   document.querySelectorAll('.filter-tab').forEach(f =>
     f.classList.toggle('active', (f.dataset.sub || null) === sub));
 
-  const labels = { household: 'Хозяйственное мыло', children: 'Детское мыло', archive: 'Прошлые коллекции' };
+  const labels = {
+    all: 'Для всех типов кожи',
+    dry: 'Для сухой кожи',
+    cleansing: 'Очищающее',
+    children: 'Детское мыло',
+    household: 'Хозяйственное мыло',
+    archive: 'Прошлые коллекции'
+  };
   labelEl.style.display = 'block';
   labelEl.textContent = sub ? (labels[sub] || '') : 'Всё мыло';
 
   const items = PRODUCTS.filter(p => {
     if (p.category !== 'soap') return false;
-    if (!sub) return p.subcategory === 'all' || !p.subcategory;
+    if (!sub) return true;
     return p.subcategory === sub;
   });
 

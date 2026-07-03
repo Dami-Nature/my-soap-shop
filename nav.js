@@ -43,16 +43,7 @@ document.addEventListener('click', (e) => {
       </a>
       <nav class="main-nav">
         <a href="index.html" class="nav-link ${isActive('index.html')}">Главная</a>
-        <div class="contact-menu catalog-menu">
-          <button class="nav-link nav-contact-btn ${catalogActive}" onclick="toggleCatalogMenu(this)">Каталог ▾</button>
-          <div class="contact-dropdown">
-            <a href="index.html#catalog" style="font-weight:600;border-bottom:1px solid var(--border);margin-bottom:4px;padding-bottom:12px;">Весь каталог →</a>
-            <a href="soap.html">Мыло</a>
-            <a href="cosmetics.html">Косметика</a>
-            <a href="teas.html">Чаи</a>
-            <a href="sets.html">Наборы</a>
-          </div>
-        </div>
+        <a href="index.html#catalog" class="nav-link ${catalogActive}">Каталог</a>
         <a href="index.html#about" class="nav-link">Обо мне</a>
         <a href="index.html#contacts" class="nav-link">Контакты</a>
         <a href="cart.html" class="nav-cart ${isActive('cart.html')}" id="nav-cart-link" title="Корзина">

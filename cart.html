@@ -317,8 +317,8 @@
     function shareCart() {
       const cart = getCart();
       if (!cart.length) return;
-      const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(cart)))));
-      const url = location.origin + location.pathname + '?cart=' + encoded;
+      const slim = cart.map(i => [i.id, i.qty || 1]);
+      const url = location.origin + location.pathname + '?cart=' + encodeURIComponent(JSON.stringify(slim));
       navigator.clipboard.writeText(url).then(() => {
         const btn = document.getElementById('btn-share');
         const orig = btn.textContent;
@@ -334,10 +334,12 @@
       const param = new URLSearchParams(location.search).get('cart');
       if (!param) return;
       try {
-        const imported = JSON.parse(decodeURIComponent(escape(atob(param))));
-        if (Array.isArray(imported) && imported.length) {
-          saveCart(imported);
-        }
+        const slim = JSON.parse(decodeURIComponent(param));
+        const imported = slim.map(([id, qty]) => {
+          const p = PRODUCTS.find(x => x.id === id);
+          return p ? { id, name: p.name, qty } : null;
+        }).filter(Boolean);
+        if (imported.length) saveCart(imported);
       } catch(e) {}
       history.replaceState(null, '', location.pathname);
     })();

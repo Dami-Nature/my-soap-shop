@@ -223,14 +223,7 @@
         ${nameSub ? `<div class="product-page-skin">${nameSub}</div>` : ''}
         <div class="product-page-desc">${p.description.replace(/\n/g, '<br>')}</div>
         <div class="product-page-meta">${weightHtml}${priceHtml}</div>
-        <div class="contact-menu">
-          <button class="btn-tg-big" onclick="toggleContactMenu(this)">Написать</button>
-          <div class="contact-dropdown">
-            <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
-            <a href="https://wa.me/79646418016" target="_blank">WhatsApp</a>
-            <a href="https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg" target="_blank">MAX</a>
-          </div>
-        </div>
+        <a href="https://t.me/EmiliyaT" target="_blank" class="btn-tg-big" style="text-decoration:none">Перейти в Мессенджер Дами</a>
         <button class="btn-tg-big btn-cart" onclick="addToCart(${p.id}, '${p.name.replace(/'/g,"\\'")}')">В корзину</button>
         <div class="cart-toast" id="cart-toast">Добавлено в корзину ✓</div>
       </div>`;

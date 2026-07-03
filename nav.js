@@ -39,7 +39,7 @@ document.addEventListener('click', (e) => {
     <header>
       <a href="index.html" class="logo">
         <span class="logo-title">Дами</span>
-        <span class="logo-sub">Здесь всё от природы</span>
+        <span class="logo-sub">С заботой от природы</span>
       </a>
       <nav class="main-nav">
         <a href="index.html" class="nav-link ${isActive('index.html')}">Главная</a>

@@ -588,7 +588,7 @@ footer {
   .cat-icon { font-size: 28px; margin-bottom: 8px; }
   .cat-name { font-size: 15px; }
   .cat-desc { font-size: 11px; }
-  .about-section { padding: 28px 0 4px; }
+  .about-section { padding: 48px 0 4px; }
   .about-inner { padding: 0 12px; flex-direction: column; gap: 16px; }
   .about-img { width: 75%; }
   .about-text { font-size: 17px; text-align: center; }

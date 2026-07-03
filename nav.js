@@ -33,14 +33,7 @@ document.addEventListener('click', (e) => {
       <nav class="main-nav">
         <a href="index.html" class="nav-link ${isActive('index.html')}">Главная</a>
         <a href="index.html#catalog" class="nav-link ${catalogActive}">Каталог</a>
-        <div class="contact-menu">
-          <button class="nav-link nav-contact-btn" onclick="toggleContactMenu(this)">Контакты</button>
-          <div class="contact-dropdown">
-            <a href="https://t.me/EmiliyaT" target="_blank">Telegram</a>
-            <a href="${WA_LINK}" target="_blank">WhatsApp</a>
-            <a href="${MAX_LINK}" target="_blank">MAX</a>
-          </div>
-        </div>
+        <a href="index.html#contacts" class="nav-link">Контакты</a>
         <a href="index.html#about" class="nav-link">Обо мне</a>
       </nav>
     </header>
@@ -58,7 +51,7 @@ document.addEventListener('click', (e) => {
           <a href="${MAX_LINK}" target="_blank">MAX</a>
         </div>
       </div>
-      <div class="footer-links">
+      <div id="contacts" class="footer-links">
         <a href="https://t.me/DamiNature" target="_blank" class="footer-icon">
           <img src="https://cdn.simpleicons.org/telegram/4a7c59" alt="Telegram" onerror="this.outerHTML='Telegram'">
           <span>Telegram<br>канал</span>

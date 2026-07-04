@@ -578,6 +578,8 @@ footer {
   .main-nav { flex-wrap: wrap; gap: 2px; }
   .nav-link { font-size: 11px; padding: 6px 10px; letter-spacing: 1px; }
   .btn-tg { font-size: 12px; padding: 7px 13px; margin-left: 6px; }
+  .btn-primary { font-size: 12px; padding: 10px 22px; letter-spacing: 1px; }
+  .btn-outline { font-size: 12px; padding: 10px 22px; letter-spacing: 1px; }
   html { scroll-padding-top: 140px; }
   .hero { padding: 60px 20px 40px; justify-content: center; background-position: center 15% !important; }
   .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 16px; justify-content: center; }

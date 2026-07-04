@@ -597,7 +597,7 @@ footer {
   .cat-name { font-size: 18px; }
   .cat-desc { font-size: 13px; }
   .product-info { padding: 10px; }
-  .product-name { font-size: 13px; }
+  .product-name { font-size: 15px; font-family: 'Marck Script', cursive; font-weight: 400; text-transform: none; }
   .product-weight { font-size: 11px; }
   .btn-add-cart { font-size: 11px; padding: 7px 10px; }
   .card-in-cart-label { font-size: 10px; }

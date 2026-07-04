@@ -577,9 +577,9 @@ footer {
   header { padding: 0 20px; height: auto; flex-wrap: wrap; gap: 10px; padding: 12px 20px; }
   .main-nav { flex-wrap: wrap; gap: 4px; }
   html { scroll-padding-top: 140px; }
-  .hero { padding: 60px 20px; padding-bottom: 80px; }
+  .hero { padding: 60px 20px 40px; justify-content: center; }
   .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 16px; justify-content: center; }
-  .hero-title { font-size: 100px; margin-top: 40px; margin-bottom: 6px; }
+  .hero-title { font-size: 100px; margin-top: 0; margin-bottom: 6px; }
   .hero-sub { font-size: 17px; letter-spacing: 2px; margin-bottom: 20px; }
   .section { padding: 48px 20px; }
   .cat-grid { grid-template-columns: repeat(2, 1fr); }

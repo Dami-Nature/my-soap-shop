@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="config.js"></script>
+  <script>
+    console.log('CONFIG:', typeof CONFIG !== 'undefined' ? 'OK' : 'NOT FOUND');
+    if (typeof CONFIG !== 'undefined') {
+      console.log('hero.image:', CONFIG.hero.image);
+      console.log('about.text length:', CONFIG.about.text.length);
+    }
+  </script>
+</head>
+</html>

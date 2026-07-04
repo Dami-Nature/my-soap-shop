@@ -1,0 +1,79 @@
+<h2>Структура расширенной админки</h2>
+<p class="subtitle">Где размещать редактирование главной страницы и галерей?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="tabs" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111;border-radius:8px;padding:12px;font-family:-apple-system,sans-serif">
+      <!-- Header с табами -->
+      <div style="background:#1c1c1e;border-radius:10px;margin-bottom:8px;overflow:hidden">
+        <div style="background:#d4956a;color:#000;font-size:12px;font-weight:600;padding:10px 12px">🧼 ДАМИ — Управление</div>
+        <div style="display:flex;border-top:1px solid #2c2c2e">
+          <div style="flex:1;text-align:center;padding:8px;font-size:11px;color:#d4956a;border-bottom:2px solid #d4956a;font-weight:600">Товары</div>
+          <div style="flex:1;text-align:center;padding:8px;font-size:11px;color:#666">Сайт</div>
+        </div>
+      </div>
+      <!-- Таб "Сайт" -->
+      <div style="background:#1c1c1e;border-radius:10px;padding:10px;font-size:11px;color:#8e8e93">
+        <div style="color:#fff;font-size:12px;font-weight:600;margin-bottom:8px">⚙️ Настройки сайта</div>
+        <div style="background:#2c2c2e;border-radius:8px;padding:8px;margin-bottom:6px;color:#eee">🖼 Фото главной страницы</div>
+        <div style="background:#2c2c2e;border-radius:8px;padding:8px;margin-bottom:6px;color:#eee">✏️ Текст "О себе"</div>
+        <div style="background:#2c2c2e;border-radius:8px;padding:8px;color:#eee">🎁 Фото раздела "Наборы"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Два таба: Товары / Сайт</h3>
+      <p>Переключатель вверху. Таб «Сайт» — для редактирования главной страницы, текста о себе, фото разделов. Чётко разделено.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="inline" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111;border-radius:8px;padding:12px;font-family:-apple-system,sans-serif">
+      <div style="background:#1c1c1e;border-radius:10px;margin-bottom:8px">
+        <div style="background:#d4956a;color:#000;font-size:12px;font-weight:600;padding:10px 12px">🧼 ДАМИ + Добавить ↩</div>
+      </div>
+      <!-- Список с разделом настроек вверху -->
+      <div style="background:#1c1c1e;border-radius:10px;padding:10px">
+        <div style="font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">⚙️ Настройки сайта</div>
+        <div style="background:#2c2c2e;border-radius:8px;padding:8px;margin-bottom:5px;display:flex;align-items:center;gap:8px">
+          <div style="width:32px;height:32px;background:#3a2a1a;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px">🏠</div>
+          <div style="font-size:12px;color:#eee">Главная страница</div>
+          <div style="margin-left:auto;color:#555">›</div>
+        </div>
+        <div style="background:#2c2c2e;border-radius:8px;padding:8px;margin-bottom:10px;display:flex;align-items:center;gap:8px">
+          <div style="width:32px;height:32px;background:#2a3a1a;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px">🎁</div>
+          <div style="font-size:12px;color:#eee">Наборы — фото</div>
+          <div style="margin-left:auto;color:#555">›</div>
+        </div>
+        <div style="font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">🧼 Мыло</div>
+        <div style="background:#2c2c2e;border-radius:8px;padding:8px;display:flex;align-items:center;gap:8px">
+          <div style="width:32px;height:32px;background:#3a3a2a;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px">🧼</div>
+          <div style="font-size:12px;color:#eee">Лесное с пихтой ⭐</div>
+          <div style="margin-left:auto;color:#555">›</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Настройки в списке, сверху</h3>
+      <p>Без переключателя — «Главная страница» и «Наборы» просто стоят первыми в общем списке. Всё в одном месте, меньше навигации.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="margin-top:24px;background:#1c1c1e;border-radius:12px;padding:16px;font-family:-apple-system,sans-serif">
+  <div style="font-size:13px;color:#d4956a;font-weight:600;margin-bottom:10px">📷 Несколько фото у товара (одинаково для обоих вариантов)</div>
+  <div style="font-size:12px;color:#8e8e93;margin-bottom:8px">В форме редактирования товара:</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <div style="width:64px;height:64px;background:#2a3a2a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:28px;position:relative">
+      🧼
+      <div style="position:absolute;top:-4px;right:-4px;background:#c46060;border-radius:50%;width:16px;height:16px;font-size:10px;color:#fff;display:flex;align-items:center;justify-content:center">×</div>
+    </div>
+    <div style="width:64px;height:64px;background:#3a2a1a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:28px;position:relative">
+      📷
+      <div style="position:absolute;top:-4px;right:-4px;background:#c46060;border-radius:50%;width:16px;height:16px;font-size:10px;color:#fff;display:flex;align-items:center;justify-content:center">×</div>
+    </div>
+    <div style="width:64px;height:64px;background:#2c2c2e;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:28px;border:2px dashed #3a3a3a;color:#555">＋</div>
+  </div>
+  <div style="font-size:11px;color:#555;margin-top:6px">Первое фото = главное (показывается в каталоге). Остальные — в карусели на странице товара.</div>
+</div>

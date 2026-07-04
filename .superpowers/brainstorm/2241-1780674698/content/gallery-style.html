@@ -1,0 +1,60 @@
+<h2>Галерея на странице товара</h2>
+<p class="subtitle">Как показывать несколько фото на странице мыла / чая?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="thumbs" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#1a1a1a;border-radius:8px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:320px;margin:0 auto">
+        <!-- Главное фото -->
+        <div style="grid-column:1/-1;background:#2a3a2a;border-radius:8px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:48px">🧼</div>
+        <!-- Миниатюры -->
+        <div style="background:#3a2a1a;border-radius:6px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:24px;border:2px solid #d4956a">🧼</div>
+        <div style="background:#2a3a2a;border-radius:6px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:24px;opacity:0.6">📷</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Главное фото + миниатюры</h3>
+      <p>Большое фото сверху, мелкие кнопки под ним. Нажимаешь на миниатюру — меняется главное. Классически, как в магазинах.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="scroll" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#1a1a1a;border-radius:8px">
+      <div style="max-width:200px;margin:0 auto">
+        <!-- Вертикальная лента -->
+        <div style="background:#2a3a2a;border-radius:8px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:8px">🧼</div>
+        <div style="background:#3a2a1a;border-radius:8px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:8px;opacity:0.7">📷</div>
+        <div style="background:#2a2a3a;border-radius:8px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.5">🌿</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Вертикальная лента</h3>
+      <p>Все фото идут друг за другом вниз. Прокручиваешь страницу — видишь следующее. Просто и удобно на телефоне.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="swipe" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#1a1a1a;border-radius:8px">
+      <div style="max-width:280px;margin:0 auto;position:relative">
+        <!-- Карусель -->
+        <div style="background:#2a3a2a;border-radius:8px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative">
+          🧼
+          <div style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#fff">‹</div>
+          <div style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#fff">›</div>
+        </div>
+        <!-- Точки -->
+        <div style="display:flex;justify-content:center;gap:6px;margin-top:8px">
+          <div style="width:8px;height:8px;border-radius:50%;background:#d4956a"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#555"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#555"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Карусель со свайпом</h3>
+      <p>Одно большое фото, стрелки влево/вправо и точки снизу. На телефоне можно свайпать пальцем. Современно.</p>
+    </div>
+  </div>
+
+</div>

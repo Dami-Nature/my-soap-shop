@@ -608,6 +608,7 @@ footer {
   .about-img { width: 75%; }
   .about-text { font-size: 17px; text-align: center; }
   .page-hero { padding: 36px 20px; }
+  .page-hero-title { font-size: 36px; letter-spacing: 3px; }
 }
 
 @media (max-width: 480px) {

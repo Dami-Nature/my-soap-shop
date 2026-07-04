@@ -596,6 +596,13 @@ footer {
   .cat-icon { font-size: 22px; margin-bottom: 6px; }
   .cat-name { font-size: 15px; }
   .cat-desc { font-size: 11px; }
+  .product-info { padding: 10px; }
+  .product-name { font-size: 13px; }
+  .product-weight { font-size: 11px; }
+  .btn-add-cart { font-size: 11px; padding: 7px 10px; }
+  .card-in-cart-label { font-size: 10px; }
+  .qty-val { font-size: 13px; }
+  .qty-btn { width: 24px; height: 24px; font-size: 16px; }
   .about-section { padding: 48px 0 4px; }
   .about-inner { padding: 0 12px; flex-direction: column; gap: 16px; }
   .about-img { width: 75%; }

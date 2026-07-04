@@ -584,7 +584,7 @@ footer {
   .btn-primary { font-size: 12px; padding: 10px 22px; letter-spacing: 1px; }
   .btn-outline { font-size: 12px; padding: 10px 22px; letter-spacing: 1px; }
   html { scroll-padding-top: 140px; }
-  .hero { padding: 60px 20px; padding-bottom: 360px; background-size: cover !important; background-position: center 30% !important; min-height: 115vh; }
+  .hero { padding: 60px 20px; padding-bottom: 360px; background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('images/hero-mobile.jpg') !important; background-size: cover !important; background-position: center 30% !important; min-height: 115vh; }
   .hero-btns { flex-direction: column; align-items: center; }
   .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 16px; justify-content: center; }
   .hero-title { font-size: 100px; margin-top: 40px; margin-bottom: 6px; }

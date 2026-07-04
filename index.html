@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Дами — Натуральная косметика</title>
-  <link rel="stylesheet" href="style.css?v=34">
+  <link rel="stylesheet" href="style.css?v=35">
 </head>
 <body>
 
@@ -71,7 +71,6 @@
         heroEl.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('" + CONFIG.hero.image + "')";
         heroEl.style.backgroundSize = "cover";
         heroEl.style.backgroundRepeat = "no-repeat";
-        heroEl.style.backgroundPosition = window.innerWidth <= 768 ? 'center top' : 'center 35%';
       }
       if (CONFIG.about && CONFIG.about.image)
         document.getElementById('about-img').src = CONFIG.about.image;

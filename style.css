@@ -163,7 +163,7 @@ header {
 /* ─── HERO ─── */
 .hero {
   background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-                    url('images/hero.jpg');
+                    url('images/hero2.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center 35%;

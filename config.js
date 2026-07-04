@@ -2,7 +2,7 @@
 
 const CONFIG = {
   hero: {
-    image: "images/hero.jpg"
+    image: "images/hero2.jpg"
   },
   about: {
     image: "images/facetune_27-06-2026-20-16-25.jpg",

@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Дами — Натуральная косметика</title>
-  <link rel="stylesheet" href="style.css?v=46">
+  <link rel="stylesheet" href="style.css?v=47">
 </head>
 <body>
 
@@ -71,10 +71,9 @@
       if (CONFIG.hero && CONFIG.hero.image) {
         var heroEl = document.getElementById('hero-section');
         heroEl.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('" + CONFIG.hero.image + "')";
-        var isMob = window.innerWidth <= 768;
-        heroEl.style.setProperty('background-size', isMob ? 'auto 130%' : 'cover', 'important');
+        heroEl.style.setProperty('background-size', 'cover', 'important');
         heroEl.style.backgroundRepeat = "no-repeat";
-        var pos = isMob ? 'center 40%' : 'center 35%';
+        var pos = window.innerWidth <= 768 ? 'center top' : 'center 35%';
         heroEl.style.setProperty('background-position', pos, 'important');
       }
       if (CONFIG.about && CONFIG.about.image)

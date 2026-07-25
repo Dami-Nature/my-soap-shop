@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 24.07.2026, 22:25:19
+// Обновлено через панель управления ДАМИ: 25.07.2026, 15:45:26
 
 const PRODUCTS = [
 
@@ -96,6 +96,14 @@ const PRODUCTS = [
 
   { id: 27, name: "Наборы", category: "set", subcategory: null,
     description: "Наборы могут быть уже собраны или можно собрать под запрос.",
-    weight: null, price: null, image: "images/img_9801.jpg", featured: false }
+    weight: null, price: null, image: "images/img_9801.jpg", featured: false },
+
+  { id: 29, name: "Липа", category: "tea", subcategory: null,
+    description: "",
+    weight: null, price: null, image: null, featured: false },
+
+  { id: 30, name: "Таволга", category: "tea", subcategory: null,
+    description: "",
+    weight: null, price: null, image: null, featured: false }
 
 ];

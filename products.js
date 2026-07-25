@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 25.07.2026, 15:45:26
+// Обновлено через панель управления ДАМИ: 25.07.2026, 15:46:35
 
 const PRODUCTS = [
 
@@ -100,10 +100,10 @@ const PRODUCTS = [
 
   { id: 29, name: "Липа", category: "tea", subcategory: null,
     description: "",
-    weight: null, price: null, image: null, featured: false },
+    weight: "50 гр", price: null, image: null, featured: false },
 
   { id: 30, name: "Таволга", category: "tea", subcategory: null,
     description: "",
-    weight: null, price: null, image: null, featured: false }
+    weight: "50 гр", price: null, image: null, featured: false }
 
 ];

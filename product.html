@@ -18,7 +18,7 @@
     .product-page-img {
       width: 100%;
       aspect-ratio: 1;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 16px;
       background: linear-gradient(135deg, #dff0e6, #ede5d5);
       display: block;
@@ -48,7 +48,8 @@
     }
     .carousel-slide {
       min-width: 100%;
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain;
       display: block;
       flex-shrink: 0;
     }

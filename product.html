@@ -31,7 +31,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 100px;
     }
     .carousel-wrap {
       position: relative;
@@ -59,7 +58,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 100px;
       flex-shrink: 0;
     }
     .carousel-btn {
@@ -181,11 +179,8 @@
   </div>
 
   <script>document.write('<script src="products.js?v=' + Date.now() + '"><\/script>')</script>
-  <script src="nav.js?v=5"></script>
+  <script src="nav.js?v=6"></script>
   <script>
-  const CATEGORY_EMOJI = {
-    soap: '🧼', face: '✨', body: '🌿', hair: '💧', tea: '🍵', set: '🎁'
-  };
   const CAT_LABEL = {
     soap: 'Мыло', face: 'Для лица', body: 'Для тела', hair: 'Для волос', tea: 'Чаи', set: 'Наборы'
   };
@@ -203,7 +198,6 @@
     container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;color:var(--muted)">Товар не найден</div>';
   } else {
     document.title = `${p.name.replace(/ для .+/, '')} — Дами`;
-    const emoji    = CATEGORY_EMOJI[p.category] || '🌿';
     const backHref = CAT_PAGE[p.category]  || 'cosmetics.html';
     const backLabel= CAT_LABEL[p.category] || 'Каталог';
     const priceHtml  = p.price  ? `<span class="product-page-price">${p.price.toLocaleString('ru')} ₽</span>` : '';
@@ -236,23 +230,23 @@
         <div class="cart-toast" id="cart-toast">Добавлено в корзину ✓</div>
       </div>`;
 
-    buildCarousel(document.getElementById('carousel-container'), allImages, emoji);
+    buildCarousel(document.getElementById('carousel-container'), allImages);
   }
 
-  function buildCarousel(el, images, emoji) {
+  function buildCarousel(el, images) {
     if (images.length === 0) {
-      el.innerHTML = `<div class="product-page-placeholder">${emoji}</div>`;
+      el.innerHTML = leafPlaceholderHTML('product-page-placeholder');
       return;
     }
     if (images.length === 1) {
       el.innerHTML = `<img class="product-page-img" src="${images[0]}" alt=""
-        onerror="this.outerHTML='<div class=\\'product-page-placeholder\\'>${emoji}</div>'">`;
+        onerror="this.outerHTML=leafPlaceholderHTML('product-page-placeholder')">`;
       return;
     }
 
     const slides = images.map(src =>
       `<img class="carousel-slide" src="${src}"
-         onerror="this.outerHTML='<div class=\\'carousel-slide-ph\\'>${emoji}</div>'">`
+         onerror="this.outerHTML=leafPlaceholderHTML('carousel-slide-ph')">`
     ).join('');
     const dots = images.map((_, i) =>
       `<div class="carousel-dot${i === 0 ? ' active' : ''}" onclick="carouselGo(${i})"></div>`

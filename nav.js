@@ -3,6 +3,21 @@
 const MAX_LINK = 'https://max.ru/u/f9LHodD0cOJED4Pjd_kQjh36VllBLFJ6e9O1iuunwgQ6yELzlDR-bTbPFfg';
 const WA_LINK = 'https://wa.me/79646418016';
 
+// Fallback icon shown wherever a product photo is missing
+const LEAF_PLACEHOLDER_ICON = '<svg class="leaf-placeholder-icon" viewBox="0 0 64 64" fill="none">'
+  + '<path d="M28,58 C26,44 30,28 32,22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
+  + '<path d="M0,0 C-5,-8 -4,-17 0,-22 C4,-17 5,-8 0,0 Z" fill="currentColor" transform="translate(27,48) rotate(-50) scale(0.9)"/>'
+  + '<path d="M0,0 C-5,-8 -4,-17 0,-22 C4,-17 5,-8 0,0 Z" fill="currentColor" transform="translate(31,38) rotate(50) scale(0.9)"/>'
+  + '<path d="M0,0 C-5,-8 -4,-17 0,-22 C4,-17 5,-8 0,0 Z" fill="currentColor" transform="translate(29,28) rotate(-45) scale(0.8)"/>'
+  + '<path d="M0,0 C-5,-8 -4,-17 0,-22 C4,-17 5,-8 0,0 Z" fill="currentColor" transform="translate(33,22) rotate(42) scale(0.75)"/>'
+  + '<path d="M0,0 C-5,-8 -4,-17 0,-22 C4,-17 5,-8 0,0 Z" fill="currentColor" transform="translate(32,22) scale(0.95)"/>'
+  + '<path d="M0,-2 L0,-19" stroke="rgba(255,255,255,0.45)" stroke-width="1.2" stroke-linecap="round" transform="translate(32,22) scale(0.95)"/>'
+  + '</svg>';
+
+window.leafPlaceholderHTML = function (wrapClass) {
+  return '<div class="' + wrapClass + '">' + LEAF_PLACEHOLDER_ICON + '</div>';
+};
+
 // Toggle catalog dropdown and navigate to catalog page
 window.toggleCatalogMenu = function (btn) {
   const menu = btn.nextElementSibling;

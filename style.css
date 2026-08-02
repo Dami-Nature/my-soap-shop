@@ -300,9 +300,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 54px;
   border-radius: 12px 12px 0 0;
 }
+.leaf-placeholder-icon { width: 42%; height: 42%; color: var(--green); }
 
 .product-info { padding: 16px; display: flex; flex-direction: column; flex: 1; }
 .product-name {

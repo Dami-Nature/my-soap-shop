@@ -1,10 +1,5 @@
 // Rendering and filtering logic
 
-// Emoji placeholders when no image
-const CATEGORY_EMOJI = {
-  soap: '✦', face: '❋', body: '✾', hair: '❧', tea: '🤖', set: '❦'
-};
-
 const SKIN_RE = /^(всех|сухой|жирной|комбинированной|нормальной|чувствительной)/i;
 
 function splitProductName(name) {
@@ -65,7 +60,6 @@ function productCard(p) {
   const weight = p.weight
     ? `<span class="product-weight">от ${p.weight}</span>`
     : `<span></span>`;
-  const emoji = CATEGORY_EMOJI[p.category] || '🌿';
   const { main, sub } = splitProductName(p.name);
   const safeName = p.name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
   const _cartNow = JSON.parse(localStorage.getItem('dami_cart') || '[]');
@@ -88,7 +82,7 @@ function productCard(p) {
         class="product-img"
         src="${p.image}"
         alt="${p.name}"
-        onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${emoji}</div>'"
+        onerror="this.outerHTML=leafPlaceholderHTML('product-img-placeholder')"
       />
       <div class="product-info">
         ${p.category === 'soap' ? '<div class="product-cat-label">Мыло</div>' : ''}

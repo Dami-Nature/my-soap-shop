@@ -86,7 +86,8 @@ function productCard(p) {
       />
       <div class="product-info">
         ${p.category === 'soap' ? '<div class="product-cat-label">Мыло</div>' : ''}
-        <div class="product-name">${main}</div>
+        ${p.category === 'tea' ? '<div class="product-cat-label">Чай</div>' : ''}
+        <div class="product-name">${main.replace('«7 трав»', '<br>«7 трав»')}</div>
         ${sub ? `<div class="product-skin">${sub}</div>` : ''}
         <div class="product-meta">${weight}${price}</div>
         ${cartCtrl}

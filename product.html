@@ -216,7 +216,7 @@
       <div id="carousel-container"></div>
       <div class="product-page-info">
         <a href="${backHref}" class="product-page-back">← ${backLabel}</a>
-        <div class="product-page-name">${mainName}</div>
+        <div class="product-page-name">${mainName.replace('«7 трав»', '<br>«7 трав»')}</div>
         ${nameSub ? `<div class="product-page-skin">${nameSub}</div>` : ''}
         <div class="product-page-desc">${p.description.replace(/^Для [^\n]*\n*/i, '').replace(/\n/g, '<br>')}</div>
         <div class="product-page-meta">${weightHtml}${priceHtml}</div>

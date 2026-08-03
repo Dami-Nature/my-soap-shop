@@ -106,15 +106,15 @@ const PRODUCTS = [
     description: "Ароматный чай с таволгой. \n\nСостав: Кипрей (Иван чай) ферментированный, Таволга цвет.\n\n🌱 Цветы Таволги - седативное (успокаивающее), противовоспалительное, сосудорасширчющее, мочегонное действие \n\n🌱 Кипрей (Иван чай) - противовоспалительное, антиоксидантное, антимикробное, цитостатическое (противоопухлевое) действие.\n\nЗаваривать: 1 ч.л. на 250 мл воды 85°C, настоять 20-30 минут.",
     weight: "50 гр", price: null, image: "images/img_1427.jpg", featured: false },
 
-  { id: 31, name: "ЯБЛОКО И КОРИЦА", category: "soap", subcategory: "archive",
+  { id: 31, name: "ЯБЛОКО И КОРИЦА для всех типов кожи", category: "soap", subcategory: "archive",
     description: "",
     weight: null, price: null, image: "images/img_4823.jpg", images: ["images/img_4679.jpg"], featured: false },
 
-  { id: 32, name: "БАНАН, МЁД И ЗЛАКИ", category: "soap", subcategory: "archive",
+  { id: 32, name: "БАНАН, МЁД И ЗЛАКИ для всех типов кожи", category: "soap", subcategory: "archive",
     description: "",
     weight: null, price: null, image: "images/img_7738.jpg", featured: false },
 
-  { id: 33, name: "ЦВЕТОЧНОЕ", category: "soap", subcategory: "archive",
+  { id: 33, name: "ЦВЕТОЧНОЕ для всех типов кожи", category: "soap", subcategory: "archive",
     description: "",
     weight: null, price: null, image: "images/img_7740.jpg", images: ["images/img_7743.jpg"], featured: false },
 
@@ -122,11 +122,11 @@ const PRODUCTS = [
     description: "",
     weight: null, price: null, image: "images/img_4807.jpg", images: ["images/img_4759.jpg"], featured: false },
 
-  { id: 35, name: "МАНДАРИНОВЫЙ МАРМЕЛАД", category: "soap", subcategory: "archive",
+  { id: 35, name: "МАНДАРИНОВЫЙ МАРМЕЛАД для всех типов кожи", category: "soap", subcategory: "archive",
     description: "",
     weight: null, price: null, image: "images/img_5060.jpg", featured: false },
 
-  { id: 36, name: "МОЛОЧНОЕ С ЛАВАНДОЙ", category: "soap", subcategory: "archive",
+  { id: 36, name: "МОЛОЧНОЕ С ЛАВАНДОЙ для сухой кожи", category: "soap", subcategory: "archive",
     description: "МЫЛО МОЛОЧНОЕ С ЛАВАНДОЙ \n\nПитательное, очень нежное мыло на цельном молоке🥛с лавандой.\n\nСостав: Оливковое масло, Кокосовое масло (инфуз Лаванды), Масло миндаля, Масло ши, Молоко, эфирное масло Лаванды, Кедр.\n\nСозревание: 4-6 нед.\nВес: 100 гр (+/-10гр)",
     weight: null, price: null, image: "images/img_4791.jpg", images: ["images/img_4521.jpg"], featured: false },
 
@@ -134,7 +134,7 @@ const PRODUCTS = [
     description: "",
     weight: null, price: null, image: "images/img_4843.jpg", featured: false },
 
-  { id: 38, name: "НЕЖНОЕ", category: "soap", subcategory: "archive",
+  { id: 38, name: "НЕЖНОЕ для сухой кожи", category: "soap", subcategory: "archive",
     description: "МЫЛО НЕЖНОЕ\n\nМыло питательное и очень деликатное. Можно для детской кожи, очень сухой и для интимной гигиены. \n\nСостав: Масла бабасу, Касторовое масло, Оливковое масло (инфуз Ромашки), Масло ши, эфирное масло Герани и Нероли.\n\nСозревание: 4-6 нед.\nВес: 100 гр (+/- 10 гр)",
     weight: null, price: null, image: "images/img_4789.jpg", featured: false },
 
@@ -142,11 +142,11 @@ const PRODUCTS = [
     description: "МЫЛО ХВОЙНОЕ 🌲 С ЙОГУРТОМ И СОЛЬЮ\n\nМыло для смешанной и жирной кожи. Или для сухой раз в неделю, как банное.\n\nХорошо очищает за счет морской соли, но и питает за счет йогурта. \nВ мыло я добавила инфуз пихты и ели, пудру хвои пихты и эфирные масла Кедра и Пихты. Очень люблю все хвойное 🌲\n\nСостав: Оливковое масло, Пальмоядровое масло, пудра хвои пихты, спирулина, йогурт, соль морская, эфирное масло Кедра и Пихты.\n\nСозревание: 4-6 нед.\nВес 100 гр (+/- 10 гр)",
     weight: null, price: null, image: "images/img_7744.jpg", images: ["images/img_7746.jpg"], featured: false },
 
-  { id: 40, name: "ЛИМОННЫЙ ЗЕФИР", category: "soap", subcategory: "archive",
+  { id: 40, name: "ЛИМОННЫЙ ЗЕФИР для всех типов кожи", category: "soap", subcategory: "archive",
     description: "МЫЛО ЛИМОННЫЕ ЗЕФИРКИ\n\nУхаживающее и питательное мыло с рисовым молочком🥛 и соком лимона🍋, который является антиоксидантом  и 6-ью разными  маслами. \n\nСостав: Кокосовое масло, Масло бабасу, Миндальное масло, Пальмовое масло, Оливковое масло (инфуз Куркумы), Касторовое масло, Рисовое молоко, сок Лимона, эфирное масло Лимона и Иланг-иланг. \n\nСозревание: 4-6 нед.\n35 гр (+/-5 гр)",
     weight: null, price: null, image: "images/img_4940.jpg", images: ["images/img_4958.jpg"], featured: false },
 
-  { id: 41, name: "ТОМАТ И БАЗИЛИК", category: "soap", subcategory: "archive",
+  { id: 41, name: "ТОМАТ И БАЗИЛИК для всех типов кожи", category: "soap", subcategory: "archive",
     description: "",
     weight: null, price: null, image: "images/img_4883.jpg", featured: false }
 

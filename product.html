@@ -207,8 +207,9 @@
     const _skinRe  = /^(всех|сухой|жирной|комбинированной|нормальной|чувствительной)/i;
     const _dIdx    = p.name.indexOf(' для ');
     const _isSkin  = _dIdx !== -1 && _skinRe.test(p.name.slice(_dIdx + 5));
-    const mainName = _isSkin ? p.name.slice(0, _dIdx) : p.name;
-    const nameSub  = _isSkin ? p.name.slice(_dIdx + 1) : '';
+    const _isClean = !_isSkin && p.name.endsWith(' Очищающее');
+    const mainName = _isSkin ? p.name.slice(0, _dIdx) : (_isClean ? p.name.slice(0, -' Очищающее'.length) : p.name);
+    const nameSub  = _isSkin ? p.name.slice(_dIdx + 1) : (_isClean ? 'Очищающее' : '');
 
     const allImages = [p.image, ...(p.images || [])].filter(Boolean);
 

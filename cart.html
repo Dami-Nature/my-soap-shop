@@ -262,8 +262,9 @@
         const _sr = /^(всех|сухой|жирной|комбинированной|нормальной|чувствительной)/i;
         const _di = item.name.indexOf(' для ');
         const _sk = _di !== -1 && _sr.test(item.name.slice(_di + 5));
-        const mainName = _sk ? item.name.slice(0, _di) : item.name;
-        const sub      = _sk ? item.name.slice(_di + 1) : '';
+        const _cl = !_sk && item.name.endsWith(' Очищающее');
+        const mainName = _sk ? item.name.slice(0, _di) : (_cl ? item.name.slice(0, -' Очищающее'.length) : item.name);
+        const sub      = _sk ? item.name.slice(_di + 1) : (_cl ? 'Очищающее' : '');
         const qty = item.qty || 1;
         const catLabel = p && p.category === 'soap' ? '<div class="cart-cat-label">Мыло</div>' : '';
         const weightHtml = p && p.weight ? `<div class="cart-item-weight">${p.weight}</div>` : '';

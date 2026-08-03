@@ -4,9 +4,13 @@ const SKIN_RE = /^(всех|сухой|жирной|комбинированно
 
 function splitProductName(name) {
   const idx = name.indexOf(' для ');
-  if (idx === -1) return { main: name, sub: '' };
-  if (!SKIN_RE.test(name.slice(idx + 5))) return { main: name, sub: '' };
-  return { main: name.slice(0, idx), sub: name.slice(idx + 1) };
+  if (idx !== -1 && SKIN_RE.test(name.slice(idx + 5))) {
+    return { main: name.slice(0, idx), sub: name.slice(idx + 1) };
+  }
+  if (name.endsWith(' Очищающее')) {
+    return { main: name.slice(0, -' Очищающее'.length), sub: 'Очищающее' };
+  }
+  return { main: name, sub: '' };
 }
 
 function addToCart(id, name, btn) {

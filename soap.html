@@ -49,7 +49,7 @@
 
   <script>document.write('<script src="products.js?v=' + Date.now() + '"><\/script>')</script>
   <script src="nav.js?v=6"></script>
-  <script src="app.js?v=5"></script>
+  <script src="app.js?v=6"></script>
   <script>
     var _activeSub = '';
 
@@ -60,9 +60,9 @@
       { subs: ['archive'],           label: 'Прошлые коллекции' },
     ];
 
-    // Товары, которые дополнительно показываются ещё в одной подкатегории,
-    // помимо своей основной (products.js хранит только одну subcategory)
-    var EXTRA_SUBS = { 8: ['all'] }; // Мыло-скраб кофейное: очищающее + для всех типов кожи
+    // Товары, которые дополнительно показываются ещё в одной подкатегории при клике
+    // на её вкладку напрямую (но не дублируются в общей группировке «Всё»)
+    var EXTRA_SUBS = { 8: ['all'] }; // Мыло-скраб кофейное: очищающее + для всех типов кожи (только по вкладке)
 
     function productInSubs(p, subs) {
       if (subs.indexOf(p.subcategory) !== -1) return true;
@@ -84,7 +84,7 @@
       if (_activeSub === '') {
         // Show all grouped (кроме «Прошлые коллекции» — только по своей вкладке)
         GROUPS.filter(function(g) { return g.subs.indexOf('archive') === -1; }).forEach(function(g) {
-          var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && productInSubs(p, g.subs); });
+          var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && g.subs.indexOf(p.subcategory) !== -1; });
           if (!items.length) return;
           var label = document.createElement('div');
           label.className = 'section-label';

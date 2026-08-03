@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 03.08.2026, 12:13:42
+// Обновлено через панель управления ДАМИ: 03.08.2026, 12:23:05
 
 const PRODUCTS = [
 
@@ -120,11 +120,11 @@ const PRODUCTS = [
 
   { id: 34, name: "УГОЛЬ И СОЛЬ", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: null, featured: false },
+    weight: null, price: null, image: "images/img_4807.jpg", featured: false },
 
   { id: 35, name: "МАНДАРИНОВЫЙ МАРМЕЛАД", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: null, featured: false },
+    weight: null, price: null, image: "images/img_5060.jpg", featured: false },
 
   { id: 36, name: "МОЛОЧНОЕ С ЛАВАНДОЙ", category: "soap", subcategory: "archive",
     description: "",
@@ -140,7 +140,7 @@ const PRODUCTS = [
 
   { id: 39, name: "ХВОЙНОЕ С ЙОГУРТОМ И СОЛЬЮ", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: null, featured: false },
+    weight: null, price: null, image: "images/img_7744.jpg", images: ["images/img_7746.jpg"], featured: false },
 
   { id: 40, name: "ЛИМОННЫЙ ЗЕФИР", category: "soap", subcategory: "archive",
     description: "",

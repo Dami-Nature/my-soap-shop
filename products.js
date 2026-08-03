@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 03.08.2026, 12:01:23
+// Обновлено через панель управления ДАМИ: 03.08.2026, 12:13:42
 
 const PRODUCTS = [
 
@@ -108,11 +108,11 @@ const PRODUCTS = [
 
   { id: 31, name: "ЯБЛОКО И КОРИЦА", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: null, featured: false },
+    weight: null, price: null, image: "images/img_4823.jpg", featured: false },
 
   { id: 32, name: "БАНАН, МЁД И ЗЛАКИ", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: null, featured: false },
+    weight: null, price: null, image: "images/img_7738.jpg", featured: false },
 
   { id: 33, name: "ЦВЕТОЧНОЕ", category: "soap", subcategory: "archive",
     description: "",

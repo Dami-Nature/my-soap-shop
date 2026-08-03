@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 03.08.2026, 12:43:52
+// Обновлено через панель управления ДАМИ: 03.08.2026, 12:46:33
 
 const PRODUCTS = [
 
@@ -120,7 +120,7 @@ const PRODUCTS = [
 
   { id: 34, name: "УГОЛЬ И СОЛЬ", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: "images/img_4807.jpg", featured: false },
+    weight: null, price: null, image: "images/img_4807.jpg", images: ["images/img_4759.jpg"], featured: false },
 
   { id: 35, name: "МАНДАРИНОВЫЙ МАРМЕЛАД", category: "soap", subcategory: "archive",
     description: "",

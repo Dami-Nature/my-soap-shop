@@ -82,8 +82,8 @@
       var wrap = document.getElementById('soap-groups');
       wrap.innerHTML = '';
       if (_activeSub === '') {
-        // Show all grouped
-        GROUPS.forEach(function(g) {
+        // Show all grouped (кроме «Прошлые коллекции» — только по своей вкладке)
+        GROUPS.filter(function(g) { return g.subs.indexOf('archive') === -1; }).forEach(function(g) {
           var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && productInSubs(p, g.subs); });
           if (!items.length) return;
           var label = document.createElement('div');

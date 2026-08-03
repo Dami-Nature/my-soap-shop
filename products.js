@@ -38,11 +38,11 @@ const PRODUCTS = [
     description: "Для нормальной, сухой и очень сухой кожи.\n\nРоскошное мыло с маслом какао и экстрактом мандарина. Увлажняет, восстанавливает и успокаивает кожу. Сладкий карамельно-цитрусовый аромат создаёт ощущение уюта. Масло какао насыщает кожу жирными кислотами и антиоксидантами.\n\nСостав: Какао масло, Кокосовое масло, Пальмовое масло, Миндальное масло, Оливковое масло, Масло Ши, глицериновый экстракт мандарина, тинктура грейпфрута и мандарина, Куркума, эфирные масла: Литсея Кубеба, Апельсин, Ваниль, Кедр.\n\nСозревание: 4–6 нед.\nВес: 100 г (±10 г)",
     weight: "100г", price: null, image: "images/img_7623.jpg", images: ["images/img_8299.jpg"], featured: true },
 
-  { id: 7, name: "АЮРВЕДИЧЕСКОЕ РОЗОВОЕ С СОЛЬЮ для всех типов кожи", category: "soap", subcategory: "archive",
+  { id: 7, name: "АЮРВЕДИЧЕСКОЕ РОЗОВОЕ С СОЛЬЮ Очищающее", category: "soap", subcategory: "archive",
     description: "Очищающее, банное мыло с розовой и морской солью. Тонизирует и питает минералами кожу.\n\nМыло по аюрведическим рецептам с гималайской розовой солью. Глубоко очищает поры, мягко отшелушивает и выравнивает рельеф кожи. Минералы соли восстанавливают водный баланс. Пряный восточный аромат расслабляет.\n\nДля нормальной и сухой кожи раз в неделю. Для жирной можно чаще. \n\nСостав: Кокосовое масло, Морская соль, Розовая соль, Эфирное масло Нероли, Иланг-иланг, Кедр.\n\nСозревание: 4–6 нед.\nВес: 100 г (±10 г)",
     weight: "100г", price: null, image: "images/img_1477.jpg", images: ["images/img_8542.jpg"], featured: false },
 
-  { id: 8, name: "МЫЛО-СКРАБ КОФЕЙНОЕ для всех типов кожи", category: "soap", subcategory: "cleansing",
+  { id: 8, name: "МЫЛО-СКРАБ КОФЕЙНОЕ Очищающее", category: "soap", subcategory: "cleansing",
     description: "Для всех типов кожи.\n\nПитательное мыло-скраб.\n\nМыло-скраб с натуральной кофейной гущей, какао и пряностями. Эффективно отшелушивает отмершие клетки, улучшает кровообращение и борется с целлюлитом. Кофеин тонизирует и подтягивает кожу. Насыщенный кофейно-шоколадный аромат.\n\nДобавила молотый кофе, отвар кофе и специй, инфуз кофе и специй, и разные эфирные масла. Посмотрите состав, какие добавлены эфирные масла — аромат прекрасен!\n\nСостав: Оливковое масло (инфуз специй и кофе), Касторовое масло, Пальмовое масло, Кокосовое масло, молотый кофе, какао, эфирное масло Корицы, Аниса, Гвоздики, Апельсина, Литсеи кубебы.\n\nСозревание: 1–1,5 мес.\nВес: 100 г (±10 г)",
     weight: "100г", price: null, image: "images/img_7596.jpg", images: ["images/img_7592.jpg", "images/img_6421.jpg"], featured: true },
 
@@ -118,7 +118,7 @@ const PRODUCTS = [
     description: "",
     weight: null, price: null, image: "images/img_7740.jpg", images: ["images/img_7743.jpg"], featured: false },
 
-  { id: 34, name: "УГОЛЬ И СОЛЬ", category: "soap", subcategory: "archive",
+  { id: 34, name: "УГОЛЬ И СОЛЬ Очищающее", category: "soap", subcategory: "archive",
     description: "",
     weight: null, price: null, image: "images/img_4807.jpg", images: ["images/img_4759.jpg"], featured: false },
 
@@ -130,7 +130,7 @@ const PRODUCTS = [
     description: "МЫЛО МОЛОЧНОЕ С ЛАВАНДОЙ \n\nПитательное, очень нежное мыло на цельном молоке🥛с лавандой.\n\nСостав: Оливковое масло, Кокосовое масло (инфуз Лаванды), Масло миндаля, Масло ши, Молоко, эфирное масло Лаванды, Кедр.\n\nСозревание: 4-6 нед.\nВес: 100 гр (+/-10гр)",
     weight: null, price: null, image: "images/img_4791.jpg", images: ["images/img_4521.jpg"], featured: false },
 
-  { id: 37, name: "АЮРВЕДИЧЕСКОЕ", category: "soap", subcategory: "archive",
+  { id: 37, name: "АЮРВЕДИЧЕСКОЕ Очищающее", category: "soap", subcategory: "archive",
     description: "",
     weight: null, price: null, image: "images/img_4843.jpg", featured: false },
 
@@ -138,7 +138,7 @@ const PRODUCTS = [
     description: "",
     weight: null, price: null, image: "images/img_4789.jpg", featured: false },
 
-  { id: 39, name: "ХВОЙНОЕ С ЙОГУРТОМ И СОЛЬЮ", category: "soap", subcategory: "archive",
+  { id: 39, name: "ХВОЙНОЕ С ЙОГУРТОМ И СОЛЬЮ Очищающее", category: "soap", subcategory: "archive",
     description: "",
     weight: null, price: null, image: "images/img_7744.jpg", images: ["images/img_7746.jpg"], featured: false },
 

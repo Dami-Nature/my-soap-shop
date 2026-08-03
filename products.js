@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 03.08.2026, 12:46:33
+// Обновлено через панель управления ДАМИ: 03.08.2026, 12:58:29
 
 const PRODUCTS = [
 
@@ -127,7 +127,7 @@ const PRODUCTS = [
     weight: null, price: null, image: "images/img_5060.jpg", featured: false },
 
   { id: 36, name: "МОЛОЧНОЕ С ЛАВАНДОЙ", category: "soap", subcategory: "archive",
-    description: "",
+    description: "МЫЛО МОЛОЧНОЕ С ЛАВАНДОЙ \n\nПитательное, очень нежное мыло на цельном молоке🥛с лавандой.\n\nСостав: Оливковое масло, Кокосовое масло (инфуз Лаванды), Масло миндаля, Масло ши, Молоко, эфирное масло Лаванды, Кедр.\n\nСозревание: 4-6 нед.\nВес: 100 гр (+/-10гр)",
     weight: null, price: null, image: "images/img_4791.jpg", images: ["images/img_4521.jpg"], featured: false },
 
   { id: 37, name: "АЮРВЕДИЧЕСКОЕ", category: "soap", subcategory: "archive",

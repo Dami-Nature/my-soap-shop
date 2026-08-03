@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 03.08.2026, 12:58:29
+// Обновлено через панель управления ДАМИ: 03.08.2026, 13:01:24
 
 const PRODUCTS = [
 
@@ -135,7 +135,7 @@ const PRODUCTS = [
     weight: null, price: null, image: "images/img_4843.jpg", featured: false },
 
   { id: 38, name: "НЕЖНОЕ", category: "soap", subcategory: "archive",
-    description: "",
+    description: "МЫЛО НЕЖНОЕ\n\nМыло питательное и очень деликатное. Можно для детской кожи, очень сухой и для интимной гигиены. \n\nСостав: Масла бабасу, Касторовое масло, Оливковое масло (инфуз Ромашки), Масло ши, эфирное масло Герани и Нероли.\n\nСозревание: 4-6 нед.\nВес: 100 гр (+/- 10 гр)",
     weight: null, price: null, image: "images/img_4789.jpg", featured: false },
 
   { id: 39, name: "ХВОЙНОЕ С ЙОГУРТОМ И СОЛЬЮ Очищающее", category: "soap", subcategory: "archive",

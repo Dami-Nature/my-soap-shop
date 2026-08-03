@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 03.08.2026, 12:23:16
+// Обновлено через панель управления ДАМИ: 03.08.2026, 12:43:52
 
 const PRODUCTS = [
 
@@ -108,7 +108,7 @@ const PRODUCTS = [
 
   { id: 31, name: "ЯБЛОКО И КОРИЦА", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: "images/img_4823.jpg", featured: false },
+    weight: null, price: null, image: "images/img_4823.jpg", images: ["images/img_4679.jpg"], featured: false },
 
   { id: 32, name: "БАНАН, МЁД И ЗЛАКИ", category: "soap", subcategory: "archive",
     description: "",
@@ -116,7 +116,7 @@ const PRODUCTS = [
 
   { id: 33, name: "ЦВЕТОЧНОЕ", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: null, featured: false },
+    weight: null, price: null, image: "images/img_7740.jpg", images: ["images/img_7743.jpg"], featured: false },
 
   { id: 34, name: "УГОЛЬ И СОЛЬ", category: "soap", subcategory: "archive",
     description: "",
@@ -128,7 +128,7 @@ const PRODUCTS = [
 
   { id: 36, name: "МОЛОЧНОЕ С ЛАВАНДОЙ", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: "images/img_4791.jpg", featured: false },
+    weight: null, price: null, image: "images/img_4791.jpg", images: ["images/img_4521.jpg"], featured: false },
 
   { id: 37, name: "АЮРВЕДИЧЕСКОЕ", category: "soap", subcategory: "archive",
     description: "",
@@ -136,7 +136,7 @@ const PRODUCTS = [
 
   { id: 38, name: "НЕЖНОЕ", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: null, featured: false },
+    weight: null, price: null, image: "images/img_4789.jpg", featured: false },
 
   { id: 39, name: "ХВОЙНОЕ С ЙОГУРТОМ И СОЛЬЮ", category: "soap", subcategory: "archive",
     description: "",
@@ -144,10 +144,10 @@ const PRODUCTS = [
 
   { id: 40, name: "ЛИМОННЫЙ ЗЕФИР", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: null, featured: false },
+    weight: null, price: null, image: "images/img_4940.jpg", featured: false },
 
   { id: 41, name: "ТОМАТ И БАЗИЛИК", category: "soap", subcategory: "archive",
     description: "",
-    weight: null, price: null, image: null, featured: false }
+    weight: null, price: null, image: "images/img_4883.jpg", featured: false }
 
 ];

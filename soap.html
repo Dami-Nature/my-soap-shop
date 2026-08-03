@@ -60,6 +60,16 @@
       { subs: ['archive'],           label: 'Прошлые коллекции' },
     ];
 
+    // Товары, которые дополнительно показываются ещё в одной подкатегории,
+    // помимо своей основной (products.js хранит только одну subcategory)
+    var EXTRA_SUBS = { 8: ['all'] }; // Мыло-скраб кофейное: очищающее + для всех типов кожи
+
+    function productInSubs(p, subs) {
+      if (subs.indexOf(p.subcategory) !== -1) return true;
+      var extra = EXTRA_SUBS[p.id] || [];
+      return extra.some(function(s) { return subs.indexOf(s) !== -1; });
+    }
+
     function selectSub(el) {
       _activeSub = el.dataset.sub;
       document.querySelectorAll('.filter-tab').forEach(function(t) {
@@ -74,7 +84,7 @@
       if (_activeSub === '') {
         // Show all grouped
         GROUPS.forEach(function(g) {
-          var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && g.subs.indexOf(p.subcategory) !== -1; });
+          var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && productInSubs(p, g.subs); });
           if (!items.length) return;
           var label = document.createElement('div');
           label.className = 'section-label';
@@ -88,7 +98,7 @@
       } else {
         // Show single subcategory flat (детское дублируется и в "для сухой")
         var subs = _activeSub === 'dry' ? ['dry', 'children'] : [_activeSub];
-        var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && subs.indexOf(p.subcategory) !== -1; });
+        var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && productInSubs(p, subs); });
         var grid = document.createElement('div');
         grid.className = 'products-grid';
         renderGrid(grid, items);

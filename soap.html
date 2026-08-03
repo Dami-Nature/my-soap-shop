@@ -86,8 +86,9 @@
           wrap.appendChild(grid);
         });
       } else {
-        // Show single subcategory flat
-        var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && p.subcategory === _activeSub; });
+        // Show single subcategory flat (детское дублируется и в "для сухой")
+        var subs = _activeSub === 'dry' ? ['dry', 'children'] : [_activeSub];
+        var items = PRODUCTS.filter(function(p) { return p.category === 'soap' && subs.indexOf(p.subcategory) !== -1; });
         var grid = document.createElement('div');
         grid.className = 'products-grid';
         renderGrid(grid, items);

@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 03.08.2026, 13:07:50
+// Обновлено через панель управления ДАМИ: 03.08.2026, 15:21:17
 
 const PRODUCTS = [
 
@@ -143,8 +143,8 @@ const PRODUCTS = [
     weight: null, price: null, image: "images/img_7744.jpg", images: ["images/img_7746.jpg"], featured: false },
 
   { id: 40, name: "ЛИМОННЫЙ ЗЕФИР", category: "soap", subcategory: "archive",
-    description: "",
-    weight: null, price: null, image: "images/img_4940.jpg", featured: false },
+    description: "МЫЛО ЛИМОННЫЕ ЗЕФИРКИ\n\nУхаживающее и питательное мыло с рисовым молочком🥛 и соком лимона🍋, который является антиоксидантом  и 6-ью разными  маслами. \n\nСостав: Кокосовое масло, Масло бабасу, Миндальное масло, Пальмовое масло, Оливковое масло (инфуз Куркумы), Касторовое масло, Рисовое молоко, сок Лимона, эфирное масло Лимона и Иланг-иланг. \n\nСозревание: 4-6 нед.\n35 гр (+/-5 гр)",
+    weight: null, price: null, image: "images/img_4940.jpg", images: ["images/img_4958.jpg"], featured: false },
 
   { id: 41, name: "ТОМАТ И БАЗИЛИК", category: "soap", subcategory: "archive",
     description: "",

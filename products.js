@@ -1,4 +1,4 @@
-// Обновлено через панель управления ДАМИ: 03.08.2026, 00:50:11
+// Обновлено через панель управления ДАМИ: 03.08.2026, 12:01:23
 
 const PRODUCTS = [
 
@@ -107,36 +107,47 @@ const PRODUCTS = [
     weight: "50 гр", price: null, image: "images/img_1427.jpg", featured: false },
 
   { id: 31, name: "ЯБЛОКО И КОРИЦА", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: null, featured: false },
 
   { id: 32, name: "БАНАН, МЁД И ЗЛАКИ", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: null, featured: false },
 
   { id: 33, name: "ЦВЕТОЧНОЕ", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: null, featured: false },
 
   { id: 34, name: "УГОЛЬ И СОЛЬ", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: null, featured: false },
 
   { id: 35, name: "МАНДАРИНОВЫЙ МАРМЕЛАД", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: null, featured: false },
 
   { id: 36, name: "МОЛОЧНОЕ С ЛАВАНДОЙ", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: "images/img_4791.jpg", featured: false },
 
   { id: 37, name: "АЮРВЕДИЧЕСКОЕ", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: "images/img_4843.jpg", featured: false },
 
   { id: 38, name: "НЕЖНОЕ", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: null, featured: false },
 
   { id: 39, name: "ХВОЙНОЕ С ЙОГУРТОМ И СОЛЬЮ", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: null, featured: false },
 
   { id: 40, name: "ЛИМОННЫЙ ЗЕФИР", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false },
+    description: "",
+    weight: null, price: null, image: null, featured: false },
 
   { id: 41, name: "ТОМАТ И БАЗИЛИК", category: "soap", subcategory: "archive",
-    description: "", weight: null, price: null, image: null, featured: false }
+    description: "",
+    weight: null, price: null, image: null, featured: false }
 
 ];
